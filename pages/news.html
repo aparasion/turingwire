@@ -7,21 +7,21 @@ permalink: /news/
 
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-  <header class="mb-8">
+  <header class="mb-6">
     <h1 class="text-3xl font-semibold tw-heading">News</h1>
     <p class="text-sm tw-muted mt-1 font-mono">AI industry coverage · updated hourly</p>
   </header>
 
-  <!-- Subcategory filter chips -->
-  <div class="flex flex-wrap gap-2 mb-4">
-    <a href="/news/" class="tw-filter-chip {% unless page.url contains '?' %}active{% endunless %}">All</a>
-    <a href="/news/?cat=model_release" class="tw-filter-chip">Model releases</a>
-    <a href="/news/?cat=product_launch" class="tw-filter-chip">Product launches</a>
-    <a href="/news/?cat=funding_round" class="tw-filter-chip">Funding</a>
-    <a href="/news/?cat=regulation_policy" class="tw-filter-chip">Policy</a>
-    <a href="/news/?cat=safety_alignment" class="tw-filter-chip">Safety</a>
-    <a href="/news/?cat=infrastructure_compute" class="tw-filter-chip">Infrastructure</a>
-    <a href="/news/?cat=partnership" class="tw-filter-chip">Partnerships</a>
+  <!-- Subcategory filter chips (JS-filtered) -->
+  <div class="flex flex-wrap gap-2 mb-3">
+    <button class="tw-filter-chip active" data-filter-subcategory="all">All</button>
+    <button class="tw-filter-chip" data-filter-subcategory="model_release">Model releases</button>
+    <button class="tw-filter-chip" data-filter-subcategory="product_launch">Product launches</button>
+    <button class="tw-filter-chip" data-filter-subcategory="funding_round">Funding</button>
+    <button class="tw-filter-chip" data-filter-subcategory="regulation_policy">Policy</button>
+    <button class="tw-filter-chip" data-filter-subcategory="safety_alignment">Safety</button>
+    <button class="tw-filter-chip" data-filter-subcategory="infrastructure_compute">Infrastructure</button>
+    <button class="tw-filter-chip" data-filter-subcategory="partnership">Partnerships</button>
   </div>
 
   <!-- Impact filter -->
@@ -42,13 +42,17 @@ permalink: /news/
 
   <div class="space-y-3" id="post-list">
     {% for post in news_posts limit: 60 %}
-    <div data-impact="{{ post.impact }}" data-date="{{ post.date | date: '%Y-%m-%dT%H:%M:%S' }}">
+    <div data-impact="{{ post.impact }}"
+         data-subcategory="{{ post.subcategory }}"
+         data-date="{{ post.date | date: '%Y-%m-%dT%H:%M:%S' }}">
       {% include post_card.html post=post %}
     </div>
     {% endfor %}
     {% for post in news_posts2 limit: 60 %}
     {% unless news_posts contains post %}
-    <div data-impact="{{ post.impact }}" data-date="{{ post.date | date: '%Y-%m-%dT%H:%M:%S' }}">
+    <div data-impact="{{ post.impact }}"
+         data-subcategory="{{ post.subcategory }}"
+         data-date="{{ post.date | date: '%Y-%m-%dT%H:%M:%S' }}">
       {% include post_card.html post=post %}
     </div>
     {% endunless %}
