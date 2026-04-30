@@ -92,6 +92,20 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
           </div>
         </div>
         {% assign shown_groups = shown_groups | plus: 1 %}
+
+        {% if shown_groups == 1 %}
+        <!-- Mobile in-feed ad — shown only below lg breakpoint -->
+        <div class="block lg:hidden">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4411470587763033"
+               data-ad-slot="XXXXXXXXXX"
+               data-ad-format="fluid"
+               data-ad-layout="in-article"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        {% endif %}
+
         {% endif %}
       {% endfor %}
 
@@ -124,8 +138,8 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
         </a>
       </div>
 
-      <!-- Sponsored / AdSense -->
-      <div class="tw-card rounded-lg border tw-border overflow-hidden">
+      <!-- Sponsored / AdSense — desktop sidebar only -->
+      <div class="hidden lg:block tw-card rounded-lg border tw-border overflow-hidden">
         <p class="text-xs font-mono tw-muted px-3 pt-3 pb-1 opacity-60">Sponsored</p>
         <!-- Google AdSense — replace data-ad-* values with your publisher details -->
         <ins class="adsbygoogle"
