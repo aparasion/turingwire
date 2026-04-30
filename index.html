@@ -57,6 +57,7 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
       {% assign grouped = recent_posts | group_by_exp: "p", "p.date | date: '%Y-%m-%d'" %}
 
       {% assign shown_groups = 0 %}
+      {% assign mobile_ad_placed = 0 %}
       {% for group in grouped %}
         {% if shown_groups >= 3 %}{% break %}{% endif %}
 
@@ -83,29 +84,31 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
             <span class="flex-1 h-px tw-border" style="background:var(--border)"></span>
           </h2>
           <div class="space-y-3">
+            {% assign valid_in_group = 0 %}
             {% for post in group.items %}
               {% assign _t = post.title | strip %}
               {% if _t and _t != "" %}
                 {% include post_card.html post=post %}
+                {% assign valid_in_group = valid_in_group | plus: 1 %}
+                {% if mobile_ad_placed == 0 and valid_in_group == 1 %}
+                <!-- Mobile in-feed ad — after first post, hidden on desktop -->
+                <div class="block lg:hidden tw-card rounded-lg border tw-border overflow-hidden">
+                  <p class="text-xs font-mono tw-muted px-3 pt-2 pb-0 opacity-50">Sponsored</p>
+                  <ins class="adsbygoogle"
+                       style="display:block"
+                       data-ad-client="ca-pub-4411470587763033"
+                       data-ad-slot="XXXXXXXXXX"
+                       data-ad-format="fluid"
+                       data-ad-layout="in-article"></ins>
+                  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+                {% assign mobile_ad_placed = 1 %}
+                {% endif %}
               {% endif %}
             {% endfor %}
           </div>
         </div>
         {% assign shown_groups = shown_groups | plus: 1 %}
-
-        {% if shown_groups == 1 %}
-        <!-- Mobile in-feed ad — shown only below lg breakpoint -->
-        <div class="block lg:hidden">
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-4411470587763033"
-               data-ad-slot="XXXXXXXXXX"
-               data-ad-format="fluid"
-               data-ad-layout="in-article"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-        {% endif %}
-
         {% endif %}
       {% endfor %}
 
