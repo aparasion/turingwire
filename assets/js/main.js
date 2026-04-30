@@ -31,7 +31,6 @@
     }
   }
 
-  // Sync icon state on page load
   applyTheme(getTheme());
 
   if (toggleBtn) {
@@ -91,15 +90,10 @@
       }
     });
 
-    // Hide kbd hint while focused
     const searchKbd = searchInput.parentElement.querySelector('.tw-search-kbd');
     if (searchKbd) {
-      searchInput.addEventListener('focus', function () {
-        searchKbd.style.opacity = '0';
-      });
-      searchInput.addEventListener('blur', function () {
-        searchKbd.style.opacity = '';
-      });
+      searchInput.addEventListener('focus', function () { searchKbd.style.opacity = '0'; });
+      searchInput.addEventListener('blur', function () { searchKbd.style.opacity = ''; });
     }
   }
 
@@ -113,62 +107,43 @@
     });
   }
 
-  // ── Impact filter chips ───────────────────────────────────────────────────
+  // ── Combined impact + subcategory filter ──────────────────────────────────
 
-  const filterChips = document.querySelectorAll('[data-filter-impact]');
-  const postCards = document.querySelectorAll('[data-impact]');
+  var activeImpact = 'all';
+  var activeSubcat = 'all';
 
-  if (filterChips.length > 0 && postCards.length > 0) {
-    filterChips.forEach(function (chip) {
-      chip.addEventListener('click', function (e) {
-        e.preventDefault();
-        const filterValue = chip.getAttribute('data-filter-impact');
+  function applyFilters() {
+    document.querySelectorAll('[data-impact]').forEach(function (card) {
+      var impact = card.getAttribute('data-impact') || '';
+      var subcat = card.getAttribute('data-subcategory') || '';
 
-        // Update active state
-        filterChips.forEach(function (c) { c.classList.remove('active'); });
-        chip.classList.add('active');
+      var impactOk = activeImpact === 'all' ||
+        (activeImpact === 'major+' && (impact === 'critical' || impact === 'major')) ||
+        (activeImpact === 'critical' && impact === 'critical');
 
-        // Show/hide posts
-        postCards.forEach(function (card) {
-          const impact = card.getAttribute('data-impact');
-          if (filterValue === 'all') {
-            card.style.display = '';
-          } else if (filterValue === 'major+') {
-            card.style.display = (impact === 'critical' || impact === 'major') ? '' : 'none';
-          } else if (filterValue === 'critical') {
-            card.style.display = (impact === 'critical') ? '' : 'none';
-          }
-        });
-      });
+      var subcatOk = activeSubcat === 'all' || subcat === activeSubcat;
+
+      card.style.display = (impactOk && subcatOk) ? '' : 'none';
     });
   }
 
-  // ── Chronological/impact toggle ───────────────────────────────────────────
-
-  const chronoToggle = document.getElementById('chrono-toggle');
-  const postList = document.getElementById('post-list');
-
-  if (chronoToggle && postList) {
-    let isChronological = false;
-    const originalOrder = Array.from(postList.children);
-
-    chronoToggle.addEventListener('click', function () {
-      isChronological = !isChronological;
-      chronoToggle.textContent = isChronological ? 'Impact order' : 'Latest (chronological)';
-
-      if (isChronological) {
-        // Sort by date descending
-        const cards = Array.from(postList.children);
-        cards.sort(function (a, b) {
-          return (b.getAttribute('data-date') || '').localeCompare(a.getAttribute('data-date') || '');
-        });
-        cards.forEach(function (card) { postList.appendChild(card); });
-      } else {
-        // Restore impact order
-        originalOrder.forEach(function (card) { postList.appendChild(card); });
-      }
+  document.querySelectorAll('[data-filter-impact]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      activeImpact = chip.getAttribute('data-filter-impact');
+      document.querySelectorAll('[data-filter-impact]').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      applyFilters();
     });
-  }
+  });
+
+  document.querySelectorAll('[data-filter-subcategory]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      activeSubcat = chip.getAttribute('data-filter-subcategory');
+      document.querySelectorAll('[data-filter-subcategory]').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      applyFilters();
+    });
+  });
 
   // ── Stocks: format change colors ──────────────────────────────────────────
 

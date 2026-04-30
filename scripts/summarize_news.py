@@ -54,9 +54,7 @@ Structure:
 Constraints:
 - {min_words}–{max_words} words total. Do not invent facts.
 - If the source is speculative, say so explicitly.
-- End with two lines exactly as shown:
-  Source: <Publisher Name>
-  <URL>
+- Do not include a source line or URL at the end — those are handled separately.
 
 Article title: {title}
 Article body:

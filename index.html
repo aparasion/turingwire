@@ -6,6 +6,11 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
 
 {% assign now_ts = 'now' | date: '%s' | plus: 0 %}
 {% assign six_hours_ago = now_ts | minus: 21600 %}
+{% assign today_str = 'now' | date: '%Y-%m-%d' %}
+{% assign yesterday_ts = now_ts | minus: 86400 %}
+{% assign yesterday_str = yesterday_ts | date: '%Y-%m-%d' %}
+{% assign two_days_ago_ts = now_ts | minus: 172800 %}
+{% assign two_days_ago_str = two_days_ago_ts | date: '%Y-%m-%d' %}
 
 {% assign critical_recent = site.posts | where: "impact", "critical" %}
 
@@ -37,56 +42,9 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
     <div class="lg:col-span-2">
 
       <!-- Feed header -->
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h1 class="text-2xl font-semibold tw-heading">Latest</h1>
-          <p class="text-xs font-mono tw-muted mt-0.5">AI news & research · updated hourly</p>
-        </div>
-        <button id="chrono-toggle" class="tw-filter-chip text-xs">
-          Latest (chronological)
-        </button>
-      </div>
-
-      <!-- Impact filters -->
-      <div class="flex flex-wrap gap-2 mb-6">
-        <button class="tw-filter-chip active" data-filter-impact="all">All</button>
-        <button class="tw-filter-chip" data-filter-impact="major+">Major+</button>
-        <button class="tw-filter-chip" data-filter-impact="critical">Critical only</button>
-      </div>
-
-      <!-- Posts: impact-weighted order (critical → major from last 24h → chronological) -->
-      <div id="post-list" class="space-y-3">
-
-        {% comment %}
-          Impact-weighted ordering:
-          1. Critical posts (any age)
-          2. Major posts from last 24h
-          3. Everything else, chronological
-        {% endcomment %}
-
-        {% assign critical_posts = site.posts | where: "impact", "critical" | limit: 5 %}
-        {% for post in critical_posts %}
-          <div data-impact="critical" data-date="{{ post.date | date: '%Y-%m-%dT%H:%M:%S' }}">
-            {% include post_card.html post=post %}
-          </div>
-        {% endfor %}
-
-        {% assign major_posts = site.posts | where: "impact", "major" | limit: 10 %}
-        {% for post in major_posts %}
-          <div data-impact="major" data-date="{{ post.date | date: '%Y-%m-%dT%H:%M:%S' }}">
-            {% include post_card.html post=post %}
-          </div>
-        {% endfor %}
-
-        {% assign other_posts = site.posts | limit: 20 %}
-        {% for post in other_posts %}
-          {% unless post.impact == 'critical' or post.impact == 'major' %}
-          <div data-impact="{{ post.impact }}" data-date="{{ post.date | date: '%Y-%m-%dT%H:%M:%S' }}">
-            {% include post_card.html post=post %}
-          </div>
-          {% endunless %}
-        {% endfor %}
-
+      <div class="mb-6">
+        <h1 class="text-2xl font-semibold tw-heading">Latest</h1>
+        <p class="text-xs font-mono tw-muted mt-0.5">AI news & research · updated hourly</p>
       </div>
 
       {% if site.posts.size == 0 %}
@@ -94,10 +52,44 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
         <p class="tw-muted text-sm font-mono">No articles indexed yet.</p>
         <p class="tw-muted text-xs mt-2">The pipeline runs hourly — check back soon.</p>
       </div>
+      {% else %}
+
+      {% assign recent_posts = site.posts | limit: 120 %}
+      {% assign grouped = recent_posts | group_by_exp: "p", "p.date | date: '%Y-%m-%d'" %}
+
+      {% assign shown_groups = 0 %}
+      {% for group in grouped %}
+        {% if shown_groups >= 3 %}{% break %}{% endif %}
+
+        {% assign day_label = group.name %}
+        {% if group.name == today_str %}{% assign day_label = "Today" %}
+        {% elsif group.name == yesterday_str %}{% assign day_label = "Yesterday" %}
+        {% endif %}
+
+        <div class="mb-8">
+          <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3 flex items-center gap-3">
+            <span>{{ day_label }}</span>
+            {% if group.name != today_str and group.name != yesterday_str %}
+            <span class="opacity-60">{{ group.name }}</span>
+            {% elsif group.name == yesterday_str %}
+            <span class="opacity-50">{{ group.name }}</span>
+            {% endif %}
+            <span class="flex-1 h-px tw-border" style="background:var(--border)"></span>
+          </h2>
+          <div class="space-y-3">
+            {% for post in group.items %}
+              {% include post_card.html post=post %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {% assign shown_groups = shown_groups | plus: 1 %}
+      {% endfor %}
+
       {% endif %}
 
       <!-- View more links -->
-      <div class="mt-8 flex flex-wrap gap-4 text-sm font-mono">
+      <div class="mt-4 flex flex-wrap gap-4 text-sm font-mono">
         <a href="/news/" class="tw-filter-chip">All news →</a>
         <a href="/research/" class="tw-filter-chip">All research →</a>
       </div>
@@ -177,8 +169,8 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
       <div class="tw-card rounded-lg border tw-border p-5">
         <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-2">About</h2>
         <p class="text-xs tw-muted leading-relaxed">
-          Turing Wire ingests RSS/API feeds from AI labs, hardware vendors, and research journals.
-          Articles are classified and summarized hourly by AI. Stocks update every 15 minutes.
+          Turing Wire tracks AI labs, hardware vendors, and research journals.
+          Articles are summarized hourly by AI. Stocks update every 15 minutes.
         </p>
         <div class="mt-3 flex flex-wrap gap-2">
           <a href="/about/" class="text-xs font-mono text-cyan-600 hover:text-cyan-500 transition-colors">Learn more →</a>
