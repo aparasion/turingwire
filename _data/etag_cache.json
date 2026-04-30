@@ -32,16 +32,16 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"162b694f67d11c2fff70ef465a171e3d\"",
-    "last_modified": "Thu, 30 Apr 2026 11:34:29 GMT"
+    "etag": "W/\"0f56f02fdf5a2207eb72670d7dd9818e\"",
+    "last_modified": "Thu, 30 Apr 2026 12:08:45 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Thu, 30 Apr 2026 11:22:28 GMT"
+    "last_modified": "Thu, 30 Apr 2026 12:55:59 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"53fe865ddbf32fcf26c0b8bf00c05ab5\"",
-    "last_modified": "Wed, 29 Apr 2026 23:06:47 GMT"
+    "etag": "W/\"1863eec97ae99ce18fbe394e9e104e18\"",
+    "last_modified": "Thu, 30 Apr 2026 11:37:45 GMT"
   },
   "https://stratechery.com/feed/": {
     "etag": "W/\"4ca48ca2d6beeb2750b96b833929ef5b\"",
@@ -61,14 +61,26 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Thu, 30 Apr 2026 11:54:33 GMT"
+    "last_modified": "Thu, 30 Apr 2026 12:37:17 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"166cf1-BQ9Iyg12JE598mm7ZOrQAgNHGYI\"",
+    "etag": "W/\"168193-1jSPZ8cF10yvSdbgTD1AiZrLsWk\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
     "etag": "",
     "last_modified": "Wed, 29 Apr 2026 00:57:12 GMT"
+  },
+  "https://news.google.com/rss/search?q=%22xAI%22+%28Grok+OR+model+OR+API+OR+release+OR+safety+OR+benchmark+OR+reasoning%29&hl=en-US&gl=US&ceid=US:en": {
+    "etag": "",
+    "last_modified": ""
+  },
+  "https://news.google.com/rss/search?q=%22DeepSeek%22+%28AI+OR+model+OR+LLM+OR+research+OR+reasoning+OR+release+OR+benchmark%29&hl=en-US&gl=US&ceid=US:en": {
+    "etag": "",
+    "last_modified": ""
+  },
+  "https://news.google.com/rss/search?q=%22MiniMax+AI%22+OR+%22Hailuo+AI%22+OR+%28%22MiniMax%22+%28model+OR+video+OR+AI+OR+chatbot+OR+release%29%29&hl=en-US&gl=US&ceid=US:en": {
+    "etag": "",
+    "last_modified": ""
   }
 }
