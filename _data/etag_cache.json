@@ -4,8 +4,8 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"5R33cg\"",
-    "last_modified": ""
+    "etag": "",
+    "last_modified": "Mon, 27 Apr 2026 07:00:06 GMT"
   },
   "https://blog.research.google/feeds/posts/default": {
     "etag": "",
@@ -16,8 +16,8 @@
     "last_modified": "Wed, 29 Apr 2026 00:18:09 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"ffb78d5dc46140edc36a50483802a86a-gzip\"",
-    "last_modified": "Thu, 30 Apr 2026 06:32:12 GMT"
+    "etag": "W/\"4048f45eb60f54ad5d8d563ea285e8b5-gzip\"",
+    "last_modified": "Thu, 30 Apr 2026 10:34:52 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
     "etag": "W/\"37667-xQVaTgTnOVRxJB3Q/NFa/qVmock\"",
@@ -32,12 +32,12 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"5a308c5b236be6205c808b6a28ded6e5\"",
-    "last_modified": "Thu, 30 Apr 2026 03:58:22 GMT"
+    "etag": "W/\"162b694f67d11c2fff70ef465a171e3d\"",
+    "last_modified": "Thu, 30 Apr 2026 11:34:29 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Wed, 29 Apr 2026 22:01:23 GMT"
+    "last_modified": "Thu, 30 Apr 2026 11:22:28 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"53fe865ddbf32fcf26c0b8bf00c05ab5\"",
@@ -48,7 +48,7 @@
     "last_modified": "Thu, 30 Apr 2026 10:00:00 GMT"
   },
   "https://www.theinformation.com/feed": {
-    "etag": "W/\"b6a08f7993b285f867d17ccea73e7b4b\"",
+    "etag": "W/\"75ab14311e64da8a52fd01673c0570c6\"",
     "last_modified": ""
   },
   "https://www.nature.com/natmachintell.rss": {
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Thu, 30 Apr 2026 09:54:14 GMT"
+    "last_modified": "Thu, 30 Apr 2026 11:54:33 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"166cf1-SfPubPicbgQqxOsZbI4JyeU7uIQ\"",
+    "etag": "W/\"166cf1-BQ9Iyg12JE598mm7ZOrQAgNHGYI\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
