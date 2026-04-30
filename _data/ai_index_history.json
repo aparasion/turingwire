@@ -2720,14 +2720,22 @@
       "change": 0.37,
       "change_pct": 0.21,
       "n_tickers": 28
+    },
+    {
+      "timestamp": "2026-04-30T21:31:35.548426+00:00",
+      "date": "2026-04-30",
+      "value": 176.84,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "n_tickers": 28
     }
   ],
   "latest": {
-    "timestamp": "2026-04-30T20:19:45.903424+00:00",
+    "timestamp": "2026-04-30T21:31:35.548426+00:00",
     "date": "2026-04-30",
     "value": 176.84,
-    "change": 0.37,
-    "change_pct": 0.21,
+    "change": 0.0,
+    "change_pct": 0.0,
     "n_tickers": 28
   }
 }
