@@ -2704,14 +2704,22 @@
       "change": 0.82,
       "change_pct": 0.47,
       "n_tickers": 28
+    },
+    {
+      "timestamp": "2026-04-30T19:05:37.047296+00:00",
+      "date": "2026-04-30",
+      "value": 176.47,
+      "change": -0.27,
+      "change_pct": -0.15,
+      "n_tickers": 28
     }
   ],
   "latest": {
-    "timestamp": "2026-04-30T17:49:41.683152+00:00",
+    "timestamp": "2026-04-30T19:05:37.047296+00:00",
     "date": "2026-04-30",
-    "value": 176.74,
-    "change": 0.82,
-    "change_pct": 0.47,
+    "value": 176.47,
+    "change": -0.27,
+    "change_pct": -0.15,
     "n_tickers": 28
   }
 }
