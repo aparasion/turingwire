@@ -49,15 +49,15 @@ jobs:
         if: github.event.inputs.dry_run != 'true'
         run: python scripts/deduplicate.py
 
-      - name: Tag companies (alias pass)
-        if: github.event.inputs.dry_run != 'true'
-        run: python scripts/tag_company.py
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
       - name: Classify articles
         if: github.event.inputs.dry_run != 'true'
         run: python scripts/classify_article.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Tag companies
+        if: github.event.inputs.dry_run != 'true'
+        run: python scripts/tag_company.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
