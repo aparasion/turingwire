@@ -1,49 +1,57 @@
 /* ==========================================================================
    Turing Wire — stocks.js
-   AIStocks dashboard: heatmap treemap + AI Index line chart using Apache ECharts
+   AIStocks dashboard: heatmap treemap + AI Index line chart using ECharts
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  // ECharts instances
   var heatmapChart = null;
   var indexChart = null;
 
-  // Theme-aware colors
+  // Safe ready — calls fn immediately if DOM already loaded, otherwise waits.
+  // This avoids the race where DOMContentLoaded fires before this script loads.
+  function ready(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  // ── Theme-aware colors ─────────────────────────────────────────────────────
+
   function getThemeColors() {
     var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     return {
-      bg:        isDark ? '#161615' : '#ffffff',
-      text:      isDark ? '#ededed' : '#111110',
-      muted:     isDark ? '#6b7280' : '#9ca3af',
-      border:    isDark ? '#2a2a28' : '#e5e5e3',
-      gridLine:  isDark ? '#1f1f1d' : '#f0f0ee',
-      positive:  '#16a34a',
-      negative:  '#dc2626',
-      neutral:   isDark ? '#6b7280' : '#9ca3af',
-      accent:    '#f97316',
+      bg:       isDark ? '#0d1732' : '#ffffff',
+      text:     isDark ? '#e2e8f0' : '#0f172a',
+      muted:    isDark ? '#94a3b8' : '#64748b',
+      border:   isDark ? '#1e3055' : '#dde3f5',
+      gridLine: isDark ? '#1a2d50' : '#eef2ff',
+      positive: '#16a34a',
+      negative: '#dc2626',
+      accent:   isDark ? '#22d3ee' : '#0891b2',
     };
   }
 
   // ── Heatmap treemap ────────────────────────────────────────────────────────
 
   function buildHeatmapOption(data, colors) {
-    // data: [{symbol, name, price, change_pct, market_cap_proxy}]
     var treeData = data.map(function (d) {
       var pct = d.change_pct || 0;
       var color;
-      if (pct > 3)        color = '#15803d';
-      else if (pct > 1.5) color = '#16a34a';
-      else if (pct > 0)   color = '#22c55e';
-      else if (pct < -3)  color = '#991b1b';
+      if      (pct >  3)   color = '#15803d';
+      else if (pct >  1.5) color = '#16a34a';
+      else if (pct >  0)   color = '#22c55e';
+      else if (pct < -3)   color = '#991b1b';
       else if (pct < -1.5) color = '#dc2626';
-      else if (pct < 0)   color = '#ef4444';
-      else                color = colors.neutral;
+      else if (pct <  0)   color = '#ef4444';
+      else                 color = colors.muted;
 
       return {
         name: d.symbol,
-        value: Math.abs(d.price || 100),  // size = price as proxy
+        value: Math.abs(d.price || 100),
         label: d.symbol,
         pct: pct,
         price: d.price,
@@ -61,12 +69,12 @@
         textStyle: { color: colors.text, fontFamily: 'JetBrains Mono' },
         formatter: function (params) {
           var d = params.data;
-          if (!d.price) return '';
+          if (!d || !d.price) return '';
           var sign = d.pct >= 0 ? '+' : '';
-          return [
-            '<strong>' + d.label + '</strong> · ' + d.fullName,
-            '$' + d.price.toFixed(2) + ' &nbsp; <span style="color:' + (d.pct >= 0 ? '#16a34a' : '#dc2626') + '">' + sign + d.pct.toFixed(2) + '%</span>',
-          ].join('<br>');
+          return '<strong>' + d.label + '</strong> · ' + d.fullName + '<br>' +
+            '$' + d.price.toFixed(2) + ' &nbsp;' +
+            '<span style="color:' + (d.pct >= 0 ? '#16a34a' : '#dc2626') + '">' +
+            sign + d.pct.toFixed(2) + '%</span>';
         },
       },
       series: [{
@@ -89,18 +97,8 @@
           fontSize: 11,
           fontWeight: 500,
         },
-        itemStyle: {
-          borderWidth: 2,
-          borderColor: colors.bg,
-          gapWidth: 2,
-        },
-        levels: [{
-          itemStyle: {
-            borderWidth: 3,
-            borderColor: colors.bg,
-            gapWidth: 3,
-          },
-        }],
+        itemStyle: { borderWidth: 2, borderColor: colors.bg, gapWidth: 2 },
+        levels: [{ itemStyle: { borderWidth: 3, borderColor: colors.bg, gapWidth: 3 } }],
       }],
     };
   }
@@ -108,23 +106,22 @@
   // ── AI Index line chart ────────────────────────────────────────────────────
 
   function buildIndexOption(series, range, colors) {
-    // series: [{timestamp, value, change_pct}]
     var now = new Date();
     var cutoff;
-    if (range === '1M') cutoff = new Date(now - 30 * 86400000);
-    else if (range === '3M') cutoff = new Date(now - 90 * 86400000);
+    if      (range === '1M')  cutoff = new Date(now - 30  * 86400000);
+    else if (range === '3M')  cutoff = new Date(now - 90  * 86400000);
     else if (range === 'YTD') cutoff = new Date(now.getFullYear(), 0, 1);
-    else if (range === '1Y') cutoff = new Date(now - 365 * 86400000);
-    else cutoff = new Date(0); // YOY / all
+    else if (range === '1Y')  cutoff = new Date(now - 365 * 86400000);
+    else                      cutoff = new Date(0);
 
-    var filtered = series.filter(function (p) {
+    var filtered = (series || []).filter(function (p) {
       return new Date(p.timestamp) >= cutoff;
     });
 
-    var dates = filtered.map(function (p) { return p.timestamp.slice(0, 10); });
+    var dates  = filtered.map(function (p) { return p.timestamp.slice(0, 10); });
     var values = filtered.map(function (p) { return p.value; });
-    var latest = values[values.length - 1] || 100;
-    var first = values[0] || 100;
+    var latest = values.length ? values[values.length - 1] : 100;
+    var first  = values.length ? values[0] : 100;
     var lineColor = latest >= first ? colors.positive : colors.negative;
 
     return {
@@ -139,7 +136,7 @@
           color: colors.muted,
           fontFamily: 'JetBrains Mono',
           fontSize: 10,
-          interval: Math.floor(dates.length / 5),
+          interval: Math.max(0, Math.floor(dates.length / 5) - 1),
         },
       },
       yAxis: {
@@ -189,17 +186,50 @@
     };
   }
 
+  // ── Sparkline (homepage sidebar) ───────────────────────────────────────────
+
+  function buildSparklineOption(series, colors) {
+    var pts = (series || []).slice(-48); // last 48 data points
+    var values = pts.map(function (p) { return p.value; });
+    if (!values.length) return null;
+
+    var latest = values[values.length - 1];
+    var first  = values[0];
+    var lineColor = latest >= first ? colors.positive : colors.negative;
+
+    return {
+      backgroundColor: 'transparent',
+      grid: { left: 0, right: 0, top: 2, bottom: 2 },
+      xAxis: { type: 'category', show: false },
+      yAxis: { type: 'value', show: false, scale: true },
+      tooltip: { show: false },
+      series: [{
+        type: 'line',
+        data: values,
+        smooth: true,
+        symbol: 'none',
+        lineStyle: { color: lineColor, width: 1.5 },
+        areaStyle: {
+          color: {
+            type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: lineColor + '40' },
+              { offset: 1, color: lineColor + '05' },
+            ],
+          },
+        },
+      }],
+    };
+  }
+
   // ── Initialize ─────────────────────────────────────────────────────────────
 
   function initHeatmap(stockData) {
     var el = document.getElementById('tw-heatmap');
     if (!el || typeof echarts === 'undefined') return;
-
     heatmapChart = echarts.init(el, null, { renderer: 'canvas' });
-    var colors = getThemeColors();
     var quotes = Object.values(stockData.quotes || {});
-    heatmapChart.setOption(buildHeatmapOption(quotes, colors));
-
+    heatmapChart.setOption(buildHeatmapOption(quotes, getThemeColors()));
     window.addEventListener('resize', function () { heatmapChart.resize(); });
   }
 
@@ -208,17 +238,27 @@
     if (!el || typeof echarts === 'undefined') return;
 
     indexChart = echarts.init(el, null, { renderer: 'canvas' });
-    var colors = getThemeColors();
     var currentRange = '3M';
-    indexChart.setOption(buildIndexOption(historyData.series || [], currentRange, colors));
 
-    // Range selector buttons
+    // Set initial option — show empty axes if no data yet
+    indexChart.setOption(buildIndexOption(historyData.series || [], currentRange, getThemeColors()));
+
+    // Show "no data" text when series is empty
+    if (!(historyData.series || []).length) {
+      indexChart.setOption({
+        graphic: [{
+          type: 'text',
+          left: 'center',
+          top: 'middle',
+          style: { text: 'Awaiting first data — stocks workflow runs every 15 min during market hours', fill: getThemeColors().muted, fontSize: 12, fontFamily: 'JetBrains Mono' },
+        }],
+      });
+    }
+
     document.querySelectorAll('[data-range]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         currentRange = btn.getAttribute('data-range');
-        document.querySelectorAll('[data-range]').forEach(function (b) {
-          b.classList.remove('active');
-        });
+        document.querySelectorAll('[data-range]').forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
         indexChart.setOption(buildIndexOption(historyData.series || [], currentRange, getThemeColors()), true);
       });
@@ -227,31 +267,40 @@
     window.addEventListener('resize', function () { indexChart.resize(); });
   }
 
-  // Re-render charts on theme change
+  function initSparkline(historyData) {
+    var el = document.getElementById('tw-sparkline-chart');
+    if (!el || typeof echarts === 'undefined') return;
+    var opt = buildSparklineOption(historyData.series || [], getThemeColors());
+    if (!opt) return;
+    var chart = echarts.init(el, null, { renderer: 'canvas' });
+    chart.setOption(opt);
+    window.addEventListener('resize', function () { chart.resize(); });
+  }
+
+  // ── Theme change observer ──────────────────────────────────────────────────
+
   var observer = new MutationObserver(function () {
+    var colors = getThemeColors();
     if (heatmapChart) {
-      var stockData = window._twStockData || {};
-      heatmapChart.setOption(buildHeatmapOption(Object.values(stockData.quotes || {}), getThemeColors()), true);
+      var quotes = Object.values((window._twStockData || {}).quotes || {});
+      heatmapChart.setOption(buildHeatmapOption(quotes, colors), true);
     }
     if (indexChart) {
-      var historyData = window._twIndexHistory || {};
-      var currentRange = (document.querySelector('[data-range].active') || {}).getAttribute('data-range') || '3M';
-      indexChart.setOption(buildIndexOption(historyData.series || [], currentRange, getThemeColors()), true);
+      var range = (document.querySelector('[data-range].active') || {}).getAttribute &&
+                  document.querySelector('[data-range].active').getAttribute('data-range') || '3M';
+      indexChart.setOption(buildIndexOption(((window._twIndexHistory || {}).series) || [], range, colors), true);
     }
   });
-
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ['data-theme'],
-  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   // ── Bootstrap ──────────────────────────────────────────────────────────────
 
-  document.addEventListener('DOMContentLoaded', function () {
-    var stockData = window._twStockData || {};
+  ready(function () {
+    var stockData   = window._twStockData   || {};
     var historyData = window._twIndexHistory || {};
     initHeatmap(stockData);
     initIndexChart(historyData);
+    initSparkline(historyData);
   });
 
 })();

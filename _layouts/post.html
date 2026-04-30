@@ -41,12 +41,12 @@ layout: default
   </h1>
 
   <!-- Source attribution — prominent, above summary -->
-  <div class="tw-card rounded-lg p-4 mb-8 flex items-start gap-3 border-l-2 border-orange-500">
+  <div class="tw-card rounded-lg p-4 mb-8 flex items-start gap-3 border-l-2 border-cyan-600">
     <div class="flex-1 min-w-0">
       <p class="text-xs font-mono tw-muted mb-1">Original source</p>
       <p class="font-medium tw-heading text-sm">{{ page.source_publisher }}</p>
       <a href="{{ page.source_url }}"
-         class="text-orange-500 hover:text-orange-400 text-xs font-mono break-all transition-colors"
+         class="text-cyan-600 hover:text-cyan-500 text-xs font-mono break-all transition-colors"
          target="_blank" rel="noopener noreferrer">
         {{ page.source_url }}
       </a>
@@ -96,7 +96,7 @@ layout: default
         <dt class="tw-muted mb-1">arXiv</dt>
         <dd>
           <a href="https://arxiv.org/abs/{{ page.arxiv_id }}"
-             class="text-orange-500 hover:text-orange-400 transition-colors"
+             class="text-cyan-600 hover:text-cyan-500 transition-colors"
              target="_blank" rel="noopener noreferrer">
             {{ page.arxiv_id }}
           </a>
@@ -116,7 +116,7 @@ layout: default
       <span class="text-xs font-mono tw-muted mr-2">Also covers:</span>
       {% for co in page.secondary_companies %}
       <a href="/companies/{{ co | slugify }}/"
-         class="inline-block font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5 mr-1 mb-1 hover:tw-accent hover:border-orange-500 transition-colors">
+         class="inline-block font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5 mr-1 mb-1 hover:tw-accent hover:border-cyan-600 transition-colors">
         {{ co }}
       </a>
       {% endfor %}

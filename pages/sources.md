@@ -90,7 +90,7 @@ Index base date: `{{ site.data.ai_index_history.base_date | default: site.ai_ind
 
 ## Requesting additions
 
-To suggest a new source, [open an issue on GitHub](https://github.com/aparasion/turingwire/issues) with the RSS/Atom URL and a brief rationale. Sources must:
+To suggest a new source, contact the site maintainer with the RSS/Atom URL and a brief rationale. Sources must:
 
 - Have a public RSS or Atom feed, or a documented public API.
 - Publish primarily about AI (labs, hardware, research, policy, or markets).

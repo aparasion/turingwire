@@ -59,7 +59,7 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
     <p class="text-xs font-mono tw-muted mt-2">
       Equal-weighted index of {{ site.data.tickers.tickers | size }} AI-related equities.
       Base = 100 on {{ site.data.ai_index_history.base_date | default: site.ai_index_base_date }}.
-      <a href="/methodology/#ai-index" class="text-orange-500 hover:text-orange-400 transition-colors">Methodology →</a>
+      <a href="/methodology/#ai-index" class="text-cyan-600 hover:text-cyan-500 transition-colors">Methodology →</a>
     </p>
   </section>
 
@@ -92,7 +92,7 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
         {% for ticker in site.data.tickers.tickers %}
         {% assign symbol = ticker.symbol %}
         {% assign q = site.data.stocks_snapshot.quotes[symbol] %}
-        <tr class="border-b tw-border hover:bg-orange-500/5 transition-colors">
+        <tr class="border-b tw-border hover:bg-cyan-500/5 transition-colors">
           <td class="py-2 font-semibold tw-heading">{{ symbol }}</td>
           <td class="py-2 tw-muted text-xs truncate max-w-32">{{ ticker.name }}</td>
           <td class="py-2 tw-muted text-xs">{{ ticker.sector | replace: '_', ' ' }}</td>
@@ -145,7 +145,7 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
       <strong class="tw-heading">Not investment advice.</strong>
       Data may be delayed up to 15 minutes. Turing Wire is not a registered investment advisor.
       Verify all data with primary sources before making investment decisions.
-      Stock prices sourced from Finnhub. Index methodology: <a href="/methodology/#ai-index" class="text-orange-500 hover:text-orange-400 transition-colors">/methodology</a>.
+      Stock prices sourced from Finnhub. Index methodology: <a href="/methodology/#ai-index" class="text-cyan-600 hover:text-cyan-500 transition-colors">/methodology</a>.
     </p>
   </div>
 

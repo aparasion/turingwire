@@ -25,7 +25,7 @@ Every hour, a pipeline:
 4. **Summarizes** news articles in 250–350 words and research papers in 450–550 words using structured templates.
 5. **Publishes** new posts to this site via GitHub Actions.
 
-Stock data updates every 15 minutes during US market hours via Finnhub. The pipeline code is open-source at [github.com/aparasion/turingwire](https://github.com/aparasion/turingwire).
+Stock data updates every 15 minutes during US market hours via Finnhub. The pipeline is fully automated and continuously improving.
 
 ## Impact levels
 
@@ -46,4 +46,4 @@ It is also not financial advice. See the [disclaimer](/disclaimer/).
 
 ## Who maintains it
 
-This is a personal project. The pipeline is fully automated; a human reviews the output periodically. If you spot an error, a missing source, or a miscategorized article, [open an issue on GitHub](https://github.com/aparasion/turingwire/issues).
+This is a personal project. The pipeline is fully automated; a human reviews the output periodically. If you spot an error, a missing source, or a miscategorized article, contact the site maintainer via the [about page](/about/).
