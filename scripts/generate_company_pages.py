@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 
 import yaml
-from python_slugify import slugify
+from slugify import slugify
 
 ROOT = Path(__file__).parent.parent
 POSTS_DIR = ROOT / "_posts"
