@@ -15,14 +15,9 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-# Pagination (jekyll-paginate-v2)
-pagination:
-  enabled: true
-  per_page: 20
-  permalink: "/page/:num/"
-  title: ":title — page :num"
-  sort_field: "date"
-  sort_reverse: true
+# Pagination (jekyll-paginate)
+paginate: 20
+paginate_path: "/page/:num/"
 
 # Collections
 collections:
@@ -70,7 +65,7 @@ include:
 
 # Plugins
 plugins:
-  - jekyll-paginate-v2
+  - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed

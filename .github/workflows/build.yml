@@ -12,14 +12,15 @@ on:
   # Manual trigger
   workflow_dispatch:
 
+# Required for GitHub Pages Actions deployment
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 concurrency:
-  group: build-deploy
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -42,7 +43,7 @@ jobs:
         run: |
           SNAPSHOT="_data/stocks_snapshot.json"
           if [ -f "$SNAPSHOT" ]; then
-            UPDATED=$(python3 -c "
+            python3 -c "
           import json, sys
           from datetime import datetime, timezone, timedelta
           with open('$SNAPSHOT') as f:
@@ -52,13 +53,15 @@ jobs:
               sys.exit(0)
           dt = datetime.fromisoformat(updated.replace('Z', '+00:00'))
           age = datetime.now(timezone.utc) - dt
+          print(f'Stocks data age: {age}')
           if age > timedelta(hours=6):
-              print(f'WARNING: stocks data is {age} old')
-          else:
-              print(f'Stocks data age: {age}')
-          ")
-            echo "$UPDATED"
+              print('WARNING: stocks data is stale')
+          "
           fi
+
+      # configure-pages sets JEKYLL_ENV and writes the correct baseurl/url
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -71,18 +74,25 @@ jobs:
         env:
           JEKYLL_ENV: production
 
-      - name: Install Pagefind
-        run: npm install -g pagefind
+      - name: Install and run Pagefind
+        run: |
+          npm install -g pagefind
+          pagefind --site _site --output-path _site/pagefind
 
-      - name: Run Pagefind indexer
-        run: pagefind --site _site --output-path _site/pagefind
-
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      # Upload the built _site as a Pages artifact
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          publish_branch: gh-pages
-          force_orphan: false
-          commit_message: "deploy: build ${{ github.run_number }} from ${{ github.sha }}"
-          cname: turingwire.com
+          path: "_site"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
