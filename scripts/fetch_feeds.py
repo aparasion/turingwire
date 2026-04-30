@@ -89,6 +89,32 @@ def fetch_url(url: str, headers: dict | None = None) -> requests.Response:
     return requests.get(url, headers=h, timeout=REQUEST_TIMEOUT)
 
 
+def resolve_redirect(url: str) -> str:
+    """Follow HTTP redirects and return the final canonical URL.
+    Used for Google News links which redirect to the actual source article."""
+    try:
+        resp = requests.head(
+            url,
+            headers={"User-Agent": USER_AGENT},
+            timeout=10,
+            allow_redirects=True,
+        )
+        final = resp.url
+        # HEAD sometimes stops at a soft redirect page; fall back to GET
+        if "news.google.com" in final:
+            resp = requests.get(
+                url,
+                headers={"User-Agent": USER_AGENT},
+                timeout=10,
+                allow_redirects=True,
+            )
+            final = resp.url
+        return final if final else url
+    except Exception as exc:
+        log.debug("redirect resolution failed for %s: %s", url, exc)
+        return url
+
+
 def fetch_full_text(url: str) -> str:
     """Attempt to extract main article text from a URL."""
     try:
@@ -165,6 +191,11 @@ def fetch_rss_atom(source: dict, etag_cache: dict, dry_run: bool) -> list[dict]:
         link = getattr(entry, "link", "") or ""
         if not link:
             continue
+
+        # For Google News sources, resolve the redirect to the real article URL
+        # so URL-based deduplication works against articles from direct feeds.
+        if source.get("resolve_redirect") and "news.google.com" in link:
+            link = resolve_redirect(link)
 
         body = ""
         for field in ("summary", "content"):
