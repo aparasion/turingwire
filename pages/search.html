@@ -9,52 +9,107 @@ permalink: /search/
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 
-<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-  <header class="mb-6">
-    <h1 class="text-2xl font-semibold tw-heading">Search</h1>
-  </header>
+  <h1 class="text-2xl font-semibold tw-heading mb-6">Search</h1>
 
   <div id="search-container"></div>
 
 </div>
 
 <script>
-  window.addEventListener('DOMContentLoaded', function () {
+  (function () {
     var params = new URLSearchParams(window.location.search);
     var query = params.get('q') || '';
 
-    new PagefindUI({
-      element: '#search-container',
-      showSubResults: false,
-      excerptLength: 15,
-      defaultQuery: query,
-    });
+    function initSearch() {
+      if (typeof PagefindUI === 'undefined') {
+        setTimeout(initSearch, 50);
+        return;
+      }
+      new PagefindUI({
+        element: '#search-container',
+        showSubResults: false,
+        excerptLength: 12,
+        defaultQuery: query,
+      });
 
-    if (query) {
-      setTimeout(function () {
-        var input = document.querySelector('.pagefind-ui__search-input');
-        if (input) {
-          input.dispatchEvent(new Event('input', { bubbles: true }));
+      if (query) {
+        // Poll until the input element exists, then force-trigger the search
+        var attempts = 0;
+        function trigger() {
+          var input = document.querySelector('.pagefind-ui__search-input');
+          if (input) {
+            input.value = query;
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+          } else if (attempts++ < 30) {
+            setTimeout(trigger, 100);
+          }
         }
-      }, 50);
+        setTimeout(trigger, 100);
+      }
     }
-  });
+
+    if (document.readyState !== 'loading') {
+      initSearch();
+    } else {
+      document.addEventListener('DOMContentLoaded', initSearch);
+    }
+  })();
 </script>
 
 <style>
-  .pagefind-ui__search-input { font-family: 'JetBrains Mono', monospace; font-size: 14px; }
-  .pagefind-ui__results { margin-top: 12px; }
-  .pagefind-ui__result { padding: 10px 0; border-bottom: 1px solid var(--border); }
-  .pagefind-ui__result-inner { margin: 0; }
-  .pagefind-ui__result-title { font-size: 13px; font-weight: 600; color: var(--fg-heading); }
-  .pagefind-ui__result-excerpt { font-size: 12px; margin-top: 2px; line-height: 1.4; }
+  /* ── Layout ── */
+  .pagefind-ui__form { margin-bottom: 0; }
+  .pagefind-ui__results-area { margin-top: 8px; }
+  .pagefind-ui__results { gap: 0; }
+
+  /* ── Each result row ── */
+  .pagefind-ui__result {
+    padding: 7px 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+  .pagefind-ui__result:last-child { border-bottom: none !important; }
+  .pagefind-ui__result-inner { padding: 0 !important; gap: 2px !important; display: flex; flex-direction: column; }
+  .pagefind-ui__result-link { padding: 0 !important; }
+  .pagefind-ui__result-nested { padding: 2px 0 0 10px !important; }
+
+  /* ── Typography ── */
+  .pagefind-ui__search-input {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+  }
+  .pagefind-ui__result-title {
+    font-size: 13px !important;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--fg-heading) !important;
+  }
+  .pagefind-ui__result-title a { color: inherit !important; }
+  .pagefind-ui__result-title a:hover { color: var(--accent) !important; }
+  .pagefind-ui__result-excerpt {
+    font-size: 11px !important;
+    line-height: 1.4;
+    margin-top: 1px !important;
+    color: var(--fg) !important;
+    opacity: 0.75;
+  }
   .pagefind-ui__result-excerpt mark {
-    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
     color: var(--accent);
     border-radius: 2px;
+    padding: 0 1px;
   }
-  .pagefind-ui__result-link { padding: 0; }
-  .pagefind-ui__message { font-size: 12px; font-family: 'JetBrains Mono', monospace; }
+  .pagefind-ui__message {
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 6px 0 !important;
+  }
   .pagefind-ui__search-clear { top: 50%; transform: translateY(-50%); }
+
+  /* ── Load more button ── */
+  .pagefind-ui__suppressed { display: none !important; }
+  .pagefind-ui__results-count { font-size: 11px; font-family: 'JetBrains Mono', monospace; opacity: 0.6; margin-bottom: 4px; }
 </style>
