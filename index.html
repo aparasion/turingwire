@@ -65,6 +65,13 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
         {% elsif group.name == yesterday_str %}{% assign day_label = "Yesterday" %}
         {% endif %}
 
+        {% assign valid_count = 0 %}
+        {% for post in group.items %}
+          {% assign _t = post.title | strip %}
+          {% if _t != blank %}{% assign valid_count = valid_count | plus: 1 %}{% endif %}
+        {% endfor %}
+
+        {% if valid_count > 0 %}
         <div class="mb-8">
           <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3 flex items-center gap-3">
             <span>{{ day_label }}</span>
@@ -84,8 +91,8 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
             {% endfor %}
           </div>
         </div>
-
         {% assign shown_groups = shown_groups | plus: 1 %}
+        {% endif %}
       {% endfor %}
 
       {% endif %}
