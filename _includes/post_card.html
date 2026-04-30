@@ -2,7 +2,7 @@
 {% assign compact = include.compact %}
 {% assign _title_stripped = p.title | strip %}
 
-{% if _title_stripped != blank %}
+{% if _title_stripped and _title_stripped != "" %}
 <article class="tw-card rounded-lg p-5 border tw-border hover:border-cyan-600/50 transition-all group">
   <div class="flex flex-col sm:flex-row sm:items-start gap-3">
 

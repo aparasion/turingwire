@@ -1,5 +1,5 @@
 ---
-title: "A Note on How to Remove the $\ln\ln T$ Term from the Squint Bound"
+title: 'A Note on How to Remove the $\ln\ln T$ Term from the Squint Bound'
 date: 2026-04-29 17:40:25 +0000
 category: research
 subcategory: theory
