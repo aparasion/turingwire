@@ -22,8 +22,8 @@ permalink: /companies/
     {% for co in all_companies %}
     {% assign co_posts = site.posts | where: "company", co %}
     <a href="/companies/{{ co | slugify }}/"
-       class="tw-card rounded border tw-border p-3 hover:border-orange-500 transition-all group">
-      <p class="font-medium tw-heading text-sm group-hover:text-orange-500 transition-colors">{{ co }}</p>
+       class="tw-card rounded border tw-border p-3 hover:border-cyan-600 transition-all group">
+      <p class="font-medium tw-heading text-sm group-hover:text-cyan-600 transition-colors">{{ co }}</p>
       <p class="text-xs font-mono tw-muted mt-0.5">{{ co_posts.size }} article{% if co_posts.size != 1 %}s{% endif %}</p>
     </a>
     {% endfor %}

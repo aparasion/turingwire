@@ -1,7 +1,7 @@
 {% assign p = include.post %}
 {% assign compact = include.compact %}
 
-<article class="tw-card rounded-lg p-5 border tw-border hover:border-orange-500/50 transition-all group">
+<article class="tw-card rounded-lg p-5 border tw-border hover:border-cyan-600/50 transition-all group">
   <div class="flex flex-col sm:flex-row sm:items-start gap-3">
 
     <div class="flex-1 min-w-0">
@@ -16,7 +16,7 @@
 
         {% if p.company %}
         <a href="/companies/{{ p.company | slugify }}/"
-           class="font-mono text-xs text-orange-500 hover:text-orange-400 transition-colors">
+           class="font-mono text-xs text-cyan-600 hover:text-cyan-500 transition-colors">
           {{ p.company }}
         </a>
         {% endif %}
@@ -27,7 +27,7 @@
       </div>
 
       <!-- Title -->
-      <h2 class="{% if compact %}text-sm{% else %}text-base{% endif %} font-semibold tw-heading leading-snug mb-2 group-hover:text-orange-500 transition-colors">
+      <h2 class="{% if compact %}text-sm{% else %}text-base{% endif %} font-semibold tw-heading leading-snug mb-2 group-hover:text-cyan-600 transition-colors">
         <a href="{{ p.url }}">{{ p.title }}</a>
       </h2>
 
@@ -44,7 +44,7 @@
       <div class="flex flex-wrap items-center gap-3 text-xs font-mono tw-muted">
         {% if p.source_publisher %}
         <span class="flex items-center gap-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-orange-500/60 flex-shrink-0"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-500/60 flex-shrink-0"></span>
           {{ p.source_publisher }}
         </span>
         {% endif %}
@@ -64,7 +64,7 @@
     </div>
 
     <!-- Arrow indicator -->
-    <div class="flex-shrink-0 tw-muted group-hover:text-orange-500 transition-colors hidden sm:block">
+    <div class="flex-shrink-0 tw-muted group-hover:text-cyan-600 transition-colors hidden sm:block">
       <svg class="w-4 h-4 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
       </svg>

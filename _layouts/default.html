@@ -49,6 +49,10 @@
   </script>
   {% endif %}
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ '/assets/img/turingwire.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/turingwire.png' | relative_url }}">
+
   <!-- Feeds -->
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }} — Major+ only" href="{{ '/feed-major.xml' | absolute_url }}">
@@ -71,8 +75,8 @@
           },
           colors: {
             accent: {
-              DEFAULT: '#f97316',
-              dark: '#fb923c',
+              DEFAULT: '#0891b2',
+              dark: '#22d3ee',
             },
           },
         },

@@ -12,7 +12,7 @@ By accessing Turing Wire, you agree to these terms. If you disagree, do not use 
 
 ## Content license
 
-Pipeline code is licensed MIT (see the [repository](https://github.com/aparasion/turingwire)). Article summaries are derivative works of their respective source publishers and are not independently licensed by Turing Wire. All original content belongs to its respective owner.
+Article summaries are derivative works of their respective source publishers and are not independently licensed by Turing Wire. All original content belongs to its respective owner.
 
 ## Use of content
 
@@ -36,4 +36,4 @@ These terms may be updated at any time. The last-updated date above reflects the
 
 ## Contact
 
-For questions, open an issue at [github.com/aparasion/turingwire](https://github.com/aparasion/turingwire/issues).
+For questions or concerns, use the contact information on the [about page](/about/).

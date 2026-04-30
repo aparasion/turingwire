@@ -1,50 +1,50 @@
 /* ==========================================================================
    Turing Wire — Main Stylesheet
-   Design system: CSS custom properties + Tailwind utility classes
+   Color palette: deep navy + cyan, inspired by the Turing Wire logo
    ========================================================================== */
 
 /* ── Custom properties ───────────────────────────────────────────────────── */
 
 :root,
 [data-theme="light"] {
-  --bg:       #f9f9f8;
-  --bg-card:  #ffffff;
-  --bg-header:#ffffffee;
-  --bg-mobile:#ffffff;
-  --fg:       #111110;
-  --fg-muted: #6b7280;
-  --fg-heading: #1a1a19;
-  --accent:   #f97316;
-  --border:   #e5e5e3;
-  --border-header: #e5e5e300;
-  --badge-major-bg:   #1f2937;
-  --badge-major-fg:   #f9fafb;
-  --badge-notable-border: #d1d5db;
-  --badge-notable-fg: #374151;
+  --bg:            #f4f7ff;
+  --bg-card:       #ffffff;
+  --bg-header:     #ffffffee;
+  --bg-mobile:     #ffffff;
+  --fg:            #111827;
+  --fg-muted:      #64748b;
+  --fg-heading:    #0f172a;
+  --accent:        #0891b2;
+  --accent-hover:  #0e7490;
+  --border:        #dde3f5;
+  --border-header: transparent;
+  --badge-major-bg:      #0f172a;
+  --badge-major-fg:      #f8fafc;
+  --badge-notable-border:#94a3b8;
+  --badge-notable-fg:    #334155;
 }
 
 [data-theme="dark"] {
-  --bg:       #0d0d0c;
-  --bg-card:  #161615;
-  --bg-header:#0d0d0cee;
-  --bg-mobile:#0d0d0c;
-  --fg:       #ededed;
-  --fg-muted: #9ca3af;
-  --fg-heading: #f5f5f4;
-  --accent:   #fb923c;
-  --border:   #2a2a28;
-  --border-header: #2a2a2800;
-  --badge-major-bg:   #f3f4f6;
-  --badge-major-fg:   #111827;
-  --badge-notable-border: #4b5563;
-  --badge-notable-fg: #d1d5db;
+  --bg:            #060d1f;
+  --bg-card:       #0d1732;
+  --bg-header:     #060d1fee;
+  --bg-mobile:     #060d1f;
+  --fg:            #e2e8f0;
+  --fg-muted:      #94a3b8;
+  --fg-heading:    #f0f4ff;
+  --accent:        #22d3ee;
+  --accent-hover:  #67e8f9;
+  --border:        #1e3055;
+  --border-header: transparent;
+  --badge-major-bg:      #e2e8f0;
+  --badge-major-fg:      #0f172a;
+  --badge-notable-border:#334155;
+  --badge-notable-fg:    #94a3b8;
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
@@ -78,7 +78,7 @@ body.tw-body {
 }
 
 .tw-border-header {
-  border-color: transparent;
+  border-color: var(--border-header);
   transition: border-color 0.2s;
 }
 
@@ -109,15 +109,11 @@ body.tw-body {
   font-weight: 500;
 }
 
-.tw-mobile-nav {
-  background-color: var(--bg-mobile);
-}
+.tw-mobile-nav { background-color: var(--bg-mobile); }
 
 /* ── Search ──────────────────────────────────────────────────────────────── */
 
-.tw-search-wrapper {
-  position: relative;
-}
+.tw-search-wrapper { position: relative; }
 
 .tw-search-input {
   background-color: var(--bg-card);
@@ -135,9 +131,7 @@ body.tw-body {
   border-color: var(--accent);
 }
 
-.tw-search-input::placeholder {
-  color: var(--fg-muted);
-}
+.tw-search-input::placeholder { color: var(--fg-muted); }
 
 .tw-search-kbd {
   position: absolute;
@@ -206,14 +200,8 @@ body.tw-body {
   padding: 0.375rem 0;
 }
 
-#breaking-strip a {
-  color: #fff;
-  text-decoration: none;
-}
-
-#breaking-strip a:hover {
-  text-decoration: underline;
-}
+#breaking-strip a { color: #fff; text-decoration: none; }
+#breaking-strip a:hover { text-decoration: underline; }
 
 /* ── Prose (article body) ────────────────────────────────────────────────── */
 
@@ -234,14 +222,9 @@ body.tw-body {
 
 .tw-prose h2 { font-size: 1.25rem; }
 .tw-prose h3 { font-size: 1.1rem; }
-
 .tw-prose strong { color: var(--fg-heading); font-weight: 600; }
 .tw-prose em { font-style: italic; }
-
-.tw-prose p {
-  margin-top: 0;
-  margin-bottom: 1em;
-}
+.tw-prose p { margin-top: 0; margin-bottom: 1em; }
 
 .tw-prose a {
   color: var(--accent);
@@ -250,9 +233,7 @@ body.tw-body {
   transition: text-decoration-color 0.15s;
 }
 
-.tw-prose a:hover {
-  text-decoration-color: var(--accent);
-}
+.tw-prose a:hover { text-decoration-color: var(--accent); }
 
 .tw-prose code {
   font-family: 'JetBrains Mono', monospace;
@@ -269,14 +250,9 @@ body.tw-body {
   margin: 1em 0;
 }
 
-.tw-prose ul, .tw-prose ol {
-  padding-left: 1.5em;
-  margin-bottom: 1em;
-}
-
+.tw-prose ul, .tw-prose ol { padding-left: 1.5em; margin-bottom: 1em; }
 .tw-prose li { margin-bottom: 0.25em; }
 
-/* Research post headings */
 .tw-prose strong:first-child {
   display: block;
   font-size: 0.875rem;
@@ -290,21 +266,13 @@ body.tw-body {
 
 /* ── Footer ──────────────────────────────────────────────────────────────── */
 
-.tw-footer {
-  background-color: var(--bg);
-}
+.tw-footer { background-color: var(--bg); }
 
 /* ── Stocks dashboard ────────────────────────────────────────────────────── */
 
-.tw-heatmap {
-  width: 100%;
-  min-height: 400px;
-}
-
-.tw-index-chart {
-  width: 100%;
-  height: 300px;
-}
+.tw-heatmap { width: 100%; min-height: 400px; }
+.tw-index-chart { width: 100%; height: 300px; }
+.tw-sparkline-chart { width: 100%; height: 60px; }
 
 .tw-ticker-row {
   display: flex;
@@ -355,9 +323,7 @@ body.tw-body {
   background-color: color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
-.tw-filter-chip.active {
-  font-weight: 500;
-}
+.tw-filter-chip.active { font-weight: 500; }
 
 /* ── Utilities ───────────────────────────────────────────────────────────── */
 
@@ -375,37 +341,12 @@ body.tw-body {
   overflow: hidden;
 }
 
-/* Sidebar AI Index sparkline mini chart */
-.tw-sparkline {
-  width: 100%;
-  height: 60px;
-}
-
-/* Skip link for accessibility */
-.skip-link {
-  position: absolute;
-  top: -999px;
-  left: 0;
-  z-index: 100;
-  padding: 0.5rem 1rem;
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.875rem;
-  border-radius: 0 0 0.375rem 0;
-}
-
-.skip-link:focus {
-  top: 0;
-}
-
-/* ── Scrollbar (webkit) ──────────────────────────────────────────────────── */
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--fg-muted); }
-
-/* ── Responsive ──────────────────────────────────────────────────────────── */
 
 @media (max-width: 640px) {
   .tw-search-input:focus { width: 100%; }
