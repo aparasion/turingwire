@@ -296,6 +296,13 @@ aliases:
     - "HBM"
     - "HBM3"
 
+  "MiniMax":
+    - "MiniMax AI"
+    - "MiniMax"
+    - "Hailuo"
+    - "Hailuo AI"
+    - "MiniMax Text"
+
   "xAI":
     - "xAI"
     - "Grok"
