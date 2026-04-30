@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Pipeline internals (not served via GitHub Pages but listed for clarity)
+Disallow: /scripts/
+Disallow: /feeds/
+Disallow: /_data/
+
+Sitemap: https://turingwire.com/sitemap.xml

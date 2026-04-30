@@ -1,0 +1,150 @@
+---
+layout: default
+---
+<article class="max-w-3xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+
+  <!-- Breadcrumb -->
+  <nav class="text-xs font-mono tw-muted mb-6 flex items-center gap-2" aria-label="Breadcrumb">
+    <a href="/" class="hover:tw-accent transition-colors">Home</a>
+    <span>/</span>
+    {% if page.category == 'news' or page.categories contains 'news' %}
+    <a href="/news/" class="hover:tw-accent transition-colors">News</a>
+    {% elsif page.category == 'research' %}
+    <a href="/research/" class="hover:tw-accent transition-colors">Research</a>
+    {% elsif page.category == 'stocks' or page.categories contains 'stocks' %}
+    <a href="/aistocks/" class="hover:tw-accent transition-colors">AIStocks</a>
+    {% endif %}
+    <span>/</span>
+    <span class="truncate max-w-xs">{{ page.title }}</span>
+  </nav>
+
+  <!-- Impact badge + metadata row -->
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    {% include impact_badge.html impact=page.impact %}
+
+    {% if page.subcategory %}
+    <span class="font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5">
+      {{ page.subcategory | replace: '_', ' ' }}
+    </span>
+    {% endif %}
+
+    {% if page.company %}
+    <a href="/companies/{{ page.company | slugify }}/" class="font-mono text-xs tw-muted hover:tw-accent transition-colors">
+      {{ page.company }}
+    </a>
+    {% endif %}
+  </div>
+
+  <!-- Title -->
+  <h1 class="text-2xl sm:text-3xl font-semibold tw-heading leading-snug mb-4">
+    {{ page.title }}
+  </h1>
+
+  <!-- Source attribution — prominent, above summary -->
+  <div class="tw-card rounded-lg p-4 mb-8 flex items-start gap-3 border-l-2 border-orange-500">
+    <div class="flex-1 min-w-0">
+      <p class="text-xs font-mono tw-muted mb-1">Original source</p>
+      <p class="font-medium tw-heading text-sm">{{ page.source_publisher }}</p>
+      <a href="{{ page.source_url }}"
+         class="text-orange-500 hover:text-orange-400 text-xs font-mono break-all transition-colors"
+         target="_blank" rel="noopener noreferrer">
+        {{ page.source_url }}
+      </a>
+    </div>
+    <a href="{{ page.source_url }}"
+       class="flex-shrink-0 tw-muted hover:tw-accent transition-colors"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Read original article">
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Summary content -->
+  <div class="tw-prose prose-article">
+    {{ content }}
+  </div>
+
+  <!-- Post metadata footer -->
+  <footer class="mt-10 pt-6 border-t tw-border">
+    <dl class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs font-mono">
+      <div>
+        <dt class="tw-muted mb-1">Published</dt>
+        <dd class="tw-heading">{{ page.date | date: "%b %-d, %Y — %H:%M UTC" }}</dd>
+      </div>
+      {% if page.summary_word_count %}
+      <div>
+        <dt class="tw-muted mb-1">Summary length</dt>
+        <dd class="tw-heading">{{ page.summary_word_count }} words</dd>
+      </div>
+      {% endif %}
+      {% if page.source_truncated %}
+      <div>
+        <dt class="tw-muted mb-1">Source note</dt>
+        <dd class="text-amber-600 dark:text-amber-400">Abstract only</dd>
+      </div>
+      {% endif %}
+      {% if page.classification_confidence %}
+      <div>
+        <dt class="tw-muted mb-1">AI confidence</dt>
+        <dd class="tw-heading">{{ page.classification_confidence | times: 100 | round }}%</dd>
+      </div>
+      {% endif %}
+      {% if page.arxiv_id and page.arxiv_id != "" %}
+      <div>
+        <dt class="tw-muted mb-1">arXiv</dt>
+        <dd>
+          <a href="https://arxiv.org/abs/{{ page.arxiv_id }}"
+             class="text-orange-500 hover:text-orange-400 transition-colors"
+             target="_blank" rel="noopener noreferrer">
+            {{ page.arxiv_id }}
+          </a>
+        </dd>
+      </div>
+      {% endif %}
+      {% if page.authors and page.authors.size > 0 %}
+      <div class="col-span-2 sm:col-span-3">
+        <dt class="tw-muted mb-1">Authors</dt>
+        <dd class="tw-heading">{{ page.authors | join: ", " }}</dd>
+      </div>
+      {% endif %}
+    </dl>
+
+    {% if page.secondary_companies and page.secondary_companies.size > 0 %}
+    <div class="mt-4">
+      <span class="text-xs font-mono tw-muted mr-2">Also covers:</span>
+      {% for co in page.secondary_companies %}
+      <a href="/companies/{{ co | slugify }}/"
+         class="inline-block font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5 mr-1 mb-1 hover:tw-accent hover:border-orange-500 transition-colors">
+        {{ co }}
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </footer>
+
+  <!-- Navigation between posts -->
+  <nav class="mt-8 flex justify-between items-center gap-4 text-sm" aria-label="Post navigation">
+    {% if page.previous %}
+    <a href="{{ page.previous.url }}" class="flex items-center gap-2 tw-muted hover:tw-accent transition-colors min-w-0">
+      <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="truncate">{{ page.previous.title }}</span>
+    </a>
+    {% else %}
+    <span></span>
+    {% endif %}
+
+    {% if page.next %}
+    <a href="{{ page.next.url }}" class="flex items-center gap-2 tw-muted hover:tw-accent transition-colors min-w-0 text-right">
+      <span class="truncate">{{ page.next.title }}</span>
+      <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </a>
+    {% endif %}
+  </nav>
+
+</article>

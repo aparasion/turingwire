@@ -1,0 +1,47 @@
+---
+layout: default
+title: "Companies"
+description: "AI industry coverage by company — browse all tracked organizations."
+permalink: /companies/
+---
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+  <header class="mb-8">
+    <h1 class="text-3xl font-semibold tw-heading">Companies</h1>
+    <p class="text-sm tw-muted mt-1 font-mono">Browse coverage by organization</p>
+  </header>
+
+  {% assign all_companies = site.posts | map: "company" | compact | uniq | sort %}
+
+  {% if all_companies.size == 0 %}
+  <p class="tw-muted text-sm font-mono">No articles indexed yet.</p>
+  {% else %}
+
+  <!-- Group by first letter -->
+  {% assign letters = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z" | split: "," %}
+
+  <div class="space-y-8">
+    {% for letter in letters %}
+    {% assign letter_companies = all_companies | where_exp: "co", "co | slice: 0 == letter" %}
+    {% if letter_companies.size > 0 %}
+    <div>
+      <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3 border-b tw-border pb-2">{{ letter }}</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+        {% for co in letter_companies %}
+        {% assign co_posts = site.posts | where: "company", co %}
+        <a href="/companies/{{ co | slugify }}/"
+           class="tw-card rounded border tw-border p-3 hover:border-orange-500 transition-all group">
+          <p class="font-medium tw-heading text-sm group-hover:text-orange-500 transition-colors">{{ co }}</p>
+          <p class="text-xs font-mono tw-muted mt-0.5">{{ co_posts.size }} article{% if co_posts.size != 1 %}s{% endif %}</p>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  {% endif %}
+
+</div>

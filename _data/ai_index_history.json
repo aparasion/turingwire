@@ -1,0 +1,8 @@
+{
+  "base_prices": {},
+  "base_date": "",
+  "series": [],
+  "name": "TW AI Index",
+  "latest": null,
+  "description": "Equal-weighted index of AI-related equities. Base = 100 on base_date. Each ticker individually indexed to its base-date close, then averaged."
+}

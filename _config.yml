@@ -1,0 +1,102 @@
+title: "Turing Wire"
+tagline: "The pulse of AI — news, research, and markets."
+description: "Near-realtime AI industry news, research summaries, and stock market data."
+url: "https://turingwire.com"
+baseurl: ""
+
+# Build
+markdown: kramdown
+highlighter: rouge
+permalink: /post/:year/:month/:day/:slug/
+timezone: UTC
+
+# Kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Pagination (jekyll-paginate-v2)
+pagination:
+  enabled: true
+  per_page: 20
+  permalink: "/page/:num/"
+  title: ":title — page :num"
+  sort_field: "date"
+  sort_reverse: true
+
+# Collections
+collections:
+  companies:
+    output: true
+    permalink: /companies/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: "pages"
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: ""
+      type: "companies"
+    values:
+      layout: "company"
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - CONTRIBUTING.md
+  - scripts/
+  - feeds/
+  - requirements.txt
+  - "*.py"
+  - ".github/"
+  - node_modules/
+  - vendor/
+  - archive/
+
+# Include
+include:
+  - _pages
+  - CNAME
+
+# Plugins
+plugins:
+  - jekyll-paginate-v2
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-redirect-from
+
+# jekyll-feed
+feed:
+  path: feed.xml
+  posts_limit: 50
+
+# SEO
+logo: "/assets/images/logo.png"
+social:
+  name: "Turing Wire"
+  links: []
+
+# Author
+author:
+  name: "Turing Wire"
+  url: "https://turingwire.com"
+
+# Analytics placeholder (fill in after launch)
+google_analytics: ""
+
+# Site-wide flags
+ai_index_base_date: "2026-01-02"
+ai_index_name: "TW AI Index"
+max_posts_per_run: 50
+post_archive_after_days: 90
