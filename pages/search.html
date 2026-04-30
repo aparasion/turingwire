@@ -12,7 +12,7 @@ permalink: /search/
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
   <div class="flex items-center gap-2 mb-6">
-    <img src="{{ '/assets/img/turingwire2.png' | relative_url }}"
+    <img src="{{ '/assets/img/turingwire.png' | relative_url }}"
          alt="Turing Wire"
          class="w-4 h-4 object-contain">
     <h1 class="text-2xl font-semibold tw-heading">Search</h1>
@@ -113,6 +113,20 @@ permalink: /search/
     padding: 6px 0 !important;
   }
   .pagefind-ui__search-clear { top: 50%; transform: translateY(-50%); }
+
+  /* ── Result thumbnails — shrink to ~30px ── */
+  .pagefind-ui__result-thumb {
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+  }
+  .pagefind-ui__result-image {
+    width: 30px !important;
+    height: 30px !important;
+    object-fit: contain !important;
+    border-radius: 4px !important;
+  }
 
   /* ── Load more button ── */
   .pagefind-ui__suppressed { display: none !important; }

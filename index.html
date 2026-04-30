@@ -77,7 +77,10 @@ description: "Near-realtime AI industry news, research summaries, and stock mark
           </h2>
           <div class="space-y-3">
             {% for post in group.items %}
-              {% include post_card.html post=post %}
+              {% assign _t = post.title | strip %}
+              {% if _t != blank %}
+                {% include post_card.html post=post %}
+              {% endif %}
             {% endfor %}
           </div>
         </div>
