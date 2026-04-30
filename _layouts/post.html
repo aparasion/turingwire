@@ -48,7 +48,7 @@ layout: default
       <a href="{{ page.source_url }}"
          class="text-cyan-600 hover:text-cyan-500 text-xs font-mono break-all transition-colors"
          target="_blank" rel="noopener noreferrer">
-        {{ page.source_url }}
+        {% if page.source_url contains 'news.google.com' %}Google News{% else %}{{ page.source_url }}{% endif %}
       </a>
     </div>
     <a href="{{ page.source_url }}"
