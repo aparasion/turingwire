@@ -1,0 +1,81 @@
+<footer class="tw-footer border-t tw-border mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-sm">
+
+      <div>
+        <p class="font-mono font-semibold tw-heading mb-3">
+          Turing<span class="text-orange-500">Wire</span>
+        </p>
+        <p class="tw-muted text-xs leading-relaxed">
+          {{ site.tagline }}
+        </p>
+      </div>
+
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest tw-muted mb-3">Feeds</p>
+        <ul class="space-y-2">
+          <li><a href="/news/" class="tw-muted hover:tw-accent transition-colors text-xs">News</a></li>
+          <li><a href="/research/" class="tw-muted hover:tw-accent transition-colors text-xs">Research</a></li>
+          <li><a href="/aistocks/" class="tw-muted hover:tw-accent transition-colors text-xs">AIStocks</a></li>
+          <li><a href="/companies/" class="tw-muted hover:tw-accent transition-colors text-xs">Companies</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest tw-muted mb-3">Syndication</p>
+        <ul class="space-y-2">
+          <li>
+            <a href="/feed.xml" class="tw-muted hover:tw-accent transition-colors text-xs font-mono flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-sm bg-orange-500 flex-shrink-0"></span> All posts
+            </a>
+          </li>
+          <li>
+            <a href="/feed-major.xml" class="tw-muted hover:tw-accent transition-colors text-xs font-mono flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-sm bg-orange-500 flex-shrink-0"></span> Major+ only
+            </a>
+          </li>
+          <li>
+            <a href="/news/feed.xml" class="tw-muted hover:tw-accent transition-colors text-xs font-mono flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-sm bg-blue-500 flex-shrink-0"></span> News RSS
+            </a>
+          </li>
+          <li>
+            <a href="/research/feed.xml" class="tw-muted hover:tw-accent transition-colors text-xs font-mono flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-sm bg-purple-500 flex-shrink-0"></span> Research RSS
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest tw-muted mb-3">Site</p>
+        <ul class="space-y-2">
+          <li><a href="/about/" class="tw-muted hover:tw-accent transition-colors text-xs">About</a></li>
+          <li><a href="/methodology/" class="tw-muted hover:tw-accent transition-colors text-xs">Methodology</a></li>
+          <li><a href="/sources/" class="tw-muted hover:tw-accent transition-colors text-xs">Sources</a></li>
+          <li><a href="/disclaimer/" class="tw-muted hover:tw-accent transition-colors text-xs">Disclaimer</a></li>
+          <li><a href="/privacy/" class="tw-muted hover:tw-accent transition-colors text-xs">Privacy</a></li>
+          <li><a href="/terms/" class="tw-muted hover:tw-accent transition-colors text-xs">Terms</a></li>
+          <li>
+            <a href="https://github.com/aparasion/turingwire"
+               class="tw-muted hover:tw-accent transition-colors text-xs"
+               target="_blank" rel="noopener noreferrer">
+              GitHub ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t tw-border pt-6 space-y-2">
+      <p class="text-xs tw-muted">
+        Turing Wire publishes summaries of publicly available articles for informational purposes.
+        Read the original source for the full story.
+      </p>
+      <p class="text-xs tw-muted">
+        © {{ 'now' | date: "%Y" }} Turing Wire. Code: MIT License.
+        Content: derivative of respective publishers.
+      </p>
+    </div>
+  </div>
+</footer>

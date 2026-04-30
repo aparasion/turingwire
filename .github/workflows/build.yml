@@ -1,0 +1,88 @@
+name: build
+
+on:
+  # Trigger after ingest or stocks succeed
+  workflow_run:
+    workflows: ["ingest", "stocks"]
+    types: [completed]
+    branches: [main]
+  # Daily safety-net rebuild
+  schedule:
+    - cron: "0 6 * * *"
+  # Manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: build-deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # Only run if triggering workflow succeeded (or triggered manually/by schedule)
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'schedule' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Check data freshness
+        run: |
+          SNAPSHOT="_data/stocks_snapshot.json"
+          if [ -f "$SNAPSHOT" ]; then
+            UPDATED=$(python3 -c "
+          import json, sys
+          from datetime import datetime, timezone, timedelta
+          with open('$SNAPSHOT') as f:
+              data = json.load(f)
+          updated = data.get('updated_at', '')
+          if not updated:
+              sys.exit(0)
+          dt = datetime.fromisoformat(updated.replace('Z', '+00:00'))
+          age = datetime.now(timezone.utc) - dt
+          if age > timedelta(hours=6):
+              print(f'WARNING: stocks data is {age} old')
+          else:
+              print(f'Stocks data age: {age}')
+          ")
+            echo "$UPDATED"
+          fi
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --destination _site
+        env:
+          JEKYLL_ENV: production
+
+      - name: Install Pagefind
+        run: npm install -g pagefind
+
+      - name: Run Pagefind indexer
+        run: pagefind --site _site --output-path _site/pagefind
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          force_orphan: false
+          commit_message: "deploy: build ${{ github.run_number }} from ${{ github.sha }}"
+          cname: turingwire.com

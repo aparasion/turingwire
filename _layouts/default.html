@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+  <!-- Canonical -->
+  {% if page.source_url and page.layout == 'post' %}
+  <link rel="canonical" href="{{ page.source_url }}">
+  {% else %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  {% endif %}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+  <!-- JSON-LD for posts -->
+  {% if page.layout == 'post' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": {{ page.title | jsonify }},
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.date | date_to_xmlschema }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ site.title }}",
+      "url": "{{ site.url }}"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "{{ site.title }}"
+    },
+    "mainEntityOfPage": "{{ page.url | absolute_url }}",
+    "url": {{ page.source_url | jsonify }}
+  }
+  </script>
+  {% endif %}
+
+  <!-- Feeds -->
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }} — Major+ only" href="{{ '/feed-major.xml' | absolute_url }}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            accent: {
+              DEFAULT: '#f97316',
+              dark: '#fb923c',
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <!-- Theme init (before paint to prevent flash) -->
+  <script>
+    (function() {
+      var stored = localStorage.getItem('tw-theme');
+      var preferred = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', preferred);
+    })();
+  </script>
+</head>
+<body class="tw-body min-h-screen flex flex-col">
+
+  {% include header.html %}
+
+  <main id="main-content" class="flex-1">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+
+  <!-- Main JS -->
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+---
+layout: default
+title: "News"
+description: "AI industry news — product launches, model releases, funding, policy, and more."
+permalink: /news/
+---
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+  <header class="mb-8">
+    <h1 class="text-3xl font-semibold tw-heading">News</h1>
+    <p class="text-sm tw-muted mt-1 font-mono">AI industry coverage · updated hourly</p>
+  </header>
+
+  <!-- Subcategory filter chips -->
+  <div class="flex flex-wrap gap-2 mb-4">
+    <a href="/news/" class="tw-filter-chip {% unless page.url contains '?' %}active{% endunless %}">All</a>
+    <a href="/news/?cat=model_release" class="tw-filter-chip">Model releases</a>
+    <a href="/news/?cat=product_launch" class="tw-filter-chip">Product launches</a>
+    <a href="/news/?cat=funding_round" class="tw-filter-chip">Funding</a>
+    <a href="/news/?cat=regulation_policy" class="tw-filter-chip">Policy</a>
+    <a href="/news/?cat=safety_alignment" class="tw-filter-chip">Safety</a>
+    <a href="/news/?cat=infrastructure_compute" class="tw-filter-chip">Infrastructure</a>
+    <a href="/news/?cat=partnership" class="tw-filter-chip">Partnerships</a>
+  </div>
+
+  <!-- Impact filter -->
+  <div class="flex flex-wrap gap-2 mb-8">
+    <button class="tw-filter-chip active text-xs" data-filter-impact="all">All impact</button>
+    <button class="tw-filter-chip text-xs" data-filter-impact="major+">Major+</button>
+    <button class="tw-filter-chip text-xs" data-filter-impact="critical">Critical only</button>
+  </div>
+
+  {% assign news_posts = site.posts | where: "category", "news" %}
+  {% assign news_posts2 = site.posts | where_exp: "p", "p.categories contains 'news'" %}
+
+  {% if news_posts.size == 0 and news_posts2.size == 0 %}
+  <div class="tw-card rounded-lg border tw-border p-8 text-center">
+    <p class="tw-muted text-sm font-mono">No news articles indexed yet.</p>
+  </div>
+  {% else %}
+
+  <div class="space-y-3" id="post-list">
+    {% for post in news_posts limit: 60 %}
+    <div data-impact="{{ post.impact }}" data-date="{{ post.date | date: '%Y-%m-%dT%H:%M:%S' }}">
+      {% include post_card.html post=post %}
+    </div>
+    {% endfor %}
+    {% for post in news_posts2 limit: 60 %}
+    {% unless news_posts contains post %}
+    <div data-impact="{{ post.impact }}" data-date="{{ post.date | date: '%Y-%m-%dT%H:%M:%S' }}">
+      {% include post_card.html post=post %}
+    </div>
+    {% endunless %}
+    {% endfor %}
+  </div>
+
+  {% endif %}
+
+</div>

@@ -1,0 +1,74 @@
+{% assign p = include.post %}
+{% assign compact = include.compact %}
+
+<article class="tw-card rounded-lg p-5 border tw-border hover:border-orange-500/50 transition-all group">
+  <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+
+    <div class="flex-1 min-w-0">
+
+      <!-- Top row: impact badge, category, company -->
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        {% include impact_badge.html impact=p.impact %}
+
+        <span class="font-mono text-xs tw-muted">
+          {% if p.category == 'research' or p.categories contains 'research' %}research{% else %}news{% endif %}
+        </span>
+
+        {% if p.company %}
+        <a href="/companies/{{ p.company | slugify }}/"
+           class="font-mono text-xs text-orange-500 hover:text-orange-400 transition-colors">
+          {{ p.company }}
+        </a>
+        {% endif %}
+
+        {% if p.categories contains 'stocks' or p.category == 'stocks' %}
+        <span class="font-mono text-xs text-emerald-600 dark:text-emerald-400">stocks</span>
+        {% endif %}
+      </div>
+
+      <!-- Title -->
+      <h2 class="{% if compact %}text-sm{% else %}text-base{% endif %} font-semibold tw-heading leading-snug mb-2 group-hover:text-orange-500 transition-colors">
+        <a href="{{ p.url }}">{{ p.title }}</a>
+      </h2>
+
+      {% unless compact %}
+      <!-- Excerpt -->
+      {% if p.excerpt %}
+      <p class="text-sm tw-muted leading-relaxed line-clamp-2 mb-3">
+        {{ p.excerpt | strip_html | truncatewords: 30 }}
+      </p>
+      {% endif %}
+      {% endunless %}
+
+      <!-- Footer row: source, date, subcategory -->
+      <div class="flex flex-wrap items-center gap-3 text-xs font-mono tw-muted">
+        {% if p.source_publisher %}
+        <span class="flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-orange-500/60 flex-shrink-0"></span>
+          {{ p.source_publisher }}
+        </span>
+        {% endif %}
+
+        <time datetime="{{ p.date | date_to_xmlschema }}">
+          {{ p.date | date: "%b %-d, %Y" }}
+        </time>
+
+        {% if p.subcategory %}
+        <span class="opacity-60">{{ p.subcategory | replace: '_', ' ' }}</span>
+        {% endif %}
+
+        {% if p.summary_word_count %}
+        <span class="opacity-60">{{ p.summary_word_count }}w</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Arrow indicator -->
+    <div class="flex-shrink-0 tw-muted group-hover:text-orange-500 transition-colors hidden sm:block">
+      <svg class="w-4 h-4 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </div>
+
+  </div>
+</article>
