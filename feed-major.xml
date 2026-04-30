@@ -11,7 +11,9 @@ layout: null
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% assign major_posts = site.posts | where_exp: "p", "p.impact == 'critical' or p.impact == 'major'" %}
+    {% assign critical_posts = site.posts | where: "impact", "critical" %}
+    {% assign major_posts_only = site.posts | where: "impact", "major" %}
+    {% assign major_posts = critical_posts | concat: major_posts_only %}
     {% for post in major_posts limit:50 %}
       <item>
         <title>{{ post.title | xml_escape }}</title>
