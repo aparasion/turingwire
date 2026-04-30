@@ -1,8 +1,53 @@
 {
-  "base_prices": {},
-  "base_date": "",
-  "series": [],
+  "base_prices": {
+    "NVDA": 209.25,
+    "AMD": 337.11,
+    "INTC": 94.75,
+    "TSM": 393.83,
+    "GOOGL": 349.94,
+    "MSFT": 424.46,
+    "META": 669.12,
+    "AMZN": 263.04,
+    "AAPL": 270.17,
+    "ORCL": 163.83,
+    "PLTR": 137.97,
+    "SMCI": 26.32,
+    "AVGO": 405.45,
+    "ARM": 201.69,
+    "ASML": 1394.08,
+    "AMAT": 382.59,
+    "LRCX": 248.75,
+    "MU": 518.46,
+    "IBM": 227.1,
+    "CRM": 181.22,
+    "NOW": 88.89,
+    "SNOW": 141.22,
+    "PATH": 10.38,
+    "AI": 8.86,
+    "BBAI": 3.82,
+    "CRWV": 114.19,
+    "BIDU": 121.01,
+    "BABA": 130.43
+  },
+  "base_date": "2026-04-30",
+  "series": [
+    {
+      "timestamp": "2026-04-30T08:17:57.060227+00:00",
+      "date": "2026-04-30",
+      "value": 100.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "n_tickers": 28
+    }
+  ],
   "name": "TW AI Index",
-  "latest": null,
+  "latest": {
+    "timestamp": "2026-04-30T08:17:57.060227+00:00",
+    "date": "2026-04-30",
+    "value": 100.0,
+    "change": 0.0,
+    "change_pct": 0.0,
+    "n_tickers": 28
+  },
   "description": "Equal-weighted index of AI-related equities. Base = 100 on base_date. Each ticker individually indexed to its base-date close, then averaged."
 }
