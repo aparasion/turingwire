@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from openai import OpenAI
-from python_slugify import slugify
+from slugify import slugify
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 ROOT = Path(__file__).parent.parent
