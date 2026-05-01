@@ -108,7 +108,9 @@
   function buildIndexOption(series, range, colors) {
     var now = new Date();
     var cutoff;
-    if      (range === '1M')  cutoff = new Date(now - 30  * 86400000);
+    if      (range === '1D')  cutoff = new Date(now - 1   * 86400000);
+    else if (range === '1W')  cutoff = new Date(now - 7   * 86400000);
+    else if (range === '1M')  cutoff = new Date(now - 30  * 86400000);
     else if (range === '3M')  cutoff = new Date(now - 90  * 86400000);
     else if (range === 'YTD') cutoff = new Date(now.getFullYear(), 0, 1);
     else if (range === '1Y')  cutoff = new Date(now - 365 * 86400000);
