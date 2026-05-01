@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Fri, 01 May 2026 06:38:31 GMT"
+    "last_modified": "Fri, 01 May 2026 07:38:35 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"1661a2-3klHKIscjiqdhpFWS5NcTxgfsjA\"",
+    "etag": "W/\"1661a2-DZPjGvf2YTYaZ+jtMqqBmtopqRI\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
