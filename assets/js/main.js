@@ -145,6 +145,24 @@
     });
   });
 
+  // ── Scroll to top ─────────────────────────────────────────────────────────
+
+  const scrollTopBtn = document.getElementById('scroll-to-top');
+  if (scrollTopBtn) {
+    function onScrollTop() {
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', onScrollTop, { passive: true });
+    onScrollTop();
+    scrollTopBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   // ── Stocks: format change colors ──────────────────────────────────────────
 
   document.querySelectorAll('[data-change]').forEach(function (el) {
