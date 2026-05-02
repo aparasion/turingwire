@@ -325,6 +325,135 @@ body.tw-body {
 
 .tw-filter-chip.active { font-weight: 500; }
 
+/* ── Research badges (arXiv + Papers with Code) ─────────────────────────── */
+
+.tw-arxiv-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  background-color: color-mix(in srgb, #b91c1c 12%, transparent);
+  color: #b91c1c;
+  border: 1px solid color-mix(in srgb, #b91c1c 30%, transparent);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.tw-arxiv-badge:hover {
+  background-color: #b91c1c;
+  color: #fff;
+}
+
+[data-theme="dark"] .tw-arxiv-badge {
+  background-color: color-mix(in srgb, #f87171 10%, transparent);
+  color: #f87171;
+  border-color: color-mix(in srgb, #f87171 30%, transparent);
+}
+
+[data-theme="dark"] .tw-arxiv-badge:hover {
+  background-color: #f87171;
+  color: #0f172a;
+}
+
+.tw-pwc-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  background-color: color-mix(in srgb, #7c3aed 10%, transparent);
+  color: #7c3aed;
+  border: 1px solid color-mix(in srgb, #7c3aed 30%, transparent);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.tw-pwc-badge:hover {
+  background-color: #7c3aed;
+  color: #fff;
+}
+
+[data-theme="dark"] .tw-pwc-badge {
+  background-color: color-mix(in srgb, #a78bfa 10%, transparent);
+  color: #a78bfa;
+  border-color: color-mix(in srgb, #a78bfa 30%, transparent);
+}
+
+[data-theme="dark"] .tw-pwc-badge:hover {
+  background-color: #a78bfa;
+  color: #0f172a;
+}
+
+/* Larger variants for article page header */
+.tw-arxiv-badge-lg {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  background-color: color-mix(in srgb, #b91c1c 12%, transparent);
+  color: #b91c1c;
+  border: 1px solid color-mix(in srgb, #b91c1c 30%, transparent);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.tw-arxiv-badge-lg:hover {
+  background-color: #b91c1c;
+  color: #fff;
+}
+
+[data-theme="dark"] .tw-arxiv-badge-lg {
+  background-color: color-mix(in srgb, #f87171 10%, transparent);
+  color: #f87171;
+  border-color: color-mix(in srgb, #f87171 30%, transparent);
+}
+
+[data-theme="dark"] .tw-arxiv-badge-lg:hover {
+  background-color: #f87171;
+  color: #0f172a;
+}
+
+.tw-pwc-badge-lg {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  background-color: color-mix(in srgb, #7c3aed 10%, transparent);
+  color: #7c3aed;
+  border: 1px solid color-mix(in srgb, #7c3aed 30%, transparent);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.tw-pwc-badge-lg:hover {
+  background-color: #7c3aed;
+  color: #fff;
+}
+
+[data-theme="dark"] .tw-pwc-badge-lg {
+  background-color: color-mix(in srgb, #a78bfa 10%, transparent);
+  color: #a78bfa;
+  border-color: color-mix(in srgb, #a78bfa 30%, transparent);
+}
+
+[data-theme="dark"] .tw-pwc-badge-lg:hover {
+  background-color: #a78bfa;
+  color: #0f172a;
+}
+
 /* ── Utilities ───────────────────────────────────────────────────────────── */
 
 .line-clamp-2 {

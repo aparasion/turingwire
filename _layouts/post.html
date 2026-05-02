@@ -40,6 +40,29 @@ layout: default
     {{ page.title }}
   </h1>
 
+  {% if page.category == 'research' %}
+  <!-- Research quick-links: arXiv + Papers with Code (above summary) -->
+  {% if page.arxiv_id and page.arxiv_id != "" %}
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <a href="https://arxiv.org/abs/{{ page.arxiv_id }}"
+       class="tw-arxiv-badge-lg"
+       target="_blank" rel="noopener noreferrer">
+      arXiv:{{ page.arxiv_id }}
+    </a>
+    <a href="https://paperswithcode.com/paper/{{ page.arxiv_id }}"
+       class="tw-pwc-badge-lg"
+       target="_blank" rel="noopener noreferrer">
+      Papers with Code →
+    </a>
+  </div>
+  {% endif %}
+  {% if page.authors and page.authors.size > 0 %}
+  <p class="text-xs font-mono tw-muted mb-6">
+    {{ page.authors | join: ", " }}
+  </p>
+  {% endif %}
+  {% endif %}
+
   <!-- Source attribution — prominent, above summary -->
   <div class="tw-card rounded-lg p-4 mb-8 flex items-start gap-3 border-l-2 border-cyan-600">
     <div class="flex-1 min-w-0">
@@ -91,7 +114,7 @@ layout: default
         <dd class="tw-heading">{{ page.classification_confidence | times: 100 | round }}%</dd>
       </div>
       {% endif %}
-      {% if page.arxiv_id and page.arxiv_id != "" %}
+      {% if page.arxiv_id and page.arxiv_id != "" and page.category != 'research' %}
       <div>
         <dt class="tw-muted mb-1">arXiv</dt>
         <dd>
@@ -103,7 +126,7 @@ layout: default
         </dd>
       </div>
       {% endif %}
-      {% if page.authors and page.authors.size > 0 %}
+      {% if page.authors and page.authors.size > 0 and page.category != 'research' %}
       <div class="col-span-2 sm:col-span-3">
         <dt class="tw-muted mb-1">Authors</dt>
         <dd class="tw-heading">{{ page.authors | join: ", " }}</dd>
