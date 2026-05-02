@@ -36,4 +36,4 @@ These terms may be updated at any time. The last-updated date above reflects the
 
 ## Contact
 
-For questions or concerns, use the contact information on the [about page](/about/).
+For questions or concerns, use the [contact form](/contact/).
