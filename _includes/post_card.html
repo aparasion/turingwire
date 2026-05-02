@@ -42,7 +42,7 @@
       {% endif %}
       {% endunless %}
 
-      <!-- Footer row: source, date, subcategory -->
+      <!-- Footer row: source, date, subcategory, research signals -->
       <div class="flex flex-wrap items-center gap-3 text-xs font-mono tw-muted">
         {% if p.source_publisher %}
         <span class="flex items-center gap-1">
@@ -61,6 +61,21 @@
 
         {% if p.summary_word_count %}
         <span class="opacity-60">{{ p.summary_word_count }}w</span>
+        {% endif %}
+
+        {% if p.arxiv_id and p.arxiv_id != "" %}
+        <a href="https://arxiv.org/abs/{{ p.arxiv_id }}"
+           class="tw-arxiv-badge"
+           target="_blank" rel="noopener noreferrer"
+           onclick="event.stopPropagation()">arXiv</a>
+        <a href="https://paperswithcode.com/paper/{{ p.arxiv_id }}"
+           class="tw-pwc-badge"
+           target="_blank" rel="noopener noreferrer"
+           onclick="event.stopPropagation()">code</a>
+        {% endif %}
+
+        {% if p.authors and p.authors.size > 0 %}
+        <span class="opacity-50">{{ p.authors | first }}{% if p.authors.size > 1 %} +{{ p.authors.size | minus: 1 }}{% endif %}</span>
         {% endif %}
       </div>
     </div>
