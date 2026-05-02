@@ -35,4 +35,4 @@ It is also not financial advice. See the [disclaimer](/disclaimer/).
 
 ## Who maintains it
 
-This is a personal project. The pipeline is fully automated — articles are fetched, classified, and summarized hourly by GPT-4o-mini. A human reviews the output periodically. If you spot an error or want to suggest a source, file an issue on GitHub.
+This is a personal project. The pipeline is fully automated — articles are fetched, classified, and summarized hourly by GPT-4o-mini. A human reviews the output periodically. If you spot an error, want to suggest a source, or have any other question, use the [contact form](/contact/).

@@ -1,0 +1,133 @@
+---
+layout: default
+title: "Contact"
+description: "Get in touch with Turing Wire — sponsorship, source suggestions, bug reports, or general questions."
+permalink: /contact/
+---
+
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+  <header class="mb-8">
+    <h1 class="text-3xl font-semibold tw-heading">Contact</h1>
+    <p class="text-sm tw-muted mt-2 font-mono">Sponsorship · source suggestions · bug reports · general questions</p>
+  </header>
+
+  <!-- Success state (shown after Formspree redirect with ?success=true) -->
+  <div id="form-success" class="hidden tw-card rounded-lg border border-emerald-500/40 bg-emerald-500/5 p-6 mb-8 text-center">
+    <p class="text-lg font-semibold tw-heading mb-1">Message sent</p>
+    <p class="text-sm tw-muted">Thanks for reaching out. You'll hear back at the email you provided.</p>
+  </div>
+
+  <div class="lg:grid lg:grid-cols-5 lg:gap-10">
+
+    <!-- Form (3/5) -->
+    <div class="lg:col-span-3">
+      <form
+        id="contact-form"
+        action="{{ site.contact_form_action }}"
+        method="POST"
+        class="space-y-5"
+      >
+        <!-- Formspree: redirect back to /contact/?success=true -->
+        <input type="hidden" name="_next" value="{{ site.url }}/contact/?success=true">
+        <!-- Formspree: custom subject prefix -->
+        <input type="hidden" name="_subject" value="[Turing Wire] Contact form submission">
+        <!-- Honeypot spam guard -->
+        <input type="text" name="_gotcha" style="display:none">
+
+        <div>
+          <label for="name" class="block text-xs font-mono tw-muted mb-1.5 uppercase tracking-wider">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            autocomplete="name"
+            placeholder="Your name"
+            class="tw-input w-full"
+          >
+        </div>
+
+        <div>
+          <label for="email" class="block text-xs font-mono tw-muted mb-1.5 uppercase tracking-wider">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="you@example.com"
+            class="tw-input w-full"
+          >
+        </div>
+
+        <div>
+          <label for="topic" class="block text-xs font-mono tw-muted mb-1.5 uppercase tracking-wider">Topic</label>
+          <select id="topic" name="topic" class="tw-input w-full">
+            <option value="general">General question</option>
+            <option value="sponsorship">Sponsorship / advertising</option>
+            <option value="source">Source suggestion</option>
+            <option value="bug">Bug report</option>
+            <option value="copyright">Copyright / content concern</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block text-xs font-mono tw-muted mb-1.5 uppercase tracking-wider">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="6"
+            placeholder="What's on your mind?"
+            class="tw-input w-full resize-y"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="tw-btn-primary w-full sm:w-auto">
+          Send message →
+        </button>
+      </form>
+    </div>
+
+    <!-- Sidebar info (2/5) -->
+    <aside class="mt-10 lg:mt-0 lg:col-span-2 space-y-5">
+
+      <div class="tw-card rounded-lg border tw-border p-5">
+        <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3">What to expect</h2>
+        <p class="text-xs tw-muted leading-relaxed">
+          This is a personal project. Messages are read by a human and replied to directly.
+          Response time is typically a few days.
+        </p>
+      </div>
+
+      <div class="tw-card rounded-lg border tw-border p-5">
+        <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3">Direct email</h2>
+        <a href="mailto:{{ site.contact_email }}"
+           class="text-xs font-mono text-cyan-600 hover:text-cyan-500 transition-colors break-all">
+          {{ site.contact_email }}
+        </a>
+      </div>
+
+      <div class="tw-card rounded-lg border tw-border p-5">
+        <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3">Useful links</h2>
+        <ul class="space-y-2 text-xs font-mono">
+          <li><a href="/about/" class="tw-muted hover:text-cyan-600 transition-colors">About Turing Wire</a></li>
+          <li><a href="/sources/" class="tw-muted hover:text-cyan-600 transition-colors">Source list</a></li>
+          <li><a href="/methodology/" class="tw-muted hover:text-cyan-600 transition-colors">Methodology</a></li>
+          <li><a href="/disclaimer/" class="tw-muted hover:text-cyan-600 transition-colors">Disclaimer</a></li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<script>
+  // Show success banner if Formspree redirected back with ?success=true
+  if (new URLSearchParams(window.location.search).get('success') === 'true') {
+    document.getElementById('form-success').classList.remove('hidden');
+    document.getElementById('contact-form').classList.add('hidden');
+  }
+</script>

@@ -22,7 +22,7 @@ Past performance of any index or security displayed here does not guarantee futu
 
 Article summaries are derivative works of their respective source publications. Turing Wire does not claim ownership of any summarized content. All original content belongs to the respective publishers. This site is operated under a good-faith interpretation of fair use for commentary, criticism, and educational purposes.
 
-If you are a publisher and believe your content is being used in a manner that infringes your rights, please contact the site maintainer.
+If you are a publisher and believe your content is being used in a manner that infringes your rights, please [contact the site maintainer](/contact/?ref=copyright).
 
 ## Accuracy
 
