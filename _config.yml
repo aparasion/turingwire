@@ -90,8 +90,9 @@ author:
 # Analytics placeholder (fill in after launch)
 google_analytics: ""
 
-# Contact form (Formspree — register at formspree.io, create a form, then paste the endpoint below)
-contact_form_action: "https://formspree.io/f/REPLACE_WITH_FORM_ID"
+# Contact form (Web3Forms — get a free access key at https://web3forms.com,
+# enter your email there, then paste the key below)
+contact_form_key: "REPLACE_WITH_WEB3FORMS_ACCESS_KEY"
 
 # Site-wide flags
 ai_index_base_date: "2026-01-02"

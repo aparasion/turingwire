@@ -12,80 +12,60 @@ permalink: /contact/
     <p class="text-sm tw-muted mt-2 font-mono">Sponsorship · source suggestions · bug reports · general questions</p>
   </header>
 
-  <!-- Success state (shown after Formspree redirect with ?success=true) -->
-  <div id="form-success" class="hidden tw-card rounded-lg border border-emerald-500/40 bg-emerald-500/5 p-6 mb-8 text-center">
+  <!-- Success state -->
+  <div id="form-success" class="hidden tw-card rounded-lg border border-emerald-500/40 p-6 mb-8 text-center" style="background-color:color-mix(in srgb,#10b981 6%,transparent)">
     <p class="text-lg font-semibold tw-heading mb-1">Message sent</p>
     <p class="text-sm tw-muted">Thanks for reaching out. You'll hear back at the email you provided.</p>
+  </div>
+
+  <!-- Error state -->
+  <div id="form-error" class="hidden tw-card rounded-lg border border-red-500/40 p-4 mb-6" style="background-color:color-mix(in srgb,#ef4444 6%,transparent)">
+    <p class="text-sm tw-muted">Something went wrong — please try again or email directly.</p>
   </div>
 
   <div class="lg:grid lg:grid-cols-5 lg:gap-10">
 
     <!-- Form (3/5) -->
     <div class="lg:col-span-3">
-      <form
-        id="contact-form"
-        action="{{ site.contact_form_action }}"
-        method="POST"
-        class="space-y-5"
-      >
-        <!-- Formspree: redirect back to /contact/?success=true -->
-        <input type="hidden" name="_next" value="{{ site.url }}/contact/?success=true">
-        <!-- Formspree: custom subject prefix -->
-        <input type="hidden" name="_subject" value="[Turing Wire] Contact form submission">
-        <!-- Honeypot spam guard -->
-        <input type="text" name="_gotcha" style="display:none">
+      <form id="contact-form" class="space-y-5" novalidate>
+
+        <!-- Web3Forms routing key (public by design) -->
+        <input type="hidden" name="access_key" value="{{ site.contact_form_key }}">
+        <input type="hidden" name="subject" value="[Turing Wire] Contact form submission">
+        <!-- Honeypot -->
+        <input type="checkbox" name="botcheck" style="display:none">
 
         <div>
           <label for="name" class="block text-xs font-mono tw-muted mb-1.5 uppercase tracking-wider">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            autocomplete="name"
-            placeholder="Your name"
-            class="tw-input w-full"
-          >
+          <input type="text" id="name" name="name" required autocomplete="name"
+            placeholder="Your name" class="tw-input w-full">
         </div>
 
         <div>
           <label for="email" class="block text-xs font-mono tw-muted mb-1.5 uppercase tracking-wider">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            autocomplete="email"
-            placeholder="you@example.com"
-            class="tw-input w-full"
-          >
+          <input type="email" id="email" name="email" required autocomplete="email"
+            placeholder="you@example.com" class="tw-input w-full">
         </div>
 
         <div>
           <label for="topic" class="block text-xs font-mono tw-muted mb-1.5 uppercase tracking-wider">Topic</label>
           <select id="topic" name="topic" class="tw-input w-full">
-            <option value="general">General question</option>
-            <option value="sponsorship">Sponsorship / advertising</option>
-            <option value="source">Source suggestion</option>
-            <option value="bug">Bug report</option>
-            <option value="copyright">Copyright / content concern</option>
-            <option value="other">Other</option>
+            <option value="General question">General question</option>
+            <option value="Sponsorship / advertising">Sponsorship / advertising</option>
+            <option value="Source suggestion">Source suggestion</option>
+            <option value="Bug report">Bug report</option>
+            <option value="Copyright / content concern">Copyright / content concern</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
         <div>
           <label for="message" class="block text-xs font-mono tw-muted mb-1.5 uppercase tracking-wider">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            required
-            rows="6"
-            placeholder="What's on your mind?"
-            class="tw-input w-full resize-y"
-          ></textarea>
+          <textarea id="message" name="message" required rows="6"
+            placeholder="What's on your mind?" class="tw-input w-full resize-y"></textarea>
         </div>
 
-        <button type="submit" class="tw-btn-primary w-full sm:w-auto">
+        <button type="submit" id="submit-btn" class="tw-btn-primary w-full sm:w-auto">
           Send message →
         </button>
       </form>
@@ -117,9 +97,36 @@ permalink: /contact/
 </div>
 
 <script>
-  // Show success banner if Formspree redirected back with ?success=true
-  if (new URLSearchParams(window.location.search).get('success') === 'true') {
-    document.getElementById('form-success').classList.remove('hidden');
-    document.getElementById('contact-form').classList.add('hidden');
-  }
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form    = e.target;
+    const btn     = document.getElementById('submit-btn');
+    const success = document.getElementById('form-success');
+    const error   = document.getElementById('form-error');
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    error.classList.add('hidden');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch {
+      error.classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = 'Send message →';
+    }
+  });
 </script>
