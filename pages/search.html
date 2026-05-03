@@ -180,16 +180,50 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
     new MutationObserver(applyFilter).observe(container, { childList: true, subtree: true });
   }
 
-  function removeSearchButton() {
-    var btn = document.querySelector('.pagefind-ui__search-button');
-    if (btn) { btn.remove(); return; }
-    setTimeout(removeSearchButton, 30);
+  /* Custom clear button — replaces pagefind's which appears unreliably */
+  function setupCustomClear() {
+    var input = document.querySelector('.pagefind-ui__search-input');
+    var form  = document.querySelector('.pagefind-ui__form');
+    if (!input || !form) { setTimeout(setupCustomClear, 80); return; }
+
+    var clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'tw-clear-btn';
+    clearBtn.setAttribute('aria-label', 'Clear search');
+    clearBtn.innerHTML =
+      '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+      '<path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    form.appendChild(clearBtn);
+
+    function sync() {
+      clearBtn.style.opacity = input.value ? '0.5' : '0';
+      clearBtn.style.pointerEvents = input.value ? 'auto' : 'none';
+    }
+
+    input.addEventListener('input', sync);
+    sync();
+
+    clearBtn.addEventListener('mouseenter', function () { if (input.value) clearBtn.style.opacity = '0.9'; });
+    clearBtn.addEventListener('mouseleave', function () { if (input.value) clearBtn.style.opacity = '0.5'; });
+    clearBtn.addEventListener('click', function () {
+      input.value = '';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      sync();
+      input.focus();
+    });
   }
 
   function initSearch() {
     if (typeof PagefindUI === 'undefined') { setTimeout(initSearch, 50); return; }
     new PagefindUI({ element: '#search-container', showSubResults: false, excerptLength: 25, defaultQuery: query });
-    removeSearchButton();
+
+    /* Remove pagefind's search/magnifier submit button */
+    (function rmBtn() {
+      var btn = document.querySelector('.pagefind-ui__search-button');
+      if (btn) { btn.remove(); } else { setTimeout(rmBtn, 30); }
+    })();
+
+    setupCustomClear();
 
     if (query) {
       var attempts = 0;
@@ -198,6 +232,9 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
         if (input) {
           input.value = query;
           input.dispatchEvent(new Event('input', { bubbles: true }));
+          /* show clear btn for pre-filled query */
+          var cb = document.querySelector('.tw-clear-btn');
+          if (cb) { cb.style.opacity = '0.5'; cb.style.pointerEvents = 'auto'; }
         } else if (attempts++ < 30) { setTimeout(trigger, 100); }
       })();
     }
@@ -220,13 +257,27 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
 </script>
 
 <style>
-  /* ── Search form ── */
-  .pagefind-ui__form { margin-bottom: 0; position: relative; }
+  /* ── Search form wrapper ── */
+  .pagefind-ui__form {
+    margin-bottom: 0;
+    position: relative;
+  }
 
-  /* Hide the built-in magnifier button — also removed via JS since pagefind injects CSS late */
-  .pagefind-ui__search-button,
-  button.pagefind-ui__search-button,
-  .pagefind-ui__form > button:first-child {
+  /* Nuke the built-in magnifier — it lives in ::before on the form element */
+  .pagefind-ui__form::before {
+    display: none !important;
+    content: '' !important;
+  }
+
+  /* Hide pagefind's own clear button entirely; we provide our own */
+  .pagefind-ui__search-clear {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /* Hide the search/submit button */
+  .pagefind-ui__search-button {
     display: none !important;
     visibility: hidden !important;
     width: 0 !important;
@@ -235,11 +286,13 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
     pointer-events: none !important;
   }
 
+  /* ── Input ── */
   .pagefind-ui__search-input {
     font-family: 'JetBrains Mono', monospace !important;
     font-size: 14px !important;
     height: 44px !important;
-    padding: 0 2.75rem 0 1rem !important;
+    /* Override pagefind's inline padding-right (set for its clear btn) */
+    padding: 0 2.5rem 0 1rem !important;
     border-radius: 8px !important;
     background: var(--bg-card) !important;
     border: 1px solid var(--border) !important;
@@ -257,23 +310,43 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
     color: var(--fg-muted) !important;
     opacity: 0.6 !important;
   }
-  .pagefind-ui__search-clear {
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    right: 10px !important;
-    opacity: 0.4 !important;
-    transition: opacity 0.15s !important;
+
+  /* ── Our custom clear button ── */
+  .tw-clear-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    color: var(--fg-muted);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    line-height: 1;
   }
-  .pagefind-ui__search-clear:hover { opacity: 0.85 !important; }
 
   /* ── Results area ── */
   .pagefind-ui__results-area { margin-top: 14px; }
-  .pagefind-ui__results { gap: 0; list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .pagefind-ui__results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
   /* Hide per-result thumbnails */
   .pagefind-ui__result-thumb { display: none !important; }
 
-  /* Card-style results — no dividers */
+  /* Card-style results */
   .pagefind-ui__result {
     padding: 14px 16px !important;
     border-bottom: none !important;
@@ -326,7 +399,7 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
   }
   .pagefind-ui__result-title a:hover { color: var(--accent) !important; }
 
-  /* ── URL hint — hidden (redundant with badge) ── */
+  /* URL hint hidden — redundant with badge */
   .pagefind-ui__result-link-hint { display: none !important; }
 
   /* ── Excerpt ── */
