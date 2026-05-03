@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "AIStocks"
+title: "AI Stocks"
 description: "AI and semiconductor stock market dashboard — TW AI Index, heatmap, and company news."
 permalink: /aistocks/
 ---
@@ -19,7 +19,7 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
   <!-- Header row -->
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
     <div>
-      <h1 class="text-3xl font-semibold tw-heading">AIStocks</h1>
+      <h1 class="text-3xl font-semibold tw-heading">AI Stocks</h1>
       <p class="text-sm tw-muted mt-1 font-mono">
         {% if site.data.stocks_snapshot.updated_at %}
           Updated {{ site.data.stocks_snapshot.updated_at | date: "%b %-d, %Y %H:%M UTC" }}
