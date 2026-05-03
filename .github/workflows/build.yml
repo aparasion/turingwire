@@ -1,9 +1,9 @@
-name: build
+name: build [auto + manual]
 
 on:
   # Trigger after ingest or stocks succeed
   workflow_run:
-    workflows: ["ingest", "stocks"]
+    workflows: ["ingest [auto + manual]", "stocks [auto + manual]"]
     types: [completed]
     branches: [main]
   # Daily safety-net rebuild

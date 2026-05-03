@@ -1,4 +1,4 @@
-name: stocks
+name: stocks [auto + manual]
 
 on:
   schedule:

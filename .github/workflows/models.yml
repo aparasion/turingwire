@@ -1,12 +1,10 @@
-name: models
+name: models [auto + manual]
 
 on:
-  schedule:
-    # Daily at 08:00 UTC
-    - cron: "0 8 * * *"
-  # Also trigger after every ingest run so new pricing news is checked promptly
+  # Trigger after every ingest run so new pricing news is checked promptly.
+  # The daily schedule is redundant here since ingest runs hourly.
   workflow_run:
-    workflows: ["ingest"]
+    workflows: ["ingest [auto + manual]"]
     types: [completed]
     branches: [main]
   workflow_dispatch:
@@ -19,6 +17,8 @@ jobs:
   check-model-pricing:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      pricing_changed: ${{ steps.pricing_check.outcome }}
 
     steps:
       - name: Checkout main
@@ -44,17 +44,18 @@ jobs:
         run: python scripts/fetch_models.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        # Exit code 1 = pricing change detected → triggers issue-on-failure
+        # Exit code 1 = pricing change detected → triggers notify-pricing-change job
         continue-on-error: true
         id: pricing_check
 
-      - name: Flag pricing change via issue
-        if: steps.pricing_check.outcome == 'failure'
-        uses: ./.github/workflows/issue-on-failure.yml
-        with:
-          workflow_name: "models — pricing change detected"
-          run_id: ${{ github.run_id }}
-        secrets: inherit
+  notify-pricing-change:
+    needs: check-model-pricing
+    if: needs.check-model-pricing.outputs.pricing_changed == 'failure'
+    uses: ./.github/workflows/issue-on-failure.yml
+    with:
+      workflow_name: "models — pricing change detected"
+      run_id: ${{ github.run_id }}
+    secrets: inherit
 
   notify-on-failure:
     needs: check-model-pricing
