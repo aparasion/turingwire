@@ -14,8 +14,8 @@ permalink: /contact/
 
   <!-- Success state (shown after Formspree redirect with ?success=true) -->
   <div id="form-success" class="hidden tw-card rounded-lg border border-emerald-500/40 bg-emerald-500/5 p-6 mb-8 text-center">
-    <p class="text-lg font-semibold tw-heading mb-1">Message sent</p>
-    <p class="text-sm tw-muted">Thanks for reaching out. You'll hear back at the email you provided.</p>
+    <p class="text-lg font-semibold tw-heading mb-1">Thank you for your message!</p>
+    <p class="text-sm tw-muted">We'll get back to you at the email you provided within a few days.</p>
   </div>
 
   <div class="lg:grid lg:grid-cols-5 lg:gap-10">
@@ -28,8 +28,6 @@ permalink: /contact/
         method="POST"
         class="space-y-5"
       >
-        <!-- Formspree: redirect back to /contact/?success=true -->
-        <input type="hidden" name="_next" value="{{ site.url }}/contact/?success=true">
         <!-- Formspree: custom subject prefix -->
         <input type="hidden" name="_subject" value="[Turing Wire] Contact form submission">
         <!-- Honeypot spam guard -->
@@ -117,9 +115,50 @@ permalink: /contact/
 </div>
 
 <script>
-  // Show success banner if Formspree redirected back with ?success=true
-  if (new URLSearchParams(window.location.search).get('success') === 'true') {
-    document.getElementById('form-success').classList.remove('hidden');
-    document.getElementById('contact-form').classList.add('hidden');
+  const form = document.getElementById('contact-form');
+  const successBanner = document.getElementById('form-success');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.classList.add('hidden');
+        successBanner.classList.remove('hidden');
+      } else {
+        const data = await response.json().catch(() => ({}));
+        const msg = data.errors?.map(e => e.message).join(', ') || 'Something went wrong. Please try again.';
+        showError(msg);
+        resetBtn();
+      }
+    } catch (_) {
+      showError('Network error — please check your connection and try again.');
+      resetBtn();
+    }
+  });
+
+  function resetBtn() {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send message →';
+  }
+
+  function showError(msg) {
+    let err = document.getElementById('form-error');
+    if (!err) {
+      err = document.createElement('p');
+      err.id = 'form-error';
+      err.className = 'text-sm text-red-500 mt-2';
+      submitBtn.insertAdjacentElement('afterend', err);
+    }
+    err.textContent = msg;
   }
 </script>
