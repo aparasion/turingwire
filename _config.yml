@@ -90,9 +90,6 @@ author:
 # Analytics placeholder (fill in after launch)
 google_analytics: ""
 
-# Contact form (Formspree — register at formspree.io, create a form, then paste the endpoint below)
-contact_form_action: "https://formspree.io/f/xgoljzky"
-
 # Site-wide flags
 ai_index_base_date: "2026-01-02"
 ai_index_name: "TW AI Index"
