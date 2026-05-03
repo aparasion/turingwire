@@ -1,4 +1,4 @@
-name: benchmarks [auto + manual]
+name: benchmarks (auto + manual)
 
 on:
   schedule:
