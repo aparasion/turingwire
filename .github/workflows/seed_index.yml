@@ -1,4 +1,4 @@
-name: Seed AI Index History
+name: Seed AI Index History [manual]
 
 on:
   workflow_dispatch:

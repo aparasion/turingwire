@@ -1,4 +1,4 @@
-name: issue-on-failure
+name: issue-on-failure [reusable]
 
 on:
   workflow_call:
