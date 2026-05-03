@@ -1,10 +1,10 @@
-name: models [auto + manual]
+name: models (auto + manual)
 
 on:
   # Trigger after every ingest run so new pricing news is checked promptly.
   # The daily schedule is redundant here since ingest runs hourly.
   workflow_run:
-    workflows: ["ingest [auto + manual]"]
+    workflows: ["ingest (auto + manual)"]
     types: [completed]
     branches: [main]
   workflow_dispatch:
