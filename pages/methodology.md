@@ -5,9 +5,9 @@ description: "How Turing Wire classifies, summarizes, and indexes AI content."
 permalink: /methodology/
 ---
 
-This page documents the pipeline and index methodology so that outputs are reproducible and auditable.
+This page documents the editorial and index methodology so that outputs are reproducible and auditable.
 
-## Article pipeline
+## Editorial process
 
 ### 1. Fetch
 
@@ -32,7 +32,7 @@ After deduplication, batches are capped at 50 articles per run. Excess is writte
 
 ### 3. Classify
 
-Each article receives one LLM call to `gpt-4o-mini` (temperature 0.0) returning:
+Each article is analyzed to produce a structured classification:
 
 ```json
 {
@@ -46,7 +46,7 @@ Each article receives one LLM call to `gpt-4o-mini` (temperature 0.0) returning:
 }
 ```
 
-Articles with `confidence < 0.60` are routed to a review queue and not published automatically.
+Articles with `confidence < 0.60` are routed to a review queue and held for editorial review before publishing.
 
 An article can be classified as both `news` and `stocks` if it is market-relevant (e.g., a major model release that moves NVDA).
 
@@ -71,9 +71,9 @@ Articles with no identifiable primary company have `company: null` and appear in
 
 ### 5. Summarize
 
-**News** — OpenAI `gpt-4o-mini`, temperature 0.3, target 250–350 words. Structured as: Lead → Body → Closing line. No invented facts. Speculative claims flagged.
+**News** — Target 250–350 words. Structured as: Lead → Body → Closing line. No invented facts. Speculative claims flagged.
 
-**Research** — OpenAI `gpt-4o-mini`, temperature 0.0, target 450–550 words. Structured as: Problem → Method → Results → Limitations → Why it matters. Technical audience, no softening of jargon.
+**Research** — Target 450–550 words. Structured as: Problem → Method → Results → Limitations → Why it matters. Technical audience, no softening of jargon.
 
 ---
 
