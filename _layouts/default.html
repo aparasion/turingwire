@@ -111,6 +111,17 @@
 
   {% include header.html %}
 
+  <div class="w-full px-4 py-2 flex justify-center bg-transparent">
+    <a href="{{ '/contact/' | relative_url }}" aria-label="Advertisement – visit our contact page">
+      <img
+        src="{{ '/assets/img/ad_banner.png' | relative_url }}"
+        alt="Advertisement"
+        class="w-full max-w-5xl h-auto rounded-sm"
+        loading="eager"
+      >
+    </a>
+  </div>
+
   <main id="main-content" class="flex-1">
     {{ content }}
   </main>
