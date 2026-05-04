@@ -120,21 +120,25 @@ description: "Daily AI briefing for engineers, researchers, and builders — cur
     <!-- ── Sidebar (1/3 width) ────────────────────────────────────────────── -->
     <aside class="mt-10 lg:mt-0 space-y-6">
 
-      <!-- Companies -->
+      <!-- About blurb -->
       <div class="tw-card rounded-lg border tw-border p-5">
-        <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-4">Companies</h2>
-        <div class="flex flex-wrap gap-1.5">
-          {% assign companies = site.posts | map: "company" | compact | uniq | sort %}
-          {% for co in companies limit: 20 %}
-          <a href="/companies/{{ co | slugify }}/"
-             class="font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5 hover:text-cyan-600 hover:border-cyan-600 transition-colors">
-            {{ co }}
-          </a>
-          {% endfor %}
+        <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-2">About</h2>
+        <p class="text-xs tw-muted leading-relaxed">
+          Turing Wire has ambition to be AI practitioners' go-to platform to trace all the leading AI sources in one place, convenient and edited to get to the very gist of what's happening in the AI and technology world.
+        </p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <a href="/about/" class="text-xs font-mono text-cyan-600 hover:text-cyan-500 transition-colors">Learn more →</a>
+          <a href="/alan-turing/#turing-wire" class="text-xs font-mono tw-muted hover:text-cyan-600 transition-colors">Why the name? →</a>
+          <a href="/feed-major.xml" class="text-xs font-mono tw-muted hover:text-cyan-600 transition-colors">Major+ RSS →</a>
         </div>
-        <a href="/companies/" class="block mt-3 text-xs font-mono tw-muted hover:text-cyan-600 transition-colors">
-          All companies →
-        </a>
+      </div>
+
+      <!-- Sponsorship CTA — desktop sidebar -->
+      <div class="hidden lg:block tw-card rounded-lg border tw-border p-5">
+        <p class="text-xs font-mono tw-muted mb-2 opacity-50 uppercase tracking-widest">Sponsored</p>
+        <p class="text-sm font-semibold tw-heading mb-2">Advertise on Turing Wire</p>
+        <p class="text-xs tw-muted leading-relaxed mb-4">Reach an engaged audience of AI engineers, researchers, and practitioners building with the latest models.</p>
+        <a href="/contact/?ref=sponsor" class="inline-block text-xs font-mono text-cyan-600 border border-cyan-600 rounded px-3 py-1 hover:bg-cyan-600 hover:text-white transition-colors">Get in touch →</a>
       </div>
 
       <!-- Research Spotlight -->
@@ -163,25 +167,21 @@ description: "Daily AI briefing for engineers, researchers, and builders — cur
       </div>
       {% endif %}
 
-      <!-- Sponsorship CTA — desktop sidebar -->
-      <div class="hidden lg:block tw-card rounded-lg border tw-border p-5">
-        <p class="text-xs font-mono tw-muted mb-2 opacity-50 uppercase tracking-widest">Sponsored</p>
-        <p class="text-sm font-semibold tw-heading mb-2">Advertise on Turing Wire</p>
-        <p class="text-xs tw-muted leading-relaxed mb-4">Reach an engaged audience of AI engineers, researchers, and practitioners building with the latest models.</p>
-        <a href="/contact/?ref=sponsor" class="inline-block text-xs font-mono text-cyan-600 border border-cyan-600 rounded px-3 py-1 hover:bg-cyan-600 hover:text-white transition-colors">Get in touch →</a>
-      </div>
-
-      <!-- About blurb -->
+      <!-- Companies -->
       <div class="tw-card rounded-lg border tw-border p-5">
-        <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-2">About</h2>
-        <p class="text-xs tw-muted leading-relaxed">
-          Turing Wire has ambition to be AI practitioners' go-to platform to trace all the leading AI sources in one place, convenient and edited to get to the very gist of what's happening in the AI and technology world.
-        </p>
-        <div class="mt-3 flex flex-wrap gap-2">
-          <a href="/about/" class="text-xs font-mono text-cyan-600 hover:text-cyan-500 transition-colors">Learn more →</a>
-          <a href="/alan-turing/#turing-wire" class="text-xs font-mono tw-muted hover:text-cyan-600 transition-colors">Why the name? →</a>
-          <a href="/feed-major.xml" class="text-xs font-mono tw-muted hover:text-cyan-600 transition-colors">Major+ RSS →</a>
+        <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-4">Companies</h2>
+        <div class="flex flex-wrap gap-1.5">
+          {% assign companies = site.posts | map: "company" | compact | uniq | sort %}
+          {% for co in companies limit: 20 %}
+          <a href="/companies/{{ co | slugify }}/"
+             class="font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5 hover:text-cyan-600 hover:border-cyan-600 transition-colors">
+            {{ co }}
+          </a>
+          {% endfor %}
         </div>
+        <a href="/companies/" class="block mt-3 text-xs font-mono tw-muted hover:text-cyan-600 transition-colors">
+          All companies →
+        </a>
       </div>
 
       <!-- AI Index card -->
