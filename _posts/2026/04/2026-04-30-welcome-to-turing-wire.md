@@ -23,9 +23,9 @@ Turing Wire is live. This automated news aggregator ingests RSS/Atom feeds and A
 
 **AIStocks** tracks 28 AI-adjacent equities and maintains the TW AI Index, an equal-weighted index of the full universe updated every 15 minutes during market hours.
 
-The pipeline runs hourly. Articles are classified and summarized by OpenAI gpt-4o-mini. Source attribution is always displayed prominently — Turing Wire is a synthesis layer, not a primary source.
+Source attribution is always displayed prominently — Turing Wire is a synthesis layer, not a primary source.
 
-See the [About](/about/) page for how it works, the [Methodology](/methodology/) page for the classification and index formulas, and the [Sources](/sources/) page for the full source list.
+See the [About](/about/) page for how it works and the [Sources](/sources/) page for the full source list.
 
 Source: Turing Wire
 https://turingwire.com/about/
