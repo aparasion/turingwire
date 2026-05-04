@@ -5,7 +5,7 @@ description: "What Turing Wire is, who it's for, and how to get the most out of 
 permalink: /about/
 ---
 
-Turing Wire is an automated AI news aggregator and research briefing — tracking labs, hardware, papers, and markets in near-realtime. It surfaces, classifies, and summarizes content from across the AI ecosystem so you spend less time hunting and more time building.
+Turing Wire is a dedicated news and research publication covering the AI ecosystem — tracking labs, hardware, papers, and markets in near-realtime. It surfaces, classifies, and distills content from across the field so you spend less time hunting and more time building.
 
 ## Who it's for
 
@@ -35,4 +35,4 @@ It is also not financial advice. See the [disclaimer](/disclaimer/).
 
 ## Who maintains it
 
-This is a personal project. The pipeline is fully automated — articles are fetched, classified, and summarized hourly by GPT-4o-mini. A human reviews the output periodically. If you spot an error, want to suggest a source, or have any other question, use the [contact form](/contact/).
+This is a personal project. Articles are fetched from primary sources, classified by topic and impact, and distilled into structured summaries on a continuous basis. If you spot an error, want to suggest a source, or have any other question, use the [contact form](/contact/).
