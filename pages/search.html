@@ -190,21 +190,16 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
     clearBtn.type = 'button';
     clearBtn.className = 'tw-clear-btn';
     clearBtn.setAttribute('aria-label', 'Clear search');
-    clearBtn.innerHTML =
-      '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-      '<path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
-    form.appendChild(clearBtn);
+    clearBtn.textContent = 'Clear';
+    form.insertAdjacentElement('afterend', clearBtn);
 
     function sync() {
-      clearBtn.style.opacity = input.value ? '0.5' : '0';
-      clearBtn.style.pointerEvents = input.value ? 'auto' : 'none';
+      clearBtn.style.display = input.value ? 'inline-flex' : 'none';
     }
 
     input.addEventListener('input', sync);
     sync();
 
-    clearBtn.addEventListener('mouseenter', function () { if (input.value) clearBtn.style.opacity = '0.9'; });
-    clearBtn.addEventListener('mouseleave', function () { if (input.value) clearBtn.style.opacity = '0.5'; });
     clearBtn.addEventListener('click', function () {
       input.value = '';
       input.dispatchEvent(new Event('input', { bubbles: true }));
@@ -234,7 +229,7 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
           input.dispatchEvent(new Event('input', { bubbles: true }));
           /* show clear btn for pre-filled query */
           var cb = document.querySelector('.tw-clear-btn');
-          if (cb) { cb.style.opacity = '0.5'; cb.style.pointerEvents = 'auto'; }
+          if (cb) { cb.style.display = 'inline-flex'; }
         } else if (attempts++ < 30) { setTimeout(trigger, 100); }
       })();
     }
@@ -291,8 +286,7 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
     font-family: 'JetBrains Mono', monospace !important;
     font-size: 14px !important;
     height: 44px !important;
-    /* Override pagefind's inline padding-right (set for its clear btn) */
-    padding: 0 2.5rem 0 1rem !important;
+    padding: 0 1rem !important;
     border-radius: 8px !important;
     background: var(--bg-card) !important;
     border: 1px solid var(--border) !important;
@@ -313,23 +307,24 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
 
   /* ── Our custom clear button ── */
   .tw-clear-btn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    display: none;
+    margin-top: 8px;
     background: none;
-    border: none;
-    padding: 5px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 12px;
     cursor: pointer;
     color: var(--fg-muted);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s;
-    display: flex;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.5;
     align-items: center;
     justify-content: center;
-    z-index: 10;
-    line-height: 1;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .tw-clear-btn:hover {
+    border-color: var(--accent);
+    color: var(--fg);
   }
 
   /* ── Results area ── */
