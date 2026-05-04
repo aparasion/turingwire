@@ -1,1 +1,1 @@
-# ©Turing Wire
+#Turing Wire ©
