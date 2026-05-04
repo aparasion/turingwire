@@ -41,7 +41,7 @@ layout: default
   </h1>
 
   {% if page.category == 'research' %}
-  <!-- Research quick-links: arXiv + Papers with Code (above summary) -->
+  <!-- Research quick-links: arXiv + Papers with Code -->
   {% if page.arxiv_id and page.arxiv_id != "" %}
   <div class="flex flex-wrap items-center gap-3 mb-4">
     <a href="https://arxiv.org/abs/{{ page.arxiv_id }}"
@@ -57,66 +57,40 @@ layout: default
   </div>
   {% endif %}
   {% if page.authors and page.authors.size > 0 %}
-  <p class="text-xs font-mono tw-muted mb-6">
+  <p class="text-xs font-mono tw-muted mb-4">
     {{ page.authors | join: ", " }}
   </p>
   {% endif %}
   {% endif %}
 
-  <!-- Source attribution — prominent, above summary -->
-  <div class="tw-card rounded-lg p-4 mb-8 flex items-start gap-3 border-l-2 border-cyan-600">
-    <div class="flex-1 min-w-0">
-      <p class="text-xs font-mono tw-muted mb-1">Original source</p>
-      <p class="font-medium tw-heading text-sm">{{ page.source_publisher }}</p>
-      <a href="{{ page.source_url }}"
-         class="text-cyan-600 hover:text-cyan-500 text-xs font-mono break-all transition-colors"
-         target="_blank" rel="noopener noreferrer">
-        {% if page.source_url contains 'news.google.com' %}Google News{% else %}{{ page.source_url }}{% endif %}
-      </a>
-    </div>
-    <a href="{{ page.source_url }}"
-       class="flex-shrink-0 tw-muted hover:tw-accent transition-colors"
-       target="_blank" rel="noopener noreferrer"
-       aria-label="Read original article">
-      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-      </svg>
-    </a>
-  </div>
-
-  <!-- Summary content -->
-  <div class="tw-prose prose-article">
-    {{ content }}
-  </div>
-
-  <!-- Post metadata footer -->
-  <footer class="mt-10 pt-6 border-t tw-border">
-    <dl class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs font-mono">
+  <!-- Post info card (header) -->
+  <div class="tw-card border tw-border rounded-lg px-5 py-4 mb-8">
+    <dl class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-xs font-mono">
       <div>
-        <dt class="tw-muted mb-1">Published</dt>
-        <dd class="tw-heading">{{ page.date | date: "%b %-d, %Y — %H:%M UTC" }}</dd>
+        <dt class="tw-muted mb-0.5">Published</dt>
+        <dd class="tw-heading font-medium">{{ page.date | date: "%b %-d, %Y" }}<span class="tw-muted font-normal"> — {{ page.date | date: "%H:%M UTC" }}</span></dd>
       </div>
       {% if page.summary_word_count %}
       <div>
-        <dt class="tw-muted mb-1">Summary length</dt>
-        <dd class="tw-heading">{{ page.summary_word_count }} words</dd>
-      </div>
-      {% endif %}
-      {% if page.source_truncated %}
-      <div>
-        <dt class="tw-muted mb-1">Source note</dt>
-        <dd class="text-amber-600 dark:text-amber-400">Abstract only</dd>
+        <dt class="tw-muted mb-0.5">Summary length</dt>
+        <dd class="tw-heading font-medium">{{ page.summary_word_count }} words</dd>
       </div>
       {% endif %}
       {% if page.classification_confidence %}
       <div>
-        <dt class="tw-muted mb-1">Relevance score</dt>
-        <dd class="tw-heading">{{ page.classification_confidence | times: 100 | round }}%</dd>
+        <dt class="tw-muted mb-0.5">Relevance score</dt>
+        <dd class="tw-heading font-medium">{{ page.classification_confidence | times: 100 | round }}%</dd>
+      </div>
+      {% endif %}
+      {% if page.source_truncated %}
+      <div>
+        <dt class="tw-muted mb-0.5">Source note</dt>
+        <dd class="text-amber-600 dark:text-amber-400 font-medium">Abstract only</dd>
       </div>
       {% endif %}
       {% if page.arxiv_id and page.arxiv_id != "" and page.category != 'research' %}
       <div>
-        <dt class="tw-muted mb-1">arXiv</dt>
+        <dt class="tw-muted mb-0.5">arXiv</dt>
         <dd>
           <a href="https://arxiv.org/abs/{{ page.arxiv_id }}"
              class="text-cyan-600 hover:text-cyan-500 transition-colors"
@@ -126,29 +100,60 @@ layout: default
         </dd>
       </div>
       {% endif %}
-      {% if page.authors and page.authors.size > 0 and page.category != 'research' %}
-      <div class="col-span-2 sm:col-span-3">
-        <dt class="tw-muted mb-1">Authors</dt>
-        <dd class="tw-heading">{{ page.authors | join: ", " }}</dd>
-      </div>
-      {% endif %}
     </dl>
 
     {% if page.secondary_companies and page.secondary_companies.size > 0 %}
-    <div class="mt-4">
-      <span class="text-xs font-mono tw-muted mr-2">Also covers:</span>
+    <div class="mt-3 pt-3 border-t tw-border flex flex-wrap items-center gap-1.5">
+      <span class="text-xs font-mono tw-muted mr-1">Also covers:</span>
       {% for co in page.secondary_companies %}
       <a href="/companies/{{ co | slugify }}/"
-         class="inline-block font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5 mr-1 mb-1 hover:tw-accent hover:border-cyan-600 transition-colors">
+         class="inline-block font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5 hover:tw-accent hover:border-cyan-600 transition-colors">
         {{ co }}
       </a>
       {% endfor %}
     </div>
     {% endif %}
-  </footer>
+  </div>
+
+  <!-- Summary content -->
+  <div class="tw-prose prose-article">
+    {{ content }}
+  </div>
+
+  <!-- Author & source card -->
+  <div class="tw-card border tw-border rounded-lg px-5 py-4 mt-10 flex items-start gap-4">
+    <img src="/assets/img/turingwirelogo.png"
+         alt="Turing Wire"
+         class="w-9 h-9 rounded-md flex-shrink-0 object-contain mt-0.5">
+    <div class="flex-1 min-w-0 text-xs font-mono space-y-2">
+      <div class="flex items-baseline gap-2">
+        <span class="tw-muted">Author</span>
+        <span class="tw-heading font-medium">Turing Wire editorial staff</span>
+      </div>
+      <div class="flex items-start gap-2 min-w-0">
+        <span class="tw-muted flex-shrink-0">Source</span>
+        <div class="min-w-0">
+          <span class="tw-heading font-medium">{{ page.source_publisher }}</span>
+          <a href="{{ page.source_url }}"
+             class="block text-cyan-600 hover:text-cyan-500 transition-colors truncate mt-0.5"
+             target="_blank" rel="noopener noreferrer">
+            {% if page.source_url contains 'news.google.com' %}Google News{% else %}{{ page.source_url }}{% endif %}
+          </a>
+        </div>
+      </div>
+    </div>
+    <a href="{{ page.source_url }}"
+       class="flex-shrink-0 tw-muted hover:tw-accent transition-colors mt-0.5"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Read original article">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+      </svg>
+    </a>
+  </div>
 
   <!-- Navigation between posts -->
-  <nav class="mt-8 flex justify-between items-center gap-4 text-sm" aria-label="Post navigation">
+  <nav class="mt-6 flex justify-between items-center gap-4 text-sm" aria-label="Post navigation">
     {% if page.previous %}
     <a href="{{ page.previous.url }}" class="flex items-center gap-2 tw-muted hover:tw-accent transition-colors min-w-0">
       <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
