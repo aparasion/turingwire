@@ -74,12 +74,14 @@ description: "Daily AI briefing for engineers, researchers, and builders — cur
 
         {% if valid_count > 0 %}
         <div class="mb-8">
-          <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3 flex items-center gap-3">
-            <span>{{ day_label }}</span>
+          <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3 flex items-center gap-3" data-day-group="{{ group.name }}">
+            <span class="day-label">{{ day_label }}</span>
             {% if group.name != today_str and group.name != yesterday_str %}
-            <span class="opacity-60">{{ group.name }}</span>
+            <span class="opacity-60 day-date">{{ group.name }}</span>
             {% elsif group.name == yesterday_str %}
-            <span class="opacity-50">{{ group.name }}</span>
+            <span class="opacity-50 day-date">{{ group.name }}</span>
+            {% else %}
+            <span class="opacity-50 day-date" style="display:none">{{ group.name }}</span>
             {% endif %}
             <span class="flex-1 h-px tw-border" style="background:var(--border)"></span>
           </h2>
@@ -244,3 +246,31 @@ window._twStockData = {{ site.data.stocks_snapshot | jsonify }};
 window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
 </script>
 <script src="{{ '/assets/js/stocks.js' | relative_url }}"></script>
+<script>
+(function () {
+  var now = new Date();
+  var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
+  var todayStr = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+  var yesterday = new Date(now);
+  yesterday.setDate(yesterday.getDate() - 1);
+  var yesterdayStr = yesterday.getFullYear() + '-' + pad(yesterday.getMonth() + 1) + '-' + pad(yesterday.getDate());
+
+  document.querySelectorAll('[data-day-group]').forEach(function (h2) {
+    var date = h2.getAttribute('data-day-group');
+    var labelEl = h2.querySelector('.day-label');
+    var dateEl = h2.querySelector('.day-date');
+    if (!labelEl) return;
+
+    if (date === todayStr) {
+      labelEl.textContent = 'Today';
+      if (dateEl) dateEl.style.display = 'none';
+    } else if (date === yesterdayStr) {
+      labelEl.textContent = 'Yesterday';
+      if (dateEl) { dateEl.style.display = ''; dateEl.style.opacity = '0.5'; }
+    } else {
+      labelEl.textContent = date;
+      if (dateEl) dateEl.style.display = 'none';
+    }
+  });
+})();
+</script>
