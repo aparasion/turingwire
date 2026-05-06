@@ -2952,14 +2952,22 @@
       "change": 0.56,
       "change_pct": 0.29,
       "n_tickers": 28
+    },
+    {
+      "timestamp": "2026-05-06T20:01:53.122384+00:00",
+      "date": "2026-05-06",
+      "value": 198.8,
+      "change": 1.79,
+      "change_pct": 0.91,
+      "n_tickers": 28
     }
   ],
   "latest": {
-    "timestamp": "2026-05-06T18:13:16.945031+00:00",
+    "timestamp": "2026-05-06T20:01:53.122384+00:00",
     "date": "2026-05-06",
-    "value": 197.01,
-    "change": 0.56,
-    "change_pct": 0.29,
+    "value": 198.8,
+    "change": 1.79,
+    "change_pct": 0.91,
     "n_tickers": 28
   }
 }
