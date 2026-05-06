@@ -93,12 +93,9 @@ description: "Daily AI briefing for engineers, researchers, and builders — cur
                 {% include post_card.html post=post %}
                 {% assign valid_in_group = valid_in_group | plus: 1 %}
                 {% if mobile_ad_placed == 0 and valid_in_group == 1 %}
-                <!-- Sponsorship CTA — after first post, hidden on desktop -->
-                <div class="block lg:hidden tw-card rounded-lg border tw-border p-4">
-                  <p class="text-xs font-mono tw-muted mb-1 opacity-50 uppercase tracking-widest">Sponsored</p>
-                  <p class="text-sm font-semibold tw-heading mb-1">Advertise on Turing Wire</p>
-                  <p class="text-xs tw-muted leading-relaxed mb-3">Reach an engaged audience of AI engineers, researchers, and practitioners.</p>
-                  <a href="/contact/?ref=sponsor" class="inline-block text-xs font-mono text-cyan-600 border border-cyan-600 rounded px-3 py-1 hover:bg-cyan-600 hover:text-white transition-colors">Get in touch →</a>
+                <!-- Compute Core carousel — after first post, hidden on desktop -->
+                <div class="block lg:hidden">
+                  {% include inference_engines_carousel.html %}
                 </div>
                 {% assign mobile_ad_placed = 1 %}
                 {% endif %}
@@ -135,12 +132,9 @@ description: "Daily AI briefing for engineers, researchers, and builders — cur
         </div>
       </div>
 
-      <!-- Sponsorship CTA — desktop sidebar -->
-      <div class="hidden lg:block tw-card rounded-lg border tw-border p-5">
-        <p class="text-xs font-mono tw-muted mb-2 opacity-50 uppercase tracking-widest">Sponsored</p>
-        <p class="text-sm font-semibold tw-heading mb-2">Advertise on Turing Wire</p>
-        <p class="text-xs tw-muted leading-relaxed mb-4">Reach an engaged audience of AI engineers, researchers, and practitioners building with the latest models.</p>
-        <a href="/contact/?ref=sponsor" class="inline-block text-xs font-mono text-cyan-600 border border-cyan-600 rounded px-3 py-1 hover:bg-cyan-600 hover:text-white transition-colors">Get in touch →</a>
+      <!-- Compute Core carousel — desktop sidebar -->
+      <div class="hidden lg:block">
+        {% include inference_engines_carousel.html %}
       </div>
 
       <!-- Research Spotlight -->
