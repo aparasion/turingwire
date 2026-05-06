@@ -1,0 +1,78 @@
+<!-- Compute Core: Local Inference Engines carousel -->
+<div class="tw-card rounded-lg border tw-border p-5 inference-carousel-wrap">
+  <p class="text-xs font-mono tw-muted mb-3 uppercase tracking-widest">Compute Core: Local Inference Engines</p>
+  <div class="inference-carousel" style="position:relative;overflow:hidden;">
+    <div class="inference-carousel-track" style="display:flex;transition:transform 0.4s ease;">
+
+      <!-- Slide 1 -->
+      <div class="inference-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+        <a href="https://amzn.to/4we93Az" target="_blank" rel="noopener sponsored" class="block group">
+          <img src="/assets/img/NVIDIA GeForce RTX 4090 24GB of GDDR6X VRAM.png"
+               alt="NVIDIA GeForce RTX 4090 24GB of GDDR6X VRAM"
+               style="width:100%;height:auto;border-radius:6px;display:block;margin-bottom:10px;">
+          <p class="text-xs font-semibold tw-heading leading-snug group-hover:text-cyan-600 transition-colors">NVIDIA GeForce RTX 4090 24GB of GDDR6X VRAM</p>
+          <p class="text-xs font-mono text-cyan-600 mt-1">Shop on Amazon →</p>
+        </a>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="inference-carousel-slide" style="min-width:100%;box-sizing:border-box;">
+        <a href="https://amzn.to/4neZc9O" target="_blank" rel="noopener sponsored" class="block group">
+          <img src="/assets/img/NVIDIA RTX 4080 Super 16GB of VRAM.png"
+               alt="NVIDIA RTX 4080 Super 16GB of VRAM"
+               style="width:100%;height:auto;border-radius:6px;display:block;margin-bottom:10px;">
+          <p class="text-xs font-semibold tw-heading leading-snug group-hover:text-cyan-600 transition-colors">NVIDIA RTX 4080 Super 16GB of VRAM</p>
+          <p class="text-xs font-mono text-cyan-600 mt-1">Shop on Amazon →</p>
+        </a>
+      </div>
+
+    </div>
+    <!-- Prev / Next -->
+    <button class="inference-prev" aria-label="Previous"
+      style="position:absolute;top:50%;left:0;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:none;color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;">&#8249;</button>
+    <button class="inference-next" aria-label="Next"
+      style="position:absolute;top:50%;right:0;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:none;color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;">&#8250;</button>
+  </div>
+  <!-- Dots -->
+  <div style="display:flex;justify-content:center;gap:6px;margin-top:10px;" class="inference-dots">
+    <button class="inference-dot active" data-idx="0" aria-label="Slide 1"
+      style="width:6px;height:6px;border-radius:50%;border:none;background:#06b6d4;cursor:pointer;padding:0;"></button>
+    <button class="inference-dot" data-idx="1" aria-label="Slide 2"
+      style="width:6px;height:6px;border-radius:50%;border:none;background:#d1d5db;cursor:pointer;padding:0;"></button>
+  </div>
+</div>
+
+<script>
+(function() {
+  document.querySelectorAll('.inference-carousel-wrap').forEach(function(wrap) {
+    var track = wrap.querySelector('.inference-carousel-track');
+    var slides = wrap.querySelectorAll('.inference-carousel-slide');
+    var dots = wrap.querySelectorAll('.inference-dot');
+    var total = slides.length;
+    var current = 0;
+    var timer;
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(d, i) {
+        d.style.background = i === current ? '#06b6d4' : '#d1d5db';
+      });
+    }
+
+    function startAuto() {
+      timer = setInterval(function() { goTo(current + 1); }, 4000);
+    }
+
+    function resetAuto() { clearInterval(timer); startAuto(); }
+
+    wrap.querySelector('.inference-prev').addEventListener('click', function() { goTo(current - 1); resetAuto(); });
+    wrap.querySelector('.inference-next').addEventListener('click', function() { goTo(current + 1); resetAuto(); });
+    dots.forEach(function(d) {
+      d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx)); resetAuto(); });
+    });
+
+    startAuto();
+  });
+})();
+</script>
