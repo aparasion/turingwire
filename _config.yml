@@ -24,6 +24,9 @@ collections:
   companies:
     output: true
     permalink: /companies/:name/
+  stories:
+    output: true
+    permalink: /story/:name/
 
 # Defaults
 defaults:
@@ -42,6 +45,11 @@ defaults:
       type: "companies"
     values:
       layout: "company"
+  - scope:
+      path: ""
+      type: "stories"
+    values:
+      layout: "story"
 
 # Exclude from build
 exclude:

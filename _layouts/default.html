@@ -50,13 +50,53 @@
     },
     "author": {
       "@type": "Organization",
-      "name": "{{ site.title }}"
+      "name": "{{ site.title }} editorial staff"
     },
     "mainEntityOfPage": "{{ page.url | absolute_url }}",
-    "url": {{ page.source_url | jsonify }}
+    "url": "{{ page.url | absolute_url }}",
+    "about": [
+      {% if page.company %}{
+        "@type": "Organization",
+        "name": {{ page.company | jsonify }},
+        "url": "{{ site.url }}/companies/{{ page.company | slugify }}/"
+      }{% if page.secondary_companies.size > 0 %},{% endif %}{% endif %}
+      {% for co in page.secondary_companies %}{
+        "@type": "Organization",
+        "name": {{ co | jsonify }},
+        "url": "{{ site.url }}/companies/{{ co | slugify }}/"
+      }{% unless forloop.last %},{% endunless %}{% endfor %}
+    ],
+    "citation": {
+      "@type": "CreativeWork",
+      "name": {{ page.source_publisher | default: "" | jsonify }},
+      "url": {{ page.source_url | default: "" | jsonify }}
+    },
+    "isBasedOn": {{ page.source_url | default: "" | jsonify }}
   }
   </script>
   {% endif %}
+
+  <!-- JSON-LD for company entity pages (Organization) -->
+  {% if page.layout == 'company' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ page.title | jsonify }},
+    "url": "{{ page.url | absolute_url }}",
+    "identifier": "{{ page.title | slugify }}",
+    "subjectOf": {
+      "@type": "Dataset",
+      "name": "Turing Wire Knowledge Graph",
+      "url": "{{ site.url }}/knowledge-graph.json"
+    }
+  }
+  </script>
+  {% endif %}
+
+  <!-- Discoverable structured data for AI crawlers -->
+  <link rel="alternate" type="application/ld+json" href="{{ '/knowledge-graph.json' | absolute_url }}" title="Turing Wire Knowledge Graph">
+  <link rel="alternate" type="text/plain" href="{{ '/llms.txt' | absolute_url }}" title="LLM citation policy">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ '/assets/img/turingwirelogo.png' | relative_url }}">
