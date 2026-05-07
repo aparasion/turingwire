@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"g-1wLA\"",
+    "etag": "\"NXBFQg\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -16,8 +16,8 @@
     "last_modified": "Wed, 06 May 2026 17:22:35 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"57ea08c81a4a8e84fec2c54f96a8e929-gzip\"",
-    "last_modified": "Wed, 06 May 2026 17:45:51 GMT"
+    "etag": "W/\"2f8df44ed759d5ba2888ab614a78f6e9-gzip\"",
+    "last_modified": "Thu, 07 May 2026 09:51:52 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
     "etag": "W/\"377c7-Iw29/Bo5wxI/NxmS0m7DaFdaCxI\"",
@@ -40,19 +40,19 @@
     "last_modified": "Wed, 6 May 2026 23:35:30 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"2fe070b2be43114120bbd8efae161e77\"",
-    "last_modified": "Wed, 06 May 2026 22:14:32 GMT"
+    "etag": "W/\"5a8f782e4edda85cc1acfbac3ef6a83f\"",
+    "last_modified": "Wed, 06 May 2026 16:18:07 GMT"
   },
   "https://stratechery.com/feed/": {
-    "etag": "W/\"3ab6ddad881352052d89e56bc24ea4cf\"",
-    "last_modified": "Wed, 06 May 2026 10:00:00 GMT"
+    "etag": "W/\"1abc6a4841caaf9a5d78789f33c60172\"",
+    "last_modified": "Thu, 07 May 2026 10:00:00 GMT"
   },
   "https://www.theinformation.com/feed": {
-    "etag": "W/\"3c3ee31f7f3f7b0af9cc67b452a06f49\"",
+    "etag": "W/\"f779f98a2b916fb2a6ff9c81c7a2d413\"",
     "last_modified": ""
   },
   "https://www.nature.com/natmachintell.rss": {
-    "etag": "\"4ee55962afabcb1d11e2651149eea7fd\"",
+    "etag": "\"1d3ca338c890d9b52cf56aa4ffcb7771\"",
     "last_modified": ""
   },
   "https://jmlr.org/jmlr.xml": {
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Thu, 07 May 2026 07:13:09 GMT"
+    "last_modified": "Thu, 07 May 2026 10:13:27 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"16032a-twHXA/aCdQbhF0PXHG3S8ySI3R0\"",
+    "etag": "W/\"160326-xY/so7yK1NoYT/MbYeqXCZuqw0o\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
