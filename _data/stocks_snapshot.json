@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-07T20:13:59.909133+00:00",
+  "updated_at": "2026-05-07T21:15:48.704233+00:00",
   "error_count": 0,
   "quotes": {
     "NVDA": {
@@ -8,12 +8,12 @@
       "sector": "semiconductors",
       "price": 211.5,
       "change": 3.67,
-      "change_pct": 1.76,
+      "change_pct": 1.77,
       "high": 214.2,
       "low": 206.5,
       "open": 208.34,
       "prev_close": 207.83,
-      "updated_at": "2026-05-07T20:13:23.325025+00:00"
+      "updated_at": "2026-05-07T21:15:11.503761+00:00"
     },
     "AMD": {
       "symbol": "AMD",
@@ -26,7 +26,7 @@
       "low": 401.08,
       "open": 417.07,
       "prev_close": 421.39,
-      "updated_at": "2026-05-07T20:13:24.749008+00:00"
+      "updated_at": "2026-05-07T21:15:12.812234+00:00"
     },
     "INTC": {
       "symbol": "INTC",
@@ -39,7 +39,7 @@
       "low": 109.15,
       "open": 111.02,
       "prev_close": 113.01,
-      "updated_at": "2026-05-07T20:13:26.023618+00:00"
+      "updated_at": "2026-05-07T21:15:14.139616+00:00"
     },
     "TSM": {
       "symbol": "TSM",
@@ -52,7 +52,7 @@
       "low": 408.11,
       "open": 418.09,
       "prev_close": 419.5,
-      "updated_at": "2026-05-07T20:13:27.313007+00:00"
+      "updated_at": "2026-05-07T21:15:15.400957+00:00"
     },
     "GOOGL": {
       "symbol": "GOOGL",
@@ -65,20 +65,20 @@
       "low": 392.68,
       "open": 399.92,
       "prev_close": 398.04,
-      "updated_at": "2026-05-07T20:13:28.604461+00:00"
+      "updated_at": "2026-05-07T21:15:16.759724+00:00"
     },
     "MSFT": {
       "symbol": "MSFT",
       "name": "Microsoft Corporation",
       "sector": "hyperscaler",
-      "price": 420.92,
-      "change": 6.96,
-      "change_pct": 1.68,
+      "price": 420.77,
+      "change": 6.81,
+      "change_pct": 1.65,
       "high": 427.98,
       "low": 418.76,
       "open": 420.11,
       "prev_close": 413.96,
-      "updated_at": "2026-05-07T20:13:29.873370+00:00"
+      "updated_at": "2026-05-07T21:15:18.223647+00:00"
     },
     "META": {
       "symbol": "META",
@@ -91,7 +91,7 @@
       "low": 613.54,
       "open": 614.72,
       "prev_close": 612.88,
-      "updated_at": "2026-05-07T20:13:31.180819+00:00"
+      "updated_at": "2026-05-07T21:15:19.506234+00:00"
     },
     "AMZN": {
       "symbol": "AMZN",
@@ -104,20 +104,20 @@
       "low": 270.49,
       "open": 275.02,
       "prev_close": 274.99,
-      "updated_at": "2026-05-07T20:13:32.454661+00:00"
+      "updated_at": "2026-05-07T21:15:20.882364+00:00"
     },
     "AAPL": {
       "symbol": "AAPL",
       "name": "Apple Inc.",
       "sector": "hyperscaler",
-      "price": 287.42,
-      "change": -0.09,
-      "change_pct": -0.03,
+      "price": 287.44,
+      "change": -0.07,
+      "change_pct": -0.02,
       "high": 292.13,
       "low": 285.78,
       "open": 289.27,
       "prev_close": 287.51,
-      "updated_at": "2026-05-07T20:13:33.811438+00:00"
+      "updated_at": "2026-05-07T21:15:22.224737+00:00"
     },
     "ORCL": {
       "symbol": "ORCL",
@@ -130,20 +130,20 @@
       "low": 190.8,
       "open": 198.61,
       "prev_close": 194.03,
-      "updated_at": "2026-05-07T20:13:35.110224+00:00"
+      "updated_at": "2026-05-07T21:15:23.507088+00:00"
     },
     "PLTR": {
       "symbol": "PLTR",
       "name": "Palantir Technologies",
       "sector": "enterprise_ai",
-      "price": 137.06,
-      "change": 3.27,
-      "change_pct": 2.45,
+      "price": 137.05,
+      "change": 3.26,
+      "change_pct": 2.44,
       "high": 140.95,
       "low": 134.78,
       "open": 135.1,
       "prev_close": 133.79,
-      "updated_at": "2026-05-07T20:13:36.384633+00:00"
+      "updated_at": "2026-05-07T21:15:24.872330+00:00"
     },
     "SMCI": {
       "symbol": "SMCI",
@@ -156,7 +156,7 @@
       "low": 32.92,
       "open": 34.01,
       "prev_close": 34.66,
-      "updated_at": "2026-05-07T20:13:37.731606+00:00"
+      "updated_at": "2026-05-07T21:15:26.257148+00:00"
     },
     "AVGO": {
       "symbol": "AVGO",
@@ -169,20 +169,20 @@
       "low": 406.3,
       "open": 421.82,
       "prev_close": 425.44,
-      "updated_at": "2026-05-07T20:13:39.005632+00:00"
+      "updated_at": "2026-05-07T21:15:27.527935+00:00"
     },
     "ARM": {
       "symbol": "ARM",
       "name": "Arm Holdings",
       "sector": "semiconductors",
-      "price": 213.33,
-      "change": -23.97,
-      "change_pct": -10.1,
+      "price": 213.31,
+      "change": -23.99,
+      "change_pct": -10.11,
       "high": 232.23,
       "low": 210.23,
       "open": 222.4,
       "prev_close": 237.3,
-      "updated_at": "2026-05-07T20:13:40.300898+00:00"
+      "updated_at": "2026-05-07T21:15:28.880878+00:00"
     },
     "ASML": {
       "symbol": "ASML",
@@ -195,46 +195,46 @@
       "low": 1497.81,
       "open": 1548.74,
       "prev_close": 1544.74,
-      "updated_at": "2026-05-07T20:13:41.570983+00:00"
+      "updated_at": "2026-05-07T21:15:30.219707+00:00"
     },
     "AMAT": {
       "symbol": "AMAT",
       "name": "Applied Materials",
       "sector": "semiconductor_equipment",
-      "price": 410.52,
-      "change": -18.1,
-      "change_pct": -4.22,
+      "price": 410.64,
+      "change": -17.98,
+      "change_pct": -4.19,
       "high": 427.7,
       "low": 406.01,
       "open": 426.36,
       "prev_close": 428.62,
-      "updated_at": "2026-05-07T20:13:42.850114+00:00"
+      "updated_at": "2026-05-07T21:15:31.496868+00:00"
     },
     "LRCX": {
       "symbol": "LRCX",
       "name": "Lam Research",
       "sector": "semiconductor_equipment",
-      "price": 286.41,
-      "change": -10.76,
-      "change_pct": -3.62,
+      "price": 286.52,
+      "change": -10.65,
+      "change_pct": -3.58,
       "high": 298.0,
       "low": 283.14,
       "open": 297.03,
       "prev_close": 297.17,
-      "updated_at": "2026-05-07T20:13:44.116689+00:00"
+      "updated_at": "2026-05-07T21:15:32.803381+00:00"
     },
     "MU": {
       "symbol": "MU",
       "name": "Micron Technology",
       "sector": "semiconductors",
-      "price": 646.47,
-      "change": -20.12,
-      "change_pct": -3.02,
+      "price": 646.63,
+      "change": -19.96,
+      "change_pct": -2.99,
       "high": 683.09,
       "low": 635.42,
       "open": 649.83,
       "prev_close": 666.59,
-      "updated_at": "2026-05-07T20:13:45.435445+00:00"
+      "updated_at": "2026-05-07T21:15:34.298264+00:00"
     },
     "IBM": {
       "symbol": "IBM",
@@ -247,7 +247,7 @@
       "low": 227.41,
       "open": 227.5,
       "prev_close": 225.74,
-      "updated_at": "2026-05-07T20:13:46.864531+00:00"
+      "updated_at": "2026-05-07T21:15:35.621626+00:00"
     },
     "CRM": {
       "symbol": "CRM",
@@ -260,7 +260,7 @@
       "low": 184.0,
       "open": 184.6,
       "prev_close": 181.19,
-      "updated_at": "2026-05-07T20:13:48.130981+00:00"
+      "updated_at": "2026-05-07T21:15:36.937047+00:00"
     },
     "NOW": {
       "symbol": "NOW",
@@ -273,7 +273,7 @@
       "low": 91.89,
       "open": 92.17,
       "prev_close": 89.05,
-      "updated_at": "2026-05-07T20:13:49.419026+00:00"
+      "updated_at": "2026-05-07T21:15:38.209036+00:00"
     },
     "SNOW": {
       "symbol": "SNOW",
@@ -286,7 +286,7 @@
       "low": 150.3,
       "open": 153.43,
       "prev_close": 139.74,
-      "updated_at": "2026-05-07T20:13:50.693538+00:00"
+      "updated_at": "2026-05-07T21:15:39.518285+00:00"
     },
     "PATH": {
       "symbol": "PATH",
@@ -299,7 +299,7 @@
       "low": 10.79,
       "open": 10.79,
       "prev_close": 10.5,
-      "updated_at": "2026-05-07T20:13:52.052813+00:00"
+      "updated_at": "2026-05-07T21:15:40.971340+00:00"
     },
     "AI": {
       "symbol": "AI",
@@ -312,7 +312,7 @@
       "low": 9.47,
       "open": 9.71,
       "prev_close": 9.6,
-      "updated_at": "2026-05-07T20:13:53.319490+00:00"
+      "updated_at": "2026-05-07T21:15:42.308139+00:00"
     },
     "BBAI": {
       "symbol": "BBAI",
@@ -325,7 +325,7 @@
       "low": 4.1,
       "open": 4.37,
       "prev_close": 4.37,
-      "updated_at": "2026-05-07T20:13:54.584894+00:00"
+      "updated_at": "2026-05-07T21:15:43.583623+00:00"
     },
     "CRWV": {
       "symbol": "CRWV",
@@ -338,7 +338,7 @@
       "low": 125.43,
       "open": 132.06,
       "prev_close": 137.98,
-      "updated_at": "2026-05-07T20:13:56.067139+00:00"
+      "updated_at": "2026-05-07T21:15:44.847310+00:00"
     },
     "BIDU": {
       "symbol": "BIDU",
@@ -351,7 +351,7 @@
       "low": 137.19,
       "open": 140.81,
       "prev_close": 140.59,
-      "updated_at": "2026-05-07T20:13:57.333825+00:00"
+      "updated_at": "2026-05-07T21:15:46.123301+00:00"
     },
     "BABA": {
       "symbol": "BABA",
@@ -364,7 +364,7 @@
       "low": 140.44,
       "open": 143.76,
       "prev_close": 141.44,
-      "updated_at": "2026-05-07T20:13:58.708821+00:00"
+      "updated_at": "2026-05-07T21:15:47.503971+00:00"
     }
   }
 }
