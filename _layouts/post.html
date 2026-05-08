@@ -144,6 +144,15 @@ layout: default
     </div>
   </div>
 
+  <!-- Share -->
+  <div class="mt-6">
+    {% include share.html
+       url=page.url
+       title=page.title
+       summary=page.description
+       variant="inline" %}
+  </div>
+
   <!-- Navigation between posts -->
   <nav class="mt-6 flex justify-between items-center gap-4 text-sm" aria-label="Post navigation">
     {% if page.previous %}

@@ -17,8 +17,11 @@ permalink: /models/
         <h1 class="text-2xl font-bold tw-heading font-mono">AI Model Pricing</h1>
         <p class="tw-muted text-sm mt-1">Token pricing, context windows, and capabilities across major providers.</p>
       </div>
-      <div class="text-right flex-shrink-0">
-        <p class="text-xs tw-muted font-mono">Updated {{ updated }}</p>
+      <div class="flex items-start gap-3 flex-shrink-0">
+        <div class="text-right">
+          <p class="text-xs tw-muted font-mono">Updated {{ updated }}</p>
+        </div>
+        {% include share.html variant="popover" align="right" %}
       </div>
     </div>
 

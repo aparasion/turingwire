@@ -166,6 +166,14 @@ layout: default
         {{ content }}
       </div>
       {% endif %}
+
+      <!-- Share -->
+      <div class="mt-8">
+        {% include share.html
+           title=page.title
+           summary=page.lead
+           variant="inline" %}
+      </div>
     </section>
 
     <!-- Sources column -->

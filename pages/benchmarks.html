@@ -16,9 +16,12 @@ permalink: /benchmarks/
         <h1 class="text-2xl font-bold tw-heading font-mono">AI Benchmark Leaderboard</h1>
         <p class="tw-muted text-sm mt-1">State-of-the-art results across key evaluation benchmarks.</p>
       </div>
-      <div class="text-right flex-shrink-0">
-        <p class="text-xs tw-muted font-mono">Updated {{ bdata.updated_at }}</p>
-        <a href="https://paperswithcode.com/sota" target="_blank" rel="noopener" class="text-xs tw-accent hover:underline">Full leaderboards on Papers With Code ↗</a>
+      <div class="flex items-start gap-3 flex-shrink-0">
+        <div class="text-right">
+          <p class="text-xs tw-muted font-mono">Updated {{ bdata.updated_at }}</p>
+          <a href="https://paperswithcode.com/sota" target="_blank" rel="noopener" class="text-xs tw-accent hover:underline">Full leaderboards on Papers With Code ↗</a>
+        </div>
+        {% include share.html variant="popover" align="right" %}
       </div>
     </div>
     <div class="tw-card rounded-lg border tw-border px-4 py-3 text-xs tw-muted leading-relaxed">
