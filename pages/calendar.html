@@ -64,7 +64,7 @@ permalink: /calendar/
   <div id="conf-grid" class="space-y-3">
     {% for conf in cdata.conferences %}
     {% assign tracks_str = conf.track | join: " " %}
-    <div class="conf-card tw-card rounded-xl border tw-border overflow-hidden"
+    <div class="conf-card tw-card rounded-xl border tw-border"
          id="conf-{{ conf.id }}"
          data-year="{{ conf.year }}"
          data-track="{{ tracks_str }}"
