@@ -112,26 +112,26 @@
 
       <details class="tw-mobile-group" {% if page.url contains '/news' or page.url contains '/research' %}open{% endif %}>
         <summary class="tw-nav-link py-2">The Wire</summary>
-        <a href="/news/"     class="tw-nav-link py-2 pl-4">News</a>
-        <a href="/research/" class="tw-nav-link py-2 pl-4">Research</a>
+        <a href="/news/"     class="py-2 {% if page.url contains '/news'     %}tw-nav-active{% endif %}">News</a>
+        <a href="/research/" class="py-2 {% if page.url contains '/research' %}tw-nav-active{% endif %}">Research</a>
       </details>
 
       <details class="tw-mobile-group" {% if page.url contains '/stor' or page.url contains '/missions' %}open{% endif %}>
         <summary class="tw-nav-link py-2">Intelligence</summary>
-        <a href="/stories/"  class="tw-nav-link py-2 pl-4">Stories</a>
-        <a href="/missions/" class="tw-nav-link py-2 pl-4">Missions</a>
+        <a href="/stories/"  class="py-2 {% if page.url contains '/stor'     %}tw-nav-active{% endif %}">Stories</a>
+        <a href="/missions/" class="py-2 {% if page.url contains '/missions' %}tw-nav-active{% endif %}">Missions</a>
       </details>
 
       <details class="tw-mobile-group" {% if page.url contains '/aistocks' or page.url contains '/companies' %}open{% endif %}>
         <summary class="tw-nav-link py-2">Markets</summary>
-        <a href="/aistocks/"  class="tw-nav-link py-2 pl-4">AI Stocks</a>
-        <a href="/companies/" class="tw-nav-link py-2 pl-4">Companies</a>
+        <a href="/aistocks/"  class="py-2 {% if page.url contains '/aistocks'  %}tw-nav-active{% endif %}">AI Stocks</a>
+        <a href="/companies/" class="py-2 {% if page.url contains '/companies' %}tw-nav-active{% endif %}">Companies</a>
       </details>
 
       <details class="tw-mobile-group" {% if page.url contains '/models' or page.url contains '/benchmarks' %}open{% endif %}>
         <summary class="tw-nav-link py-2">Technical</summary>
-        <a href="/models/"     class="tw-nav-link py-2 pl-4">Models</a>
-        <a href="/benchmarks/" class="tw-nav-link py-2 pl-4">Benchmarks</a>
+        <a href="/models/"     class="py-2 {% if page.url contains '/models'     %}tw-nav-active{% endif %}">Models</a>
+        <a href="/benchmarks/" class="py-2 {% if page.url contains '/benchmarks' %}tw-nav-active{% endif %}">Benchmarks</a>
       </details>
 
       <a href="/calendar/" class="tw-nav-link py-2 {% if page.url contains '/calendar' %}tw-nav-active{% endif %}">Events</a>

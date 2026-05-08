@@ -197,6 +197,47 @@ body.tw-body {
 
 .tw-mobile-group[open] > summary::after { transform: rotate(180deg); }
 
+.tw-mobile-group > a {
+  display: flex;
+  align-items: center;
+  margin-left: 0.75rem;
+  padding-left: 0.875rem;
+  border-left: 2px solid var(--border);
+  color: var(--fg-muted);
+  font-size: 0.875rem;
+}
+
+.tw-mobile-group > a::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--fg-muted);
+  margin-right: 0.625rem;
+  opacity: 0.55;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.tw-mobile-group > a:hover {
+  color: var(--fg-heading);
+  border-left-color: var(--accent);
+}
+
+.tw-mobile-group > a:hover::before {
+  background-color: var(--accent);
+  opacity: 1;
+}
+
+.tw-mobile-group > a.tw-nav-active {
+  border-left-color: var(--accent);
+  color: var(--fg-heading);
+}
+
+.tw-mobile-group > a.tw-nav-active::before {
+  background-color: var(--accent);
+  opacity: 1;
+}
+
 /* ── Search ──────────────────────────────────────────────────────────────── */
 
 .tw-search-wrapper { position: relative; }
