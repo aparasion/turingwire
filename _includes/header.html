@@ -13,15 +13,56 @@
 
     <!-- Desktop Nav (center) -->
     <nav class="hidden md:flex items-center gap-1 text-sm font-medium" aria-label="Main navigation">
-      <a href="/news/"        class="tw-nav-link {% if page.url contains '/news'        %}tw-nav-active{% endif %}">News</a>
-      <a href="/stories/"     class="tw-nav-link {% if page.url contains '/stor'        %}tw-nav-active{% endif %}">Stories</a>
-      <a href="/missions/"    class="tw-nav-link {% if page.url contains '/missions'    %}tw-nav-active{% endif %}">Missions</a>
-      <a href="/research/"    class="tw-nav-link {% if page.url contains '/research'    %}tw-nav-active{% endif %}">Research</a>
-      <a href="/aistocks/"    class="tw-nav-link {% if page.url contains '/aistocks'    %}tw-nav-active{% endif %}">AI Stocks</a>
-      <a href="/companies/"   class="tw-nav-link {% if page.url contains '/companies'   %}tw-nav-active{% endif %}">Companies</a>
-      <a href="/models/"      class="tw-nav-link {% if page.url contains '/models'      %}tw-nav-active{% endif %}">Models</a>
-      <a href="/benchmarks/"  class="tw-nav-link {% if page.url contains '/benchmarks'  %}tw-nav-active{% endif %}">Benchmarks</a>
-      <a href="/calendar/"    class="tw-nav-link {% if page.url contains '/calendar'    %}tw-nav-active{% endif %}">Calendar</a>
+
+      <div class="tw-nav-group">
+        <button type="button"
+                class="tw-nav-link tw-nav-trigger {% if page.url contains '/news' or page.url contains '/research' %}tw-nav-active{% endif %}"
+                aria-haspopup="true" aria-expanded="false">
+          The Wire <span aria-hidden="true" class="tw-nav-caret">&#9662;</span>
+        </button>
+        <div class="tw-nav-dropdown" role="menu">
+          <a href="/news/"     class="tw-dropdown-item" role="menuitem">News</a>
+          <a href="/research/" class="tw-dropdown-item" role="menuitem">Research</a>
+        </div>
+      </div>
+
+      <div class="tw-nav-group">
+        <button type="button"
+                class="tw-nav-link tw-nav-trigger {% if page.url contains '/stor' or page.url contains '/missions' %}tw-nav-active{% endif %}"
+                aria-haspopup="true" aria-expanded="false">
+          Intelligence <span aria-hidden="true" class="tw-nav-caret">&#9662;</span>
+        </button>
+        <div class="tw-nav-dropdown" role="menu">
+          <a href="/stories/"  class="tw-dropdown-item" role="menuitem">Stories</a>
+          <a href="/missions/" class="tw-dropdown-item" role="menuitem">Missions</a>
+        </div>
+      </div>
+
+      <div class="tw-nav-group">
+        <button type="button"
+                class="tw-nav-link tw-nav-trigger {% if page.url contains '/aistocks' or page.url contains '/companies' %}tw-nav-active{% endif %}"
+                aria-haspopup="true" aria-expanded="false">
+          Markets <span aria-hidden="true" class="tw-nav-caret">&#9662;</span>
+        </button>
+        <div class="tw-nav-dropdown" role="menu">
+          <a href="/aistocks/"  class="tw-dropdown-item" role="menuitem">AI Stocks</a>
+          <a href="/companies/" class="tw-dropdown-item" role="menuitem">Companies</a>
+        </div>
+      </div>
+
+      <div class="tw-nav-group">
+        <button type="button"
+                class="tw-nav-link tw-nav-trigger {% if page.url contains '/models' or page.url contains '/benchmarks' %}tw-nav-active{% endif %}"
+                aria-haspopup="true" aria-expanded="false">
+          Technical <span aria-hidden="true" class="tw-nav-caret">&#9662;</span>
+        </button>
+        <div class="tw-nav-dropdown" role="menu">
+          <a href="/models/"     class="tw-dropdown-item" role="menuitem">Models</a>
+          <a href="/benchmarks/" class="tw-dropdown-item" role="menuitem">Benchmarks</a>
+        </div>
+      </div>
+
+      <a href="/calendar/" class="tw-nav-link {% if page.url contains '/calendar' %}tw-nav-active{% endif %}">Events</a>
     </nav>
 
     <!-- Right: Search + Theme toggle + Mobile menu -->
@@ -68,15 +109,33 @@
   <!-- Mobile nav drawer -->
   <div id="mobile-nav" class="md:hidden hidden tw-mobile-nav border-t tw-border">
     <nav class="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1 text-sm font-medium">
-      <a href="/news/"        class="tw-nav-link py-2">News</a>
-      <a href="/stories/"     class="tw-nav-link py-2">Stories</a>
-      <a href="/missions/"    class="tw-nav-link py-2">Missions</a>
-      <a href="/research/"    class="tw-nav-link py-2">Research</a>
-      <a href="/aistocks/"    class="tw-nav-link py-2">AI Stocks</a>
-      <a href="/companies/"   class="tw-nav-link py-2">Companies</a>
-      <a href="/models/"      class="tw-nav-link py-2">Models</a>
-      <a href="/benchmarks/"  class="tw-nav-link py-2">Benchmarks</a>
-      <a href="/calendar/"    class="tw-nav-link py-2">Calendar</a>
+
+      <details class="tw-mobile-group" {% if page.url contains '/news' or page.url contains '/research' %}open{% endif %}>
+        <summary class="tw-nav-link py-2">The Wire</summary>
+        <a href="/news/"     class="tw-nav-link py-2 pl-4">News</a>
+        <a href="/research/" class="tw-nav-link py-2 pl-4">Research</a>
+      </details>
+
+      <details class="tw-mobile-group" {% if page.url contains '/stor' or page.url contains '/missions' %}open{% endif %}>
+        <summary class="tw-nav-link py-2">Intelligence</summary>
+        <a href="/stories/"  class="tw-nav-link py-2 pl-4">Stories</a>
+        <a href="/missions/" class="tw-nav-link py-2 pl-4">Missions</a>
+      </details>
+
+      <details class="tw-mobile-group" {% if page.url contains '/aistocks' or page.url contains '/companies' %}open{% endif %}>
+        <summary class="tw-nav-link py-2">Markets</summary>
+        <a href="/aistocks/"  class="tw-nav-link py-2 pl-4">AI Stocks</a>
+        <a href="/companies/" class="tw-nav-link py-2 pl-4">Companies</a>
+      </details>
+
+      <details class="tw-mobile-group" {% if page.url contains '/models' or page.url contains '/benchmarks' %}open{% endif %}>
+        <summary class="tw-nav-link py-2">Technical</summary>
+        <a href="/models/"     class="tw-nav-link py-2 pl-4">Models</a>
+        <a href="/benchmarks/" class="tw-nav-link py-2 pl-4">Benchmarks</a>
+      </details>
+
+      <a href="/calendar/" class="tw-nav-link py-2 {% if page.url contains '/calendar' %}tw-nav-active{% endif %}">Events</a>
+
       <form action="/search/" method="get" class="mt-2">
         <input type="search" name="q" placeholder="Search…"
                class="tw-search-input w-full font-mono text-sm">
