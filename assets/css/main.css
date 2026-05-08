@@ -111,6 +111,92 @@ body.tw-body {
 
 .tw-mobile-nav { background-color: var(--bg-mobile); }
 
+/* ── Grouped nav (dropdowns) ─────────────────────────────────────────────── */
+
+.tw-nav-group { position: relative; }
+
+.tw-nav-trigger {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  gap: 0.25rem;
+}
+
+.tw-nav-caret {
+  font-size: 0.7em;
+  opacity: 0.55;
+  margin-left: 0.15rem;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.tw-nav-group:hover .tw-nav-caret,
+.tw-nav-group:focus-within .tw-nav-caret {
+  opacity: 1;
+  transform: translateY(1px);
+}
+
+.tw-nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 11rem;
+  margin-top: 0.25rem;
+  padding: 0.25rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  display: none;
+  z-index: 60;
+}
+
+.tw-nav-group:hover .tw-nav-dropdown,
+.tw-nav-group:focus-within .tw-nav-dropdown {
+  display: block;
+}
+
+.tw-nav-group:hover .tw-nav-trigger[aria-expanded],
+.tw-nav-group:focus-within .tw-nav-trigger[aria-expanded] {
+  color: var(--fg-heading);
+}
+
+.tw-dropdown-item {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.375rem;
+  color: var(--fg);
+  font-size: 0.875rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.tw-dropdown-item:hover {
+  color: var(--fg-heading);
+  background-color: color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+/* Mobile accordion groups */
+.tw-mobile-group > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tw-mobile-group > summary::-webkit-details-marker { display: none; }
+
+.tw-mobile-group > summary::after {
+  content: "\25BE";
+  font-size: 0.7em;
+  opacity: 0.5;
+  transition: transform 0.15s ease;
+}
+
+.tw-mobile-group[open] > summary::after { transform: rotate(180deg); }
+
 /* ── Search ──────────────────────────────────────────────────────────────── */
 
 .tw-search-wrapper { position: relative; }
