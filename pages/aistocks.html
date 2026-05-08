@@ -28,6 +28,9 @@ window._twIndexHistory = {{ site.data.ai_index_history | jsonify }};
         {% endif %}
         · 15 min intervals during market hours
       </p>
+      <div class="mt-2">
+        {% include share.html variant="popover" align="left" %}
+      </div>
     </div>
     {% if site.data.ai_index_history.latest %}
     {% assign idx = site.data.ai_index_history.latest %}

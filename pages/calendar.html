@@ -65,6 +65,7 @@ permalink: /calendar/
     {% for conf in cdata.conferences %}
     {% assign tracks_str = conf.track | join: " " %}
     <div class="conf-card tw-card rounded-xl border tw-border overflow-hidden"
+         id="conf-{{ conf.id }}"
          data-year="{{ conf.year }}"
          data-track="{{ tracks_str }}"
          data-submission="{{ conf.submission_deadline }}"
@@ -84,14 +85,24 @@ permalink: /calendar/
             <p class="text-xs tw-muted">{{ conf.full_name }}</p>
           </div>
 
-          <!-- Location + link -->
-          <div class="text-right flex-shrink-0">
-            <div class="text-sm tw-heading font-semibold">{{ conf.location }}</div>
-            {% if conf.acceptance_rate != "" %}
-            <div class="text-xs tw-muted font-mono">Accept rate: {{ conf.acceptance_rate }}</div>
-            {% endif %}
-            <a href="{{ conf.website }}" target="_blank" rel="noopener"
-               class="text-xs tw-accent hover:underline font-mono">website ↗</a>
+          <!-- Location + link + share -->
+          <div class="flex items-start gap-3 flex-shrink-0">
+            <div class="text-right">
+              <div class="text-sm tw-heading font-semibold">{{ conf.location }}</div>
+              {% if conf.acceptance_rate != "" %}
+              <div class="text-xs tw-muted font-mono">Accept rate: {{ conf.acceptance_rate }}</div>
+              {% endif %}
+              <a href="{{ conf.website }}" target="_blank" rel="noopener"
+                 class="text-xs tw-accent hover:underline font-mono">website ↗</a>
+            </div>
+            {% capture conf_share_url %}/calendar/#conf-{{ conf.id }}{% endcapture %}
+            {% capture conf_share_title %}{{ conf.name }} — {{ conf.full_name }}{% endcapture %}
+            {% include share.html
+               url=conf_share_url
+               title=conf_share_title
+               summary=conf.notes
+               variant="popover"
+               align="right" %}
           </div>
         </div>
 
