@@ -45,6 +45,17 @@ TRACKING_PARAMS = {
     "fbclid", "gclid", "ref", "referer", "_ga", "mc_cid", "mc_eid",
 }
 
+_CYRILLIC_RE = re.compile(r"[Ѐ-ӿ]")
+_ALPHA_RE = re.compile(r"[A-Za-zЀ-ӿ]")
+
+
+def _is_cyrillic_dominant(text: str, threshold: float = 0.5) -> bool:
+    """Return True if over half of alphabetic characters in text are Cyrillic."""
+    alpha = _ALPHA_RE.findall(text)
+    if not alpha:
+        return False
+    return len(_CYRILLIC_RE.findall(text)) / len(alpha) > threshold
+
 USER_AGENT = (
     "TuringWire/1.0 (+https://turingwire.com; news aggregator; "
     "contact: webmaster@turingwire.com)"
@@ -211,9 +222,14 @@ def fetch_rss_atom(source: dict, etag_cache: dict, dry_run: bool) -> list[dict]:
         if source.get("requires_full_text_fetch") and len(body) < 200:
             body = fetch_full_text(link) or body
 
+        title = getattr(entry, "title", "").strip()
+        if _is_cyrillic_dominant(title):
+            log.debug("skipping Cyrillic-dominant article: %s", title)
+            continue
+
         articles.append({
             "guid": getattr(entry, "id", link) or link,
-            "title": getattr(entry, "title", "").strip(),
+            "title": title,
             "url": canonical_url(link),
             "published": pub.isoformat() if pub else datetime.now(timezone.utc).isoformat(),
             "body": body,
@@ -224,6 +240,10 @@ def fetch_rss_atom(source: dict, etag_cache: dict, dry_run: bool) -> list[dict]:
             "priority": source.get("priority", 2),
             "source_truncated": source.get("notes", "").find("source_truncated: true") != -1,
         })
+
+    max_articles = source.get("max_articles")
+    if max_articles:
+        articles = articles[:max_articles]
 
     log.info("fetched %d articles from %s", len(articles), source["name"])
     return articles
