@@ -6,6 +6,18 @@ on:
     workflows: ["ingest (auto + manual)", "stocks (auto + manual)"]
     types: [completed]
     branches: [main]
+  # Trigger on direct pushes to site content (manual adjustments)
+  push:
+    branches: [main]
+    paths:
+      - '_posts/**'
+      - '_companies/**'
+      - '_stories/**'
+      - '_data/**'
+      - '_layouts/**'
+      - '_includes/**'
+      - '_config.yml'
+      - 'Gemfile'
   # Daily safety-net rebuild
   schedule:
     - cron: "0 6 * * *"
