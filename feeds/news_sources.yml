@@ -212,13 +212,26 @@ sources:
     requires_full_text_fetch: false
     priority: 2
 
-  - name: "The Information (headlines)"
-    url: "https://www.theinformation.com/feed"
+  - name: "VentureBeat AI"
+    url: "https://venturebeat.com/ai/feed/"
     type: rss
     category_hint: news
     requires_full_text_fetch: false
     priority: 2
-    notes: "Paywalled — summarize from headline/abstract only. source_truncated: true"
+
+  - name: "The Decoder"
+    url: "https://the-decoder.com/feed/"
+    type: rss
+    category_hint: news
+    requires_full_text_fetch: false
+    priority: 2
+
+  - name: "404 Media"
+    url: "https://www.404media.co/rss"
+    type: rss
+    category_hint: news
+    requires_full_text_fetch: false
+    priority: 2
 
   # ── Tier 3: Aggregators ───────────────────────────────────────────────────
   - name: "Hacker News (AI filtered)"
@@ -240,7 +253,8 @@ sources:
     category_hint: news
     requires_full_text_fetch: true
     resolve_redirect: true
-    priority: 1
+    priority: 2
+    max_articles: 8
     company: "xAI"
     notes: "Google News proxy for xAI/Grok — no official RSS. Redirect resolved to source URL."
 
@@ -250,7 +264,8 @@ sources:
     category_hint: news
     requires_full_text_fetch: true
     resolve_redirect: true
-    priority: 1
+    priority: 2
+    max_articles: 8
     company: "DeepSeek"
     notes: "Google News proxy for DeepSeek — no official RSS. Redirect resolved to source URL."
 
@@ -260,6 +275,29 @@ sources:
     category_hint: news
     requires_full_text_fetch: true
     resolve_redirect: true
-    priority: 1
+    priority: 2
+    max_articles: 8
     company: "MiniMax"
     notes: "Google News proxy for MiniMax/Hailuo — no official RSS. Redirect resolved to source URL."
+
+  - name: "Google News · Scale AI"
+    url: "https://news.google.com/rss/search?q=%22Scale+AI%22+%28model+OR+data+OR+labeling+OR+enterprise+OR+contract+OR+funding+OR+release%29&hl=en-US&gl=US&ceid=US:en"
+    type: rss
+    category_hint: news
+    requires_full_text_fetch: true
+    resolve_redirect: true
+    priority: 2
+    max_articles: 6
+    company: "Scale AI"
+    notes: "Google News proxy for Scale AI — no official RSS."
+
+  - name: "Google News · Character.AI"
+    url: "https://news.google.com/rss/search?q=%22Character.AI%22+OR+%22Character+AI%22+%28model+OR+chatbot+OR+safety+OR+update+OR+release+OR+funding%29&hl=en-US&gl=US&ceid=US:en"
+    type: rss
+    category_hint: news
+    requires_full_text_fetch: true
+    resolve_redirect: true
+    priority: 2
+    max_articles: 6
+    company: "Character.AI"
+    notes: "Google News proxy for Character.AI — no official RSS."
