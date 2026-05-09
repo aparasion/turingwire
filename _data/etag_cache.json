@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"ch6DKA\"",
+    "etag": "\"vx-AzQ\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -32,16 +32,16 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"2d54d49f41997eb6c3b1b49a4ffbfa62\"",
-    "last_modified": "Sat, 09 May 2026 20:32:17 GMT"
+    "etag": "W/\"13cf896403a2b5d4d363214fc1832114\"",
+    "last_modified": "Sat, 09 May 2026 21:44:38 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
     "last_modified": "Sat, 9 May 2026 17:45:52 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"727daa8cb2ddb16b4f21129c3c603518\"",
-    "last_modified": "Sat, 09 May 2026 20:17:40 GMT"
+    "etag": "W/\"56f5895801cd37fccd0d8e4c5c180735\"",
+    "last_modified": "Sat, 09 May 2026 20:41:51 GMT"
   },
   "https://stratechery.com/feed/": {
     "etag": "W/\"b4f924ce128a26bdce11ceaa154c6ff5\"",
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Sat, 09 May 2026 20:14:46 GMT"
+    "last_modified": "Sat, 09 May 2026 21:17:39 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"16476a-zLDgGqiPrkKvNV34GcGkuc4FhwY\"",
+    "etag": "W/\"164ec9-N5YnKfIvu+uHvfXxuh5WDImNoi8\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -80,6 +80,22 @@
     "last_modified": ""
   },
   "https://news.google.com/rss/search?q=%22MiniMax+AI%22+OR+%22Hailuo+AI%22+OR+%28%22MiniMax%22+%28model+OR+video+OR+AI+OR+chatbot+OR+release%29%29&hl=en-US&gl=US&ceid=US:en": {
+    "etag": "",
+    "last_modified": ""
+  },
+  "https://the-decoder.com/feed/": {
+    "etag": "\"e91ae4005277c6831dec504f2019a84b\"",
+    "last_modified": "Sat, 09 May 2026 15:29:59 GMT"
+  },
+  "https://www.404media.co/rss": {
+    "etag": "W/\"12d66-fZpNvl/XPEEx4LWLfxpYdexTPYg\"",
+    "last_modified": ""
+  },
+  "https://news.google.com/rss/search?q=%22Scale+AI%22+%28model+OR+data+OR+labeling+OR+enterprise+OR+contract+OR+funding+OR+release%29&hl=en-US&gl=US&ceid=US:en": {
+    "etag": "",
+    "last_modified": ""
+  },
+  "https://news.google.com/rss/search?q=%22Character.AI%22+OR+%22Character+AI%22+%28model+OR+chatbot+OR+safety+OR+update+OR+release+OR+funding%29&hl=en-US&gl=US&ceid=US:en": {
     "etag": "",
     "last_modified": ""
   }
