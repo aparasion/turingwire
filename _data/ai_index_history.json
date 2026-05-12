@@ -3136,14 +3136,22 @@
       "change": 0.0,
       "change_pct": 0.0,
       "n_tickers": 28
+    },
+    {
+      "timestamp": "2026-05-12T15:37:01.049964+00:00",
+      "date": "2026-05-12",
+      "value": 195.99,
+      "change": -9.9,
+      "change_pct": -4.81,
+      "n_tickers": 28
     }
   ],
   "latest": {
-    "timestamp": "2026-05-11T22:08:29.037132+00:00",
-    "date": "2026-05-11",
-    "value": 205.89,
-    "change": 0.0,
-    "change_pct": 0.0,
+    "timestamp": "2026-05-12T15:37:01.049964+00:00",
+    "date": "2026-05-12",
+    "value": 195.99,
+    "change": -9.9,
+    "change_pct": -4.81,
     "n_tickers": 28
   }
 }
