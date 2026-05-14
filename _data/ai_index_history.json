@@ -3216,14 +3216,22 @@
       "change": 0.0,
       "change_pct": 0.0,
       "n_tickers": 28
+    },
+    {
+      "timestamp": "2026-05-14T15:13:45.511129+00:00",
+      "date": "2026-05-14",
+      "value": 204.61,
+      "change": 1.11,
+      "change_pct": 0.55,
+      "n_tickers": 28
     }
   ],
   "latest": {
-    "timestamp": "2026-05-13T22:12:24.788512+00:00",
-    "date": "2026-05-13",
-    "value": 203.5,
-    "change": 0.0,
-    "change_pct": 0.0,
+    "timestamp": "2026-05-14T15:13:45.511129+00:00",
+    "date": "2026-05-14",
+    "value": 204.61,
+    "change": 1.11,
+    "change_pct": 0.55,
     "n_tickers": 28
   }
 }
