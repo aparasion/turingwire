@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  {% if page.noindex %}<meta name="robots" content="noindex, follow">{% endif %}
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MBL2SZCZX"></script>
@@ -16,11 +17,7 @@
   </script>
 
   <!-- Canonical -->
-  {% if page.source_url and page.layout == 'post' %}
-  <link rel="canonical" href="{{ page.source_url }}">
-  {% else %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-  {% endif %}
 
   <!-- Open Graph -->
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
@@ -28,11 +25,14 @@
   <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/img/turingwirelogo.png' | absolute_url }}{% endif %}">
+  <meta property="og:image:alt" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
   <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="twitter:image" content="{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/img/turingwirelogo.png' | absolute_url }}{% endif %}">
 
   <!-- JSON-LD for posts -->
   {% if page.layout == 'post' %}
@@ -42,17 +42,27 @@
     "@type": "NewsArticle",
     "headline": {{ page.title | jsonify }},
     "datePublished": "{{ page.date | date_to_xmlschema }}",
-    "dateModified": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+    "image": [
+      "{% if page.og_image %}{{ page.og_image | absolute_url }}{% else %}{{ '/assets/img/turingwirelogo.png' | absolute_url }}{% endif %}"
+    ],
     "publisher": {
       "@type": "Organization",
       "name": "{{ site.title }}",
-      "url": "{{ site.url }}"
+      "url": "{{ site.url }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ '/assets/img/turingwirelogo.png' | absolute_url }}"
+      }
     },
     "author": {
       "@type": "Organization",
-      "name": "{{ site.title }} editorial staff"
+      "name": "{{ site.title }}"
     },
-    "mainEntityOfPage": "{{ page.url | absolute_url }}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}"
+    },
     "url": "{{ page.url | absolute_url }}",
     "about": [
       {% if page.company %}{
@@ -72,6 +82,32 @@
       "url": {{ page.source_url | default: "" | jsonify }}
     },
     "isBasedOn": {{ page.source_url | default: "" | jsonify }}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.url }}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {% if page.category == 'research' %}"Research"{% elsif page.category == 'news' %}"News"{% elsif page.categories contains 'stocks' %}"AIStocks"{% else %}"News"{% endif %},
+        "item": {% if page.category == 'research' %}"{{ site.url }}/research/"{% elsif page.category == 'news' %}"{{ site.url }}/news/"{% elsif page.categories contains 'stocks' %}"{{ site.url }}/aistocks/"{% else %}"{{ site.url }}/news/"{% endif %}
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ page.title | jsonify }},
+        "item": "{{ page.url | absolute_url }}"
+      }
+    ]
   }
   </script>
   {% endif %}

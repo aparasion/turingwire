@@ -44,6 +44,12 @@ Disallow: /scripts/
 Disallow: /feeds/
 Disallow: /_data/
 
+# Data endpoints — not indexable content
+Disallow: /knowledge-graph.json
+Disallow: /llms.txt
+Disallow: /llms-full.txt
+Disallow: /missions-index.json
+
 Sitemap: https://turingwire.com/sitemap.xml
 
 # Structured data for LLM consumption
