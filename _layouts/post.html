@@ -79,12 +79,6 @@ layout: default
         <dt class="tw-muted mb-0.5">Published</dt>
         <dd class="tw-heading font-medium">{{ page.date | date: "%b %-d, %Y" }}<span class="tw-muted font-normal"> — {{ page.date | date: "%H:%M UTC" }}</span></dd>
       </div>
-      {% if page.source_truncated %}
-      <div>
-        <dt class="tw-muted mb-0.5">Source note</dt>
-        <dd class="text-amber-600 dark:text-amber-400 font-medium">Abstract only</dd>
-      </div>
-      {% endif %}
       {% if page.arxiv_id and page.arxiv_id != "" and page.category != 'research' %}
       <div>
         <dt class="tw-muted mb-0.5">arXiv</dt>
@@ -101,7 +95,7 @@ layout: default
 
     {% if page.secondary_companies and page.secondary_companies.size > 0 %}
     <div class="mt-3 pt-3 border-t tw-border flex flex-wrap items-center gap-1.5">
-      <span class="text-xs font-mono tw-muted mr-1">Also covers:</span>
+      <span class="text-xs font-mono tw-muted mr-1">Also in this story:</span>
       {% for co in page.secondary_companies %}
       <a href="/companies/{{ co | slugify }}/"
          class="inline-block font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5 hover:tw-accent hover:border-cyan-600 transition-colors">
@@ -127,7 +121,7 @@ layout: default
     <p class="text-xs font-mono tw-muted leading-relaxed">
       By <span class="tw-heading font-medium">Turing Wire editorial staff</span>
       · {{ page.date | date: "%b %-d, %Y" }}
-      · <a href="/about/" class="hover:tw-accent transition-colors">About our methodology →</a>
+      · <a href="/about/" class="hover:tw-accent transition-colors">Editorial standards →</a>
     </p>
   </div>
 
