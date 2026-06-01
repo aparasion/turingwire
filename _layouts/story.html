@@ -16,19 +16,14 @@ layout: default
     <span class="truncate max-w-xs">{{ page.title }}</span>
   </nav>
 
-  <!-- Synthesis badge -->
+  <!-- Story badge -->
   <div class="flex flex-wrap items-center gap-3 mb-4">
     <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-1 rounded"
           style="background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent);">
-      Verifiable synthesis
+      Multi-source analysis
     </span>
-    {% if page.trust_score %}
-    <span class="font-mono text-xs tw-muted border tw-border rounded px-2 py-0.5">
-      Trust index: <strong class="tw-heading">{{ page.trust_score | times: 100 | round }}%</strong>
-    </span>
-    {% endif %}
     <span class="font-mono text-xs tw-muted">
-      {{ sources | size }} sources · {{ claims | size }} claims
+      {{ sources | size }} sources
     </span>
   </div>
 
@@ -91,7 +86,7 @@ layout: default
     <!-- Claims column -->
     <section class="lg:col-span-2">
       <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-4">
-        Claim-level provenance
+        Key findings
       </h2>
       <ol class="space-y-4 list-none pl-0">
         {% for claim in claims %}
@@ -121,11 +116,6 @@ layout: default
                 </span>
                 {% endif %}
 
-                {% if claim.confidence %}
-                <span class="font-mono text-[11px] tw-muted">
-                  confidence {{ claim.confidence | times: 100 | round }}%
-                </span>
-                {% endif %}
               </div>
 
               <!-- Supporting sources -->
@@ -171,7 +161,7 @@ layout: default
 
       {% if content and content != "" %}
       <div class="tw-prose prose-article mt-10">
-        <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3">Editorial synthesis</h2>
+        <h2 class="text-xs font-mono uppercase tracking-widest tw-muted mb-3">Analysis</h2>
         {{ content }}
       </div>
       {% endif %}
@@ -195,10 +185,6 @@ layout: default
               <div class="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px] font-mono tw-muted">
                 <span>{{ src.publisher }}</span>
                 {% if src.date %}<span>·</span><span>{{ src.date | date: "%b %-d" }}</span>{% endif %}
-                {% if src.bias %}
-                <span>·</span>
-                <span class="tw-bias-tag tw-bias-{{ src.bias }}">{{ src.bias }}</span>
-                {% endif %}
               </div>
             </div>
           </div>
@@ -208,21 +194,19 @@ layout: default
     </aside>
   </div>
 
-  <!-- Methodology -->
+  <!-- About this story -->
   <details class="tw-card border tw-border rounded-lg p-4 mt-6">
     <summary class="cursor-pointer text-xs font-mono uppercase tracking-widest tw-muted">
-      Methodology
+      About this story
     </summary>
     <div class="mt-3 text-sm tw-muted leading-relaxed space-y-2">
       <p>
-        This page is a <strong class="tw-heading">retrieval-augmented synthesis</strong>: each
-        claim is extracted from one or more source articles and labelled by how many independent
-        sources support or contradict it. The system flags disputed claims rather than smoothing
-        them into a single tone.
+        This story tracks a developing topic across multiple sources. Each key finding is cross-referenced
+        against the listed sources and labelled by how many independent outlets corroborate or contest it.
+        Disputed findings are surfaced explicitly rather than resolved editorially.
       </p>
       <p>
-        The trust index is the share of claims with two or more independent corroborating sources
-        of differing publisher bias. Disagreement is a feature of this view, not a bug.
+        All source articles are linked directly. <a href="/about/" class="hover:tw-accent transition-colors">About our editorial standards →</a>
       </p>
     </div>
   </details>
@@ -244,8 +228,10 @@ layout: default
     "url": "{{ site.url }}"
   },
   "author": {
-    "@type": "Organization",
-    "name": "{{ site.title }} editorial synthesis"
+    "@type": "Person",
+    "@id": "{{ site.url }}/about/#editorial-team",
+    "name": "Turing Wire Editorial Team",
+    "url": "{{ site.url }}/about/"
   },
   "mainEntityOfPage": "{{ page.url | absolute_url }}",
   "about": [

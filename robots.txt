@@ -39,11 +39,6 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-# Pipeline internals (not served via GitHub Pages but listed for clarity)
-Disallow: /scripts/
-Disallow: /feeds/
-Disallow: /_data/
-
 # Data endpoints — not indexable content
 Disallow: /knowledge-graph.json
 Disallow: /llms.txt
@@ -51,8 +46,3 @@ Disallow: /llms-full.txt
 Disallow: /missions-index.json
 
 Sitemap: https://turingwire.com/sitemap.xml
-
-# Structured data for LLM consumption
-# Knowledge graph: https://turingwire.com/knowledge-graph.json
-# Citation policy: https://turingwire.com/llms.txt
-# Full text dump:  https://turingwire.com/llms-full.txt

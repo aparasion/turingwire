@@ -42,22 +42,11 @@
       {% endif %}
       {% endunless %}
 
-      <!-- Footer row: source, date, subcategory, research signals -->
+      <!-- Footer row: date, research signals -->
       <div class="flex flex-wrap items-center gap-3 text-xs font-mono tw-muted">
-        {% if p.source_publisher %}
-        <span class="flex items-center gap-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-cyan-500/60 flex-shrink-0"></span>
-          {{ p.source_publisher }}
-        </span>
-        {% endif %}
-
         <time datetime="{{ p.date | date_to_xmlschema }}">
           {{ p.date | date: "%b %-d, %Y" }}
         </time>
-
-        {% if p.subcategory %}
-        <span class="opacity-60">{{ p.subcategory | replace: '_', ' ' }}</span>
-        {% endif %}
 
         {% if p.arxiv_id and p.arxiv_id != "" %}
         <a href="https://arxiv.org/abs/{{ p.arxiv_id }}"

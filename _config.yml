@@ -35,6 +35,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+      sitemap: true
   - scope:
       path: "pages"
       type: "pages"
