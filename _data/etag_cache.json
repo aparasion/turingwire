@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"iOes2A\"",
+    "etag": "\"wFnsYA\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,15 +12,15 @@
     "last_modified": "Sun, 31 May 2026 06:04:12 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"4b704f2589800b647b2ee0dd38badab4-gzip\"",
-    "last_modified": "Fri, 29 May 2026 16:13:02 GMT"
+    "etag": "\"4743b04890e1ec4b4b2a74b0c7febded-gzip\"",
+    "last_modified": "Mon, 01 Jun 2026 05:04:24 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"67c73d97c45da91578d164729e5c816d-gzip\"",
-    "last_modified": "Fri, 29 May 2026 16:05:12 GMT"
+    "etag": "W/\"18b9a1110002bd92c1819e8d407ab626-gzip\"",
+    "last_modified": "Mon, 01 Jun 2026 03:07:47 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
-    "etag": "W/\"3884a-7bpe+1T0illG8a6ssKQlCIi7Bq0\"",
+    "etag": "W/\"38850-NtkLeM/G2hNHkMJf63KMZZYq+t8\"",
     "last_modified": ""
   },
   "https://cohere.com/blog/rss": {
@@ -64,7 +64,7 @@
     "last_modified": "Wed, 27 May 2026 21:32:45 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"16df04-dUI5ZGMGHfKAKRhMyFdqso4/cF8\"",
+    "etag": "W/\"16e15d-roO6GPNup3z1pRegOktNgh8AkjA\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
