@@ -27,8 +27,8 @@ SEEN_FILE = DATA_DIR / "seen_articles.json"
 
 MODEL = "gpt-4o-mini"
 TEMPERATURE = 0.3
-MIN_WORDS = 250
-MAX_WORDS = 350
+MIN_WORDS = 400
+MAX_WORDS = 500
 
 logging.basicConfig(
     level=logging.INFO,
@@ -46,15 +46,18 @@ SYSTEM_PROMPT = (
 
 USER_PROMPT = """Summarize the following AI industry article for a daily digest.
 
-Structure:
+First line must be:
+META: <one sentence, 120–155 characters, describing the news for search snippets. No quotes.>
+
+Then the article body:
 - Lead (2–3 sentences): what happened, who is involved, why it matters now.
-- Body (2–3 paragraphs): key facts, numbers if cited, claims attributed to whom, and the so-what — what changes for users, the market, or competitors.
+- Body (3–4 paragraphs): key facts, numbers if cited, claims attributed to whom, competitive context (who else is affected), and the so-what — what changes for users, the market, or competitors. Include at least one data point or named comparison if the article provides one.
 - Closing line (1 sentence): what to watch next.
 
 Constraints:
-- {min_words}–{max_words} words total. Do not invent facts.
+- {min_words}–{max_words} words total (not counting the META line). Do not invent facts.
 - If the source is speculative, say so explicitly.
-- Do not include a source line or URL at the end — those are handled separately.
+- You MUST reference the source publication naturally within the body at least once using journalistic citation style — e.g. "according to [Publisher Name]({url})", "as [Publisher Name]({url}) reported", "[Publisher Name]({url}) noted that". Use a markdown hyperlink on the publisher name. Do not add a standalone source label or footer.
 
 Article title: {title}
 Article body:
@@ -64,7 +67,8 @@ URL: {url}"""
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
-def summarize_one(client: OpenAI, article: dict) -> str:
+def summarize_one(client: OpenAI, article: dict) -> tuple[str, str]:
+    """Returns (description, summary_body)."""
     body = (article.get("body") or "")[:6000]
     prompt = USER_PROMPT.format(
         min_words=MIN_WORDS,
@@ -82,14 +86,30 @@ def summarize_one(client: OpenAI, article: dict) -> str:
             {"role": "user", "content": prompt},
         ],
     )
-    return (response.choices[0].message.content or "").strip()
+    raw = (response.choices[0].message.content or "").strip()
+    return _parse_meta(raw)
+
+
+def _parse_meta(raw: str) -> tuple[str, str]:
+    """Split META: first line from the article body."""
+    lines = raw.splitlines()
+    description = ""
+    body_start = 0
+    if lines and lines[0].startswith("META:"):
+        description = lines[0][5:].strip().strip('"').strip("'")
+        body_start = 1
+        # skip blank line after META
+        if len(lines) > 1 and lines[1].strip() == "":
+            body_start = 2
+    summary = "\n".join(lines[body_start:]).strip()
+    return description, summary
 
 
 def word_count(text: str) -> int:
     return len(text.split())
 
 
-def build_front_matter(article: dict, summary: str, pub_date: datetime) -> str:
+def build_front_matter(article: dict, summary: str, pub_date: datetime, description: str = "") -> str:
     classification = article.get("classification", {})
     categories = article.get("categories", ["news"])
     company = classification.get("company") or article.get("source_company")
@@ -111,6 +131,8 @@ def build_front_matter(article: dict, summary: str, pub_date: datetime) -> str:
 
     company_line = f'company: "{company}"' if company else "company: null"
 
+    desc_escaped = description.replace('"', '\\"') if description else ""
+
     lines = [
         "---",
         f'title: "{title}"',
@@ -127,12 +149,14 @@ def build_front_matter(article: dict, summary: str, pub_date: datetime) -> str:
         f"classification_confidence: {confidence:.2f}",
         f"source_truncated: {str(article.get('source_truncated', False)).lower()}",
         f'layout: post',
-        "---",
     ]
+    if desc_escaped:
+        lines.append(f'description: "{desc_escaped}"')
+    lines.append("---")
     return "\n".join(lines)
 
 
-def write_post(article: dict, summary: str, pub_date: datetime) -> Path:
+def write_post(article: dict, summary: str, pub_date: datetime, description: str = "") -> Path:
     year = pub_date.strftime("%Y")
     month = pub_date.strftime("%m")
     date_prefix = pub_date.strftime("%Y-%m-%d")
@@ -149,7 +173,7 @@ def write_post(article: dict, summary: str, pub_date: datetime) -> Path:
         log.debug("post already exists, skipping: %s", post_path)
         return post_path
 
-    front_matter = build_front_matter(article, summary, pub_date)
+    front_matter = build_front_matter(article, summary, pub_date, description)
     content = f"{front_matter}\n\n{summary}\n"
 
     with post_path.open("w") as f:
@@ -185,7 +209,7 @@ def main() -> int:
     for article in news_articles:
         title = article.get("title", "")
         try:
-            summary = summarize_one(client, article)
+            description, summary = summarize_one(client, article)
         except Exception as exc:
             log.warning("summarization failed for '%s': %s", title, exc)
             continue
@@ -201,7 +225,7 @@ def main() -> int:
         except Exception:
             pub_date = datetime.now(timezone.utc)
 
-        path = write_post(article, summary, pub_date)
+        path = write_post(article, summary, pub_date, description)
         seen[article["guid"]] = datetime.now(timezone.utc).isoformat()
 
         log.info("wrote post: %s (%d words)", path.name, wc)

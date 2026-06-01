@@ -59,10 +59,6 @@
         <span class="opacity-60">{{ p.subcategory | replace: '_', ' ' }}</span>
         {% endif %}
 
-        {% if p.summary_word_count %}
-        <span class="opacity-60">{{ p.summary_word_count }}w</span>
-        {% endif %}
-
         {% if p.arxiv_id and p.arxiv_id != "" %}
         <a href="https://arxiv.org/abs/{{ p.arxiv_id }}"
            class="tw-arxiv-badge"

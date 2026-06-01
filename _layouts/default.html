@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  {% if page.noindex %}<meta name="robots" content="noindex, follow">{% endif %}
+  {% assign _noindex = false %}
+  {% if page.noindex %}{% assign _noindex = true %}{% endif %}
+  {% if page.source_truncated %}{% assign _noindex = true %}{% endif %}
+  {% if page.summary_word_count and page.summary_word_count < 300 %}{% assign _noindex = true %}{% endif %}
+  {% if _noindex %}<meta name="robots" content="noindex, follow">{% endif %}
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MBL2SZCZX"></script>

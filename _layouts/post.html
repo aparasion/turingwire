@@ -79,18 +79,6 @@ layout: default
         <dt class="tw-muted mb-0.5">Published</dt>
         <dd class="tw-heading font-medium">{{ page.date | date: "%b %-d, %Y" }}<span class="tw-muted font-normal"> — {{ page.date | date: "%H:%M UTC" }}</span></dd>
       </div>
-      {% if page.summary_word_count %}
-      <div>
-        <dt class="tw-muted mb-0.5">Summary length</dt>
-        <dd class="tw-heading font-medium">{{ page.summary_word_count }} words</dd>
-      </div>
-      {% endif %}
-      {% if page.classification_confidence %}
-      <div>
-        <dt class="tw-muted mb-0.5">Relevance score</dt>
-        <dd class="tw-heading font-medium">{{ page.classification_confidence | times: 100 | round }}%</dd>
-      </div>
-      {% endif %}
       {% if page.source_truncated %}
       <div>
         <dt class="tw-muted mb-0.5">Source note</dt>
@@ -129,28 +117,18 @@ layout: default
     {{ content }}
   </div>
 
-  <!-- Author & source card -->
-  <div class="tw-card border tw-border rounded-lg px-5 py-4 mt-10 flex items-start gap-4">
+  <!-- Author attribution + editorial disclosure -->
+  <div class="mt-10 pt-6 border-t tw-border flex items-center gap-3">
     <img src="/assets/img/turingwirelogo.png"
          alt="Turing Wire"
-         class="w-9 h-9 rounded-md flex-shrink-0 object-contain mt-0.5">
-    <div class="flex-1 min-w-0 text-xs font-mono space-y-2">
-      <div class="flex items-baseline gap-2">
-        <span class="tw-muted">Author</span>
-        <span class="tw-heading font-medium">Turing Wire editorial staff</span>
-      </div>
-      <div class="flex items-start gap-2 min-w-0">
-        <span class="tw-muted flex-shrink-0">Source</span>
-        <div class="min-w-0">
-          <span class="tw-heading font-medium">{{ page.source_publisher }}</span>
-          <a href="{{ page.source_url }}"
-             class="block text-cyan-600 hover:text-cyan-500 transition-colors truncate mt-0.5"
-             target="_blank" rel="noopener noreferrer">
-            {% if page.source_url contains 'news.google.com' %}Google News{% else %}{{ page.source_url }}{% endif %}
-          </a>
-        </div>
-      </div>
-    </div>
+         width="36" height="36"
+         class="w-9 h-9 rounded-md flex-shrink-0 object-contain"
+         loading="lazy" decoding="async">
+    <p class="text-xs font-mono tw-muted leading-relaxed">
+      By <span class="tw-heading font-medium">Turing Wire editorial staff</span>
+      · {{ page.date | date: "%b %-d, %Y" }}
+      · <a href="/about/" class="hover:tw-accent transition-colors">About our methodology →</a>
+    </p>
   </div>
 
   <!-- Navigation between posts -->
