@@ -131,6 +131,30 @@ layout: default
     </p>
   </div>
 
+  <!-- Related posts -->
+  {% if page.company %}
+  {% assign related_posts = site.posts | where: "company", page.company | where_exp: "p", "p.url != page.url" | sort: "date" | reverse %}
+  {% elsif page.subcategory %}
+  {% assign related_posts = site.posts | where: "subcategory", page.subcategory | where_exp: "p", "p.url != page.url" | sort: "date" | reverse %}
+  {% else %}
+  {% assign related_posts = "" | split: "" %}
+  {% endif %}
+  {% if related_posts.size > 0 %}
+  <aside class="mt-10 pt-6 border-t tw-border">
+    <h2 class="text-xs font-mono tw-muted uppercase tracking-widest mb-4">
+      {% if page.company %}More on {{ page.company }}{% else %}Related coverage{% endif %}
+    </h2>
+    <ul class="space-y-2">
+      {% for rel in related_posts limit: 4 %}
+      <li class="flex items-baseline gap-2 text-sm">
+        <a href="{{ rel.url }}" class="tw-accent hover:underline leading-snug flex-1">{{ rel.title }}</a>
+        <span class="text-xs font-mono tw-muted flex-shrink-0">{{ rel.date | date: "%b %-d" }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+  {% endif %}
+
   <!-- Navigation between posts -->
   <nav class="mt-6 flex justify-between items-center gap-4 text-sm" aria-label="Post navigation">
     {% if page.previous %}

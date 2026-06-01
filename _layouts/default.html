@@ -9,7 +9,8 @@
   {% if page.noindex %}{% assign _noindex = true %}{% endif %}
   {% if page.source_truncated %}{% assign _noindex = true %}{% endif %}
   {% if page.summary_word_count and page.summary_word_count < 300 %}{% assign _noindex = true %}{% endif %}
-  {% if _noindex %}<meta name="robots" content="noindex, follow">{% endif %}
+  {% if _noindex %}<meta name="robots" content="noindex, follow">
+  {% if page.layout == 'post' %}<meta name="sitemap" content="false">{% endif %}{% endif %}
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MBL2SZCZX"></script>
@@ -60,8 +61,10 @@
       }
     },
     "author": {
-      "@type": "Organization",
-      "name": "{{ site.title }}"
+      "@type": "Person",
+      "@id": "{{ site.url }}/about/#editorial-team",
+      "name": "Turing Wire Editorial Team",
+      "url": "{{ site.url }}/about/"
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
@@ -133,6 +136,29 @@
   }
   </script>
   {% endif %}
+
+  <!-- JSON-LD: Publication identity + editorial author -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "{{ site.url }}/about/#editorial-team",
+    "name": "Turing Wire Editorial Team",
+    "url": "{{ site.url }}/about/",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "{{ site.title }}",
+      "url": "{{ site.url }}"
+    },
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "AI Research",
+      "Large Language Models",
+      "AI Industry News"
+    ]
+  }
+  </script>
 
   <!-- Discoverable structured data for AI crawlers -->
   <link rel="alternate" type="application/ld+json" href="{{ '/knowledge-graph.json' | absolute_url }}" title="Turing Wire Knowledge Graph">
