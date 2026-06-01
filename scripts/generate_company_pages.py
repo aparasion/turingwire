@@ -46,27 +46,36 @@ def extract_company_from_post(path: Path) -> str | None:
 
 
 def main() -> int:
-    companies: set[str] = set()
+    company_counts: dict[str, int] = {}
 
     for md_file in POSTS_DIR.rglob("*.md"):
         co = extract_company_from_post(md_file)
         if co:
-            companies.add(co)
+            company_counts[co] = company_counts.get(co, 0) + 1
 
     COMPANIES_DIR.mkdir(parents=True, exist_ok=True)
 
     created = 0
-    for company in sorted(companies):
+    for company in sorted(company_counts):
         slug = slugify(company)
         page_path = COMPANIES_DIR / f"{slug}.md"
 
         if not page_path.exists():
-            content = f"---\ntitle: \"{company}\"\nlayout: company\n---\n"
+            count = company_counts[company]
+            description = (
+                f"Turing Wire coverage of {company}: AI news, research summaries, "
+                f"and analysis across {count} article{'s' if count != 1 else ''}."
+            )
+            content = (
+                f'---\ntitle: "{company}"\n'
+                f'description: "{description}"\n'
+                f"layout: company\n---\n"
+            )
             page_path.write_text(content)
             log.info("created company page: %s", page_path.name)
             created += 1
 
-    log.info("company pages: %d created, %d total", created, len(companies))
+    log.info("company pages: %d created, %d total", created, len(company_counts))
     return 0
 
 

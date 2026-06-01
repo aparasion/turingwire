@@ -42,22 +42,24 @@ SYSTEM_PROMPT = (
     "Use precise terminology. Do not soften jargon for a general audience."
 )
 
-USER_PROMPT = """Summarize the following AI research paper. Use these exact Markdown headings:
+USER_PROMPT = """Summarize the following AI research paper.
+
+First line must be:
+META: <one sentence, 120–155 characters, describing the paper's contribution for search snippets. No quotes.>
+
+Then use these exact Markdown headings:
 
 **Problem** — what gap in capability or literature does this address?
 **Method** — the core technical contribution. Be specific: architecture, loss, data, training compute if disclosed.
 **Results** — headline numbers vs named baselines on named benchmarks. Effect sizes, not just p-values.
 **Limitations** — what the authors flag, plus any obvious ones they don't.
-**Why it matters** — implications for downstream work.
+**Why it matters** — implications for downstream work. This section MUST include a natural contextual citation linking to the source: e.g. "as published in [{source_name}]({url})" or "available on [arXiv]({url})".
 
 Constraints:
-- {min_words}–{max_words} words total across all sections.
+- {min_words}–{max_words} words total across all sections (not counting the META line).
 - Use precise ML terminology. This is for an expert audience.
 - If the work is preprint and unreviewed, state that in the Problem section.
-- End with:
-  Authors: <author list>
-  Source: arXiv:<id> (or appropriate venue)
-  <URL>
+- Do not add a standalone Authors/Source footer block — author names belong in the Method or Problem section if relevant.
 
 Paper title: {title}
 Authors: {authors}
@@ -69,7 +71,8 @@ arXiv ID: {arxiv_id}"""
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
-def summarize_one(client: OpenAI, article: dict) -> str:
+def summarize_one(client: OpenAI, article: dict) -> tuple[str, str]:
+    """Returns (description, summary_body)."""
     body = (article.get("body") or "")[:5000]
     authors_str = ", ".join(article.get("authors", [])[:8])
     if len(article.get("authors", [])) > 8:
@@ -93,14 +96,29 @@ def summarize_one(client: OpenAI, article: dict) -> str:
             {"role": "user", "content": prompt},
         ],
     )
-    return (response.choices[0].message.content or "").strip()
+    raw = (response.choices[0].message.content or "").strip()
+    return _parse_meta(raw)
+
+
+def _parse_meta(raw: str) -> tuple[str, str]:
+    """Split META: first line from the article body."""
+    lines = raw.splitlines()
+    description = ""
+    body_start = 0
+    if lines and lines[0].startswith("META:"):
+        description = lines[0][5:].strip().strip('"').strip("'")
+        body_start = 1
+        if len(lines) > 1 and lines[1].strip() == "":
+            body_start = 2
+    summary = "\n".join(lines[body_start:]).strip()
+    return description, summary
 
 
 def word_count(text: str) -> int:
     return len(text.split())
 
 
-def build_front_matter(article: dict, summary: str, pub_date: datetime) -> str:
+def build_front_matter(article: dict, summary: str, pub_date: datetime, description: str = "") -> str:
     classification = article.get("classification", {})
     company = classification.get("company") or article.get("source_company")
     secondary = classification.get("secondary_companies", [])
@@ -118,6 +136,8 @@ def build_front_matter(article: dict, summary: str, pub_date: datetime) -> str:
     secondary_yaml = json.dumps(secondary) if secondary else "[]"
     company_line = f'company: "{company}"' if company else "company: null"
     authors_yaml = json.dumps(authors[:6])
+
+    desc_escaped = description.replace('"', '\\"') if description else ""
 
     lines = [
         "---",
@@ -137,12 +157,14 @@ def build_front_matter(article: dict, summary: str, pub_date: datetime) -> str:
         f"classification_confidence: {confidence:.2f}",
         f"source_truncated: false",
         f"layout: post",
-        "---",
     ]
+    if desc_escaped:
+        lines.append(f'description: "{desc_escaped}"')
+    lines.append("---")
     return "\n".join(lines)
 
 
-def write_post(article: dict, summary: str, pub_date: datetime) -> Path:
+def write_post(article: dict, summary: str, pub_date: datetime, description: str = "") -> Path:
     year = pub_date.strftime("%Y")
     month = pub_date.strftime("%m")
     date_prefix = pub_date.strftime("%Y-%m-%d")
@@ -157,7 +179,7 @@ def write_post(article: dict, summary: str, pub_date: datetime) -> Path:
         log.debug("post already exists, skipping: %s", post_path)
         return post_path
 
-    front_matter = build_front_matter(article, summary, pub_date)
+    front_matter = build_front_matter(article, summary, pub_date, description)
     content = f"{front_matter}\n\n{summary}\n"
 
     with post_path.open("w") as f:
@@ -192,7 +214,7 @@ def main() -> int:
     for article in research_articles:
         title = article.get("title", "")
         try:
-            summary = summarize_one(client, article)
+            description, summary = summarize_one(client, article)
         except Exception as exc:
             log.warning("summarization failed for '%s': %s", title, exc)
             continue
@@ -208,7 +230,7 @@ def main() -> int:
         except Exception:
             pub_date = datetime.now(timezone.utc)
 
-        path = write_post(article, summary, pub_date)
+        path = write_post(article, summary, pub_date, description)
         seen[article["guid"]] = datetime.now(timezone.utc).isoformat()
 
         log.info("wrote research post: %s (%d words)", path.name, wc)
