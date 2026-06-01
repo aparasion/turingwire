@@ -109,6 +109,11 @@ def word_count(text: str) -> int:
     return len(text.split())
 
 
+def has_source_link(summary: str) -> bool:
+    """Return True if the summary contains at least one markdown hyperlink."""
+    return bool(re.search(r'\[.+?\]\(https?://', summary))
+
+
 def build_front_matter(article: dict, summary: str, pub_date: datetime, description: str = "") -> str:
     classification = article.get("classification", {})
     categories = article.get("categories", ["news"])
@@ -217,6 +222,10 @@ def main() -> int:
         wc = word_count(summary)
         if wc < 100:
             log.warning("summary too short (%d words), skipping: %s", wc, title)
+            continue
+
+        if not has_source_link(summary):
+            log.warning("summary missing source hyperlink, skipping: %s", title)
             continue
 
         pub_str = article.get("published", "")
