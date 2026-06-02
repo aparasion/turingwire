@@ -30,6 +30,37 @@ TEMPERATURE = 0.3
 MIN_WORDS = 400
 MAX_WORDS = 500
 
+# Stage 1: extract structured facts from raw article body
+EXTRACTOR_SYSTEM = (
+    "You are a cold, analytical Data Extraction Engine. "
+    "Your sole purpose is to ingest third-party articles and strip away all narrative flow, "
+    "author bias, editorial voice, transitions, and stylistic choices. "
+    "Output ONLY raw, verified facts, data points, entity definitions, and precise chronological milestones. "
+    "Act as a firewall — the stylistic cadence, structure, or vocabulary of the source text must not pass through."
+)
+
+EXTRACTOR_USER = """Extract all verifiable facts from the article below. Output nothing except the structured schema.
+
+### 1. HARD ENTITIES & ATTRIBUTES
+[All specific people, companies, software tools, model names, or organizations with their exact role or context.]
+- **Entity Name:** [Role / Exact Context]
+
+### 2. DISCRETE DATAPOINTS & STATS
+[Every percentage, monetary value, number, or statistical claim. Context under 15 words.]
+- **[Data/Stat]:** [Exact context]
+
+### 3. CHRONOLOGICAL MILESTONES
+[All dates, historical comparisons, deadlines, or timelines.]
+- **[Date/Timeframe]:** [Event or change]
+
+### 4. DIRECT QUOTES & CLAIMS
+[Verbatim quotes or specific technical claims by named individuals. Prefix unverified author opinions with [UNVERIFIED CLAIM BY SOURCE].]
+- **Source Claim:** "[Quote or claim]" — Attributed to: [Name/Source]
+
+Article title: {title}
+Article body:
+{body}"""
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(name)s: %(message)s",
@@ -67,26 +98,42 @@ URL: {url}"""
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
+def _call(client: OpenAI, system: str, user: str, temperature: float = TEMPERATURE) -> str:
+    response = client.chat.completions.create(
+        model=MODEL,
+        temperature=temperature,
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ],
+    )
+    return (response.choices[0].message.content or "").strip()
+
+
 def summarize_one(client: OpenAI, article: dict) -> tuple[str, str]:
-    """Returns (description, summary_body)."""
-    body = (article.get("body") or "")[:6000]
+    """Two-stage pipeline: extract facts → write article. Returns (description, summary_body)."""
+    raw_body = (article.get("body") or "")[:6000]
+    title = article.get("title", "")
+
+    # Stage 1 — extract structured facts (temperature 0 for determinism)
+    extracted = _call(
+        client,
+        EXTRACTOR_SYSTEM,
+        EXTRACTOR_USER.format(title=title, body=raw_body),
+        temperature=0,
+    )
+    log.debug("extracted facts (%d chars) for: %s", len(extracted), title)
+
+    # Stage 2 — write article from structured facts
     prompt = USER_PROMPT.format(
         min_words=MIN_WORDS,
         max_words=MAX_WORDS,
-        title=article.get("title", ""),
-        body=body,
+        title=title,
+        body=extracted,
         source_name=article.get("source_name", ""),
         url=article.get("url", ""),
     )
-    response = client.chat.completions.create(
-        model=MODEL,
-        temperature=TEMPERATURE,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": prompt},
-        ],
-    )
-    raw = (response.choices[0].message.content or "").strip()
+    raw = _call(client, SYSTEM_PROMPT, prompt)
     return _parse_meta(raw)
 
 
