@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"m7GvFA\"",
+    "etag": "\"Q96CGQ\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,8 +12,8 @@
     "last_modified": "Sun, 31 May 2026 06:04:12 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"575042939708d809ea573b43f5226e6e-gzip\"",
-    "last_modified": "Tue, 02 Jun 2026 19:47:21 GMT"
+    "etag": "\"3570f72435aa341dc9a5b0f3aec05561-gzip\"",
+    "last_modified": "Tue, 02 Jun 2026 22:00:58 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"b66c513df71ee84579514942d4572857-gzip\"",
@@ -32,12 +32,12 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"cbafeece1cd90da9b7cf473ba779d336\"",
-    "last_modified": "Tue, 02 Jun 2026 20:20:07 GMT"
+    "etag": "W/\"295a3760c2965bc0f0816a4a2ea3008f\"",
+    "last_modified": "Tue, 02 Jun 2026 22:50:56 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Tue, 2 Jun 2026 18:20:38 GMT"
+    "last_modified": "Tue, 2 Jun 2026 21:33:55 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"f544a9b3efc57af3401468ab1ec6545a\"",
@@ -64,7 +64,7 @@
     "last_modified": "Wed, 27 May 2026 21:32:45 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"16e24a-IlbfWszBz/oBnPigkuz6s+k3HNo\"",
+    "etag": "W/\"16fc89-I10mabDYCRtH1fLiwBgiRJExYVs\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -88,7 +88,7 @@
     "last_modified": "Tue, 02 Jun 2026 18:35:15 GMT"
   },
   "https://www.404media.co/rss": {
-    "etag": "W/\"1cc69-UzsjivD2rZUtTN8IFL/BNJaumuc\"",
+    "etag": "W/\"1b7e0-axGYAbYMPNcVNDxmxrHx8Av2GB0\"",
     "last_modified": ""
   },
   "https://news.google.com/rss/search?q=%22Scale+AI%22+%28model+OR+data+OR+labeling+OR+enterprise+OR+contract+OR+funding+OR+release%29&hl=en-US&gl=US&ceid=US:en": {
