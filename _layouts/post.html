@@ -125,6 +125,12 @@ layout: default
     </p>
   </div>
 
+  {% if page.source_url and page.source_url != "" %}
+  <p class="mt-3 text-xs font-mono tw-muted">
+    Article inspired by: <a href="{{ page.source_url }}" class="hover:tw-accent transition-colors" target="_blank" rel="noopener noreferrer">{{ page.source_publisher | default: page.source_url }}</a>
+  </p>
+  {% endif %}
+
   <!-- Related posts -->
   {% if page.company %}
   {% assign related_posts = site.posts | where: "company", page.company | where_exp: "p", "p.url != page.url" | sort: "date" | reverse %}
