@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"CKWH9g\"",
+    "etag": "\"Sq7W8A\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -16,8 +16,8 @@
     "last_modified": "Thu, 11 Jun 2026 13:00:17 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"44db4b2ee813679ecc2e7f3aa45d4c35-gzip\"",
-    "last_modified": "Thu, 11 Jun 2026 09:26:08 GMT"
+    "etag": "W/\"01e77803bd431838552f899a2f7fa71f-gzip\"",
+    "last_modified": "Fri, 12 Jun 2026 08:40:26 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
     "etag": "W/\"392d8-bjuiVp3jaSP72oJjqpCmlFx3J8E\"",
@@ -40,8 +40,8 @@
     "last_modified": "Thu, 11 Jun 2026 22:35:09 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"1b99053e90215db7461fc131c8642252\"",
-    "last_modified": "Thu, 11 Jun 2026 21:44:23 GMT"
+    "etag": "W/\"39264d9a20977dcc0da1e80efc0fef8d\"",
+    "last_modified": "Wed, 10 Jun 2026 19:06:00 GMT"
   },
   "https://stratechery.com/feed/": {
     "etag": "W/\"2d7eaa53649e1f3f28dda2ad90c8804b\"",
@@ -52,7 +52,7 @@
     "last_modified": ""
   },
   "https://www.nature.com/natmachintell.rss": {
-    "etag": "\"1ad694f814ba9492d0f70cbb791d5527\"",
+    "etag": "\"9fbacfcf60028dc5d9be5de35d01fc23\"",
     "last_modified": ""
   },
   "https://jmlr.org/jmlr.xml": {
@@ -64,7 +64,7 @@
     "last_modified": "Wed, 27 May 2026 21:32:45 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"17ee09-PL0hBTtAD+oZXe0QrGQfe4ddMeQ\"",
+    "etag": "W/\"17fcda-p/Ldsvc7wPx8WlzS8OtDBuJBXH8\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,11 +84,11 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"de983ef1f295efd223da091d1525e128\"",
-    "last_modified": "Thu, 11 Jun 2026 17:00:58 GMT"
+    "etag": "\"7d815f248c9a9f648e700d7371e593d4\"",
+    "last_modified": "Fri, 12 Jun 2026 10:40:00 GMT"
   },
   "https://www.404media.co/rss": {
-    "etag": "W/\"16140-TEgvnNp132wBeKTUU8Is7VNH85M\"",
+    "etag": "W/\"16206-gkevUKgNk08T7FGJM6hQLQnIiEw\"",
     "last_modified": ""
   },
   "https://news.google.com/rss/search?q=%22Scale+AI%22+%28model+OR+data+OR+labeling+OR+enterprise+OR+contract+OR+funding+OR+release%29&hl=en-US&gl=US&ceid=US:en": {
