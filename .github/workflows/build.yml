@@ -18,9 +18,9 @@ on:
       - '_includes/**'
       - '_config.yml'
       - 'Gemfile'
-  # Daily safety-net rebuild
+  # Every 3 hours (offset by 43 minutes after ingest to let it finish)
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "0 */3 * * *"
   # Manual trigger
   workflow_dispatch:
 

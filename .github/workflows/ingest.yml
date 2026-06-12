@@ -2,8 +2,8 @@ name: ingest (auto + manual)
 
 on:
   schedule:
-    # Hourly at :17 past the hour (offset to reduce GitHub Actions queue contention)
-    - cron: "17 * * * *"
+    # Every 3 hours at :17 past the hour (offset to reduce GitHub Actions queue contention)
+    - cron: "17 */3 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
