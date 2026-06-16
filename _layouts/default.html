@@ -12,6 +12,10 @@
   {% if _noindex %}<meta name="robots" content="noindex, follow">
   {% if page.layout == 'post' %}<meta name="sitemap" content="false">{% endif %}{% endif %}
 
+  {% if site.google_site_verification and site.google_site_verification != "" %}
+  <meta name="google-site-verification" content="{{ site.google_site_verification }}">
+  {% endif %}
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MBL2SZCZX"></script>
   <script>
@@ -62,9 +66,9 @@
     },
     "author": {
       "@type": "Person",
-      "@id": "{{ site.url }}/about/#editorial-team",
-      "name": "Turing Wire Editorial Team",
-      "url": "{{ site.url }}/about/"
+      "@id": "{{ site.url }}/about/editor/#editor",
+      "name": {{ site.editor.name | jsonify }},
+      "url": "{{ site.editor.url | absolute_url }}"
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
@@ -137,19 +141,48 @@
   </script>
   {% endif %}
 
-  <!-- JSON-LD: Publication identity + editorial author -->
+  <!-- JSON-LD: Publication identity (NewsMediaOrganization) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    "@id": "{{ site.url }}/#organization",
+    "name": {{ site.organization.name | default: site.title | jsonify }},
+    "legalName": {{ site.organization.legal_name | default: site.title | jsonify }},
+    "url": "{{ site.url }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ '/assets/img/turingwirelogo.png' | absolute_url }}"
+    },
+    "foundingDate": {{ site.organization.founding_date | default: "2026" | jsonify }},
+    "description": {{ site.description | jsonify }},
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "AI Research",
+      "Large Language Models",
+      "AI Industry News"
+    ],
+    "publishingPrinciples": "{{ site.url }}/about/",
+    "correctionsPolicy": "{{ site.url }}/about/#editorial-standards",
+    "diversityPolicy": "{{ site.url }}/about/",
+    "ownershipFundingInfo": "{{ site.url }}/about/#ownership",
+    "ethicsPolicy": "{{ site.url }}/about/"{% if site.organization.same_as.size > 0 %},
+    "sameAs": {{ site.organization.same_as | jsonify }}{% endif %}
+  }
+  </script>
+
+  <!-- JSON-LD: Named editor (Person) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": "{{ site.url }}/about/#editorial-team",
-    "name": "Turing Wire Editorial Team",
-    "url": "{{ site.url }}/about/",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "{{ site.title }}",
-      "url": "{{ site.url }}"
-    },
+    "@id": "{{ site.url }}/about/editor/#editor",
+    "name": {{ site.editor.name | jsonify }},
+    "jobTitle": {{ site.editor.role | jsonify }},
+    "description": {{ site.editor.bio | jsonify }},
+    "url": "{{ site.editor.url | absolute_url }}",
+    "worksFor": { "@id": "{{ site.url }}/#organization" },
     "knowsAbout": [
       "Artificial Intelligence",
       "Machine Learning",
@@ -159,6 +192,29 @@
     ]
   }
   </script>
+
+  {% if page.url == '/' %}
+  <!-- JSON-LD: WebSite + Sitelinks search box (homepage only) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "{{ site.url }}/#website",
+    "url": "{{ site.url }}",
+    "name": {{ site.title | jsonify }},
+    "description": {{ site.description | jsonify }},
+    "publisher": { "@id": "{{ site.url }}/#organization" },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "{{ site.url }}/search/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  {% endif %}
 
   <!-- Discoverable structured data for AI crawlers -->
   <link rel="alternate" type="application/ld+json" href="{{ '/knowledge-graph.json' | absolute_url }}" title="Turing Wire Knowledge Graph">

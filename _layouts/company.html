@@ -32,6 +32,14 @@ layout: default
     </div>
   </header>
 
+  {% if page.profile %}
+  <section class="mb-10">
+    <div class="tw-prose prose-article max-w-3xl text-sm tw-muted leading-relaxed">
+      {{ page.profile | markdownify }}
+    </div>
+  </section>
+  {% endif %}
+
   {% if company_posts.size > 0 %}
   <section>
     <h2 class="text-xs font-mono tw-muted uppercase tracking-widest mb-4">Primary coverage</h2>

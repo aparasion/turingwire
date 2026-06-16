@@ -8,7 +8,7 @@ permalink: /disclaimer/
 
 Turing Wire publishes editorial summaries of publicly available articles for informational purposes only. Every summary links to its original source. Readers should consult the original source for the complete, authoritative version of any story.
 
-Summaries are produced through an automated editorial process and may contain inaccuracies, omissions, or mischaracterizations. Turing Wire is not a primary news source and does not independently verify the claims it summarizes.
+Summaries are produced with AI assistance under human editorial oversight and may contain inaccuracies, omissions, or mischaracterizations. Turing Wire is not a primary news source and does not independently verify the claims it summarizes. See [Editorial standards](/about/#editorial-standards) for how summaries are produced.
 
 ## Investment disclaimer
 

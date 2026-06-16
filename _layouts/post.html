@@ -119,11 +119,16 @@ layout: default
          class="w-9 h-9 rounded-md flex-shrink-0 object-contain"
          loading="lazy" decoding="async">
     <p class="text-xs font-mono tw-muted leading-relaxed">
-      By <span class="tw-heading font-medium">Turing Wire editorial staff</span>
+      By <a href="{{ site.editor.url }}" class="tw-heading font-medium hover:tw-accent transition-colors">{{ site.editor.name }}</a>
       · {{ page.date | date: "%b %-d, %Y" }}
       · <a href="/about/" class="hover:tw-accent transition-colors">Editorial standards →</a>
     </p>
   </div>
+
+  <p class="mt-3 text-xs font-mono tw-muted leading-relaxed">
+    Summarised from the primary source with AI assistance under human editorial oversight.
+    Turing Wire is not a primary source — read the original for the authoritative account.
+  </p>
 
   {% if page.source_url and page.source_url != "" %}
   <p class="mt-3 text-xs font-mono tw-muted">
