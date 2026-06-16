@@ -66,6 +66,7 @@ exclude:
   - node_modules/
   - vendor/
   - archive/
+  - docs/
 
 # Include
 include:
@@ -86,7 +87,7 @@ feed:
   posts_limit: 50
 
 # SEO
-logo: "/assets/images/logo.png"
+logo: "/assets/img/turingwirelogo.png"
 social:
   name: "Turing Wire"
   links: []
@@ -95,6 +96,32 @@ social:
 author:
   name: "Turing Wire"
   url: "https://turingwire.com"
+
+# Editorial identity (E-E-A-T) — named editor persona used for bylines and Person schema.
+# TODO(owner): replace `name`/`bio` with your preferred pen name and a true description.
+editor:
+  name: "Avery Calder"
+  role: "Founder & Editor"
+  url: "/about/editor/"
+  bio: "Avery Calder is the pen name of the founder and editor of Turing Wire, an AI practitioner who builds and maintains the publication."
+
+# Publication identity (E-E-A-T) — drives NewsMediaOrganization schema.
+organization:
+  name: "Turing Wire"
+  legal_name: "Turing Wire"
+  founding_date: "2026"
+  # Add real, verified profile URLs (X, LinkedIn, GitHub, etc.) to strengthen authority.
+  same_as: []
+
+# Search Console — paste the verification token after launch (leave blank to omit the tag).
+google_site_verification: ""
+
+# Newsletter capture — set `action` to your provider's form endpoint
+# (e.g. Buttondown/Substack/Mailchimp) to render the signup block. Blank = hidden.
+newsletter:
+  action: ""
+  email_field: "email"
+  placeholder: "you@example.com"
 
 # Analytics placeholder (fill in after launch)
 google_analytics: ""
