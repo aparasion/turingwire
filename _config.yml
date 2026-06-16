@@ -100,10 +100,10 @@ author:
 # Editorial identity (E-E-A-T) — named editor persona used for bylines and Person schema.
 # TODO(owner): replace `name`/`bio` with your preferred pen name and a true description.
 editor:
-  name: "Avery Calder"
+  name: "Callan Zhang"
   role: "Founder & Editor"
   url: "/about/editor/"
-  bio: "Avery Calder is the pen name of the founder and editor of Turing Wire, an AI practitioner who builds and maintains the publication."
+  bio: "Callan Zhang is the pen name of the founder and editor of Turing Wire, an AI practitioner who builds and maintains the publication."
 
 # Publication identity (E-E-A-T) — drives NewsMediaOrganization schema.
 organization:
