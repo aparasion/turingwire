@@ -9,15 +9,6 @@ on:
   # Trigger on direct pushes to site content (manual adjustments)
   push:
     branches: [main]
-    paths:
-      - '_posts/**'
-      - '_companies/**'
-      - '_stories/**'
-      - '_data/**'
-      - '_layouts/**'
-      - '_includes/**'
-      - '_config.yml'
-      - 'Gemfile'
   # Hourly safety-net rebuild (offset by 43 minutes after ingest to let it finish)
   schedule:
     - cron: "0 * * * *"
@@ -40,6 +31,7 @@ jobs:
     if: >
       github.event_name == 'workflow_dispatch' ||
       github.event_name == 'schedule' ||
+      github.event_name == 'push' ||
       github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 20
