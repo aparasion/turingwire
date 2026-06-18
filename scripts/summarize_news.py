@@ -31,10 +31,10 @@ SEEN_FILE = DATA_DIR / "seen_articles.json"
 # Override with SUMMARIZER_MODEL (e.g. gpt-4o) to upgrade quality; default keeps cost low.
 MODEL = os.environ.get("SUMMARIZER_MODEL", "gpt-4o-mini")
 TEMPERATURE = 0.3
-# Length follows substance, not a target. A tight 150-word summary beats a padded
-# 400-word one. These are guard rails, not goals.
+# Length follows substance, not a target. No floor that forces padding; the ceiling
+# is generous enough for a genuinely rich single-source story.
 MIN_WORDS = 120
-MAX_WORDS = 350
+MAX_WORDS = 500
 
 # Stage 1: extract structured facts from raw article body
 EXTRACTOR_SYSTEM = (
@@ -181,7 +181,7 @@ def related_context(index: list[dict], company: str | None, subcategory: str, ti
 
 def summarize_one(client: OpenAI, article: dict, index: list[dict] | None = None) -> tuple[str, str, str]:
     """Two-stage pipeline: extract facts → write article. Returns (title, description, summary_body)."""
-    raw_body = (article.get("body") or "")[:6000]
+    raw_body = (article.get("body") or "")[:12000]
     title = article.get("title", "")
     classification = article.get("classification", {})
 
