@@ -20,7 +20,7 @@ from openai import OpenAI
 from slugify import slugify
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from quality import clean_headline, passes_quality
+from quality import clean_headline, parse_summary_output, passes_quality
 
 ROOT = Path(__file__).parent.parent
 DATA_DIR = ROOT / "_data"
@@ -85,17 +85,16 @@ SYSTEM_PROMPT = (
 
 USER_PROMPT = """Write a tight, useful summary of the following AI industry news for an expert audience.
 
-First two lines must be:
-TITLE: <a clear, accurate, specific headline (≤ ~80 chars) drawn only from the facts. No marketing superlatives (fastest/best/strongest/revolutionary), no clickbait, no promising content you don't deliver. Do not copy a promotional source headline verbatim.>
-META: <one sentence, 120–155 characters, describing the news for search snippets. No quotes.>
+Return ONLY a single JSON object with exactly these keys:
+- "title": a clear, accurate, specific headline (≤ ~80 chars) drawn only from the facts. No marketing superlatives (fastest/best/strongest/revolutionary), no clickbait, no promising content you don't deliver. Do not copy a promotional source headline verbatim.
+- "meta": one sentence, 120–155 characters, describing the news for search snippets. No quotes.
+- "body": the article in Markdown (see rules below).
 
-Then the body:
+Rules for "body":
 - Open with the single most specific, concrete fact (a number, a name, a decision) — not scene-setting.
 - Cover what happened, who is involved, the concrete figures, and who else is affected. Attribute claims to whom.
 - If there is a genuine, specific consequence for practitioners (what this changes about what they can build, buy, or rely on), state it in one concrete sentence. If there isn't one, do not invent generic "implications".
 - {context_block}
-
-Hard rules:
 - Length follows substance: roughly {min_words}–{max_words} words, but a shorter, denser summary is better than a padded one. Never add a paragraph just to reach a length.
 - Do NOT invent facts, numbers, or quotes. Use only what the source supports.
 - BANNED — do not write any of these or similar filler: "the competitive landscape is heating up", "implications could be substantial", "for users, this means", "looking ahead", "it will be crucial/important to monitor", "remains to be seen", "game-changer", "in a rapidly evolving". Do not end with a vague "what to watch next" sentence — end on a concrete fact.
@@ -109,15 +108,18 @@ URL: {url}"""
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
-def _call(client: OpenAI, system: str, user: str, temperature: float = TEMPERATURE) -> str:
-    response = client.chat.completions.create(
-        model=MODEL,
-        temperature=temperature,
-        messages=[
+def _call(client: OpenAI, system: str, user: str, temperature: float = TEMPERATURE, json_mode: bool = False) -> str:
+    kwargs = {
+        "model": MODEL,
+        "temperature": temperature,
+        "messages": [
             {"role": "system", "content": system},
             {"role": "user", "content": user},
         ],
-    )
+    }
+    if json_mode:
+        kwargs["response_format"] = {"type": "json_object"}
+    response = client.chat.completions.create(**kwargs)
     return (response.choices[0].message.content or "").strip()
 
 
@@ -211,35 +213,8 @@ def summarize_one(client: OpenAI, article: dict, index: list[dict] | None = None
         source_name=article.get("source_name", ""),
         url=article.get("url", ""),
     )
-    raw = _call(client, SYSTEM_PROMPT, prompt)
-    return _parse_meta(raw)
-
-
-def _parse_meta(raw: str) -> tuple[str, str, str]:
-    """Split optional TITLE: and META: header lines from the article body.
-
-    Returns (title, description, summary). title/description are "" if absent.
-    """
-    lines = raw.splitlines()
-    title = ""
-    description = ""
-    i = 0
-    # Header lines (TITLE/META) may appear in either order; consume them then any blank.
-    while i < len(lines):
-        stripped = lines[i].strip()
-        if stripped.upper().startswith("TITLE:"):
-            title = stripped[6:].strip().strip('"').strip("'")
-            i += 1
-        elif stripped.upper().startswith("META:"):
-            description = stripped[5:].strip().strip('"').strip("'")
-            i += 1
-        elif stripped == "" and (title or description):
-            i += 1
-            break
-        else:
-            break
-    summary = "\n".join(lines[i:]).strip()
-    return title, description, summary
+    raw = _call(client, SYSTEM_PROMPT, prompt, json_mode=True)
+    return parse_summary_output(raw)
 
 
 def word_count(text: str) -> int:

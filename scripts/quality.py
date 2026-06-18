@@ -8,6 +8,7 @@ find elsewhere. A summary that fails the gate is not published.
 """
 from __future__ import annotations
 
+import json
 import re
 
 # Boilerplate phrases observed in the thin-content audit. These are filler that
@@ -67,6 +68,51 @@ def clean_headline(raw: str) -> str | None:
     if SUPERLATIVE_RE.search(h):
         return None
     return h
+
+
+def parse_summary_output(raw: str) -> tuple[str, str, str]:
+    """Return (title, meta, body) from a model response.
+
+    Prefers a JSON object {title, meta, body}; falls back to the legacy
+    TITLE:/META: header-line protocol so a non-JSON response can never leak a
+    raw "META:" line into the published body.
+    """
+    raw = (raw or "").strip()
+    if raw.startswith("```"):
+        raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw).strip()
+
+    # JSON-first
+    try:
+        d = json.loads(raw)
+        if isinstance(d, dict):
+            title = str(d.get("title", "") or "").strip()
+            meta = str(d.get("meta", d.get("description", "")) or "").strip()
+            body = str(d.get("body", "") or "").strip()
+            if body:
+                return title, meta, body
+    except (ValueError, TypeError):
+        pass
+
+    # Fallback: TITLE:/META: header lines (order-independent), then body.
+    lines = raw.splitlines()
+    title = ""
+    meta = ""
+    i = 0
+    while i < len(lines):
+        s = lines[i].strip().lstrip("*").strip()
+        if s.upper().startswith("TITLE:"):
+            title = s.split(":", 1)[1].strip().strip('"').strip("'")
+            i += 1
+        elif s.upper().startswith("META:"):
+            meta = s.split(":", 1)[1].strip().strip('"').strip("'")
+            i += 1
+        elif s == "" and (title or meta):
+            i += 1
+            break
+        else:
+            break
+    body = "\n".join(lines[i:]).strip()
+    return title, meta, body
 
 
 def find_banned_phrases(text: str) -> list[str]:

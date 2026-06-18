@@ -19,7 +19,7 @@ from openai import OpenAI
 from slugify import slugify
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from quality import passes_quality
+from quality import parse_summary_output, passes_quality
 
 ROOT = Path(__file__).parent.parent
 DATA_DIR = ROOT / "_data"
@@ -64,18 +64,16 @@ SYSTEM_PROMPT = (
 
 USER_PROMPT = """Summarize the following AI research paper.
 
-First line must be:
-META: <one sentence, 120–155 characters, describing the paper's contribution for search snippets. No quotes.>
+Return ONLY a single JSON object with exactly these keys:
+- "meta": one sentence, 120–155 characters, describing the paper's contribution for search snippets. No quotes.
+- "body": Markdown using these exact headings:
+  **Problem** — what gap in capability or literature does this address?
+  **Method** — the core technical contribution. Be specific: architecture, loss, data, training compute if disclosed.
+  **Results** — headline numbers vs named baselines on named benchmarks, ONLY where the source provides them.
+  **Limitations** — what the authors flag, plus any obvious ones they don't.
+  **Why it matters** — implications for downstream work. This section MUST include a natural contextual citation linking to the source: e.g. "as published in [{source_name}]({url})" or "available on [arXiv]({url})".
 
-Then use these exact Markdown headings:
-
-**Problem** — what gap in capability or literature does this address?
-**Method** — the core technical contribution. Be specific: architecture, loss, data, training compute if disclosed.
-**Results** — headline numbers vs named baselines on named benchmarks, ONLY where the source provides them.
-**Limitations** — what the authors flag, plus any obvious ones they don't.
-**Why it matters** — implications for downstream work. This section MUST include a natural contextual citation linking to the source: e.g. "as published in [{source_name}]({url})" or "available on [arXiv]({url})".
-
-Constraints:
+Constraints for "body":
 - Length follows substance: up to {min_words}–{max_words} words, but never pad. A dense, shorter summary is better than a long one.
 - Use precise ML terminology. This is for an expert audience.
 - CRITICAL — do not fabricate. Cite ONLY numbers, baselines, benchmarks, and method details that appear in the provided text. If the text gives no quantitative results, write "the available text does not report quantitative results" in the Results section. Never estimate, infer, or supply plausible-sounding figures or model names that are not in the source.
@@ -94,13 +92,11 @@ arXiv ID: {arxiv_id}"""
 # Method/Results template that induces fabricated metrics.
 REPORTING_PROMPT = """Summarize the following article, which reports on AI research but is NOT the primary paper.
 
-First line must be:
-META: <one sentence, 120–155 characters, for search snippets. No quotes.>
+Return ONLY a single JSON object with exactly these keys:
+- "meta": one sentence, 120–155 characters, for search snippets. No quotes.
+- "body": 2–4 tight Markdown paragraphs covering what the research claims, who did it, and any concrete findings the article actually states. Treat this as secondary reporting.
 
-Then write 2–4 tight paragraphs covering: what the research claims, who did it, and any concrete
-findings the article actually states. Treat this as secondary reporting.
-
-Hard rules:
+Hard rules for "body":
 - Length follows substance ({min_words}–{max_words} words max); never pad.
 - Do NOT fabricate. Use only figures, model names, and benchmarks explicitly present in the text below. Do not produce a Method/Results breakdown or invent metrics.
 - Make clear this is reporting on research, not a primary paper.
@@ -145,26 +141,14 @@ def summarize_one(client: OpenAI, article: dict) -> tuple[str, str]:
     response = client.chat.completions.create(
         model=MODEL,
         temperature=TEMPERATURE,
+        response_format={"type": "json_object"},
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": prompt},
         ],
     )
     raw = (response.choices[0].message.content or "").strip()
-    return _parse_meta(raw)
-
-
-def _parse_meta(raw: str) -> tuple[str, str]:
-    """Split META: first line from the article body."""
-    lines = raw.splitlines()
-    description = ""
-    body_start = 0
-    if lines and lines[0].startswith("META:"):
-        description = lines[0][5:].strip().strip('"').strip("'")
-        body_start = 1
-        if len(lines) > 1 and lines[1].strip() == "":
-            body_start = 2
-    summary = "\n".join(lines[body_start:]).strip()
+    _title, description, summary = parse_summary_output(raw)
     return description, summary
 
 
