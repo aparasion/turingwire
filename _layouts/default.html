@@ -9,6 +9,9 @@
   {% if page.noindex %}{% assign _noindex = true %}{% endif %}
   {% if page.source_truncated %}{% assign _noindex = true %}{% endif %}
   {% if page.summary_word_count and page.summary_word_count < 300 %}{% assign _noindex = true %}{% endif %}
+  {% comment %} Quality gate: only posts the improved pipeline marked `quality: high` are indexed.
+  Unflagged thin backlog is noindexed and ages out of the 90-day window. {% endcomment %}
+  {% if site.require_quality_flag and page.layout == 'post' and page.quality != 'high' %}{% assign _noindex = true %}{% endif %}
   {% if _noindex %}<meta name="robots" content="noindex, follow">
   {% if page.layout == 'post' %}<meta name="sitemap" content="false">{% endif %}{% endif %}
 

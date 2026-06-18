@@ -20,15 +20,20 @@ from openai import OpenAI
 from slugify import slugify
 from tenacity import retry, stop_after_attempt, wait_exponential
 
+from quality import passes_quality
+
 ROOT = Path(__file__).parent.parent
 DATA_DIR = ROOT / "_data"
+POSTS_DIR = ROOT / "_posts"
 CLASSIFIED_FILE = DATA_DIR / "classified_articles.json"
 SEEN_FILE = DATA_DIR / "seen_articles.json"
 
 MODEL = "gpt-4o-mini"
 TEMPERATURE = 0.3
-MIN_WORDS = 400
-MAX_WORDS = 500
+# Length follows substance, not a target. A tight 150-word summary beats a padded
+# 400-word one. These are guard rails, not goals.
+MIN_WORDS = 120
+MAX_WORDS = 350
 
 # Stage 1: extract structured facts from raw article body
 EXTRACTOR_SYSTEM = (
@@ -69,29 +74,33 @@ logging.basicConfig(
 log = logging.getLogger("summarize_news")
 
 SYSTEM_PROMPT = (
-    "You are a senior tech journalist for an AI industry publication. "
-    "Your audience is informed but not technical: founders, product managers, investors, "
-    "engineers outside ML. Write summaries as a journalist who has read the source — "
-    "never say 'the article says' or 'according to the article'."
+    "You are a senior editor at an AI industry publication read by AI engineers, ML "
+    "researchers, and technical product managers. You write for people who can already "
+    "build with this technology and want signal, not filler. Write as someone who has read "
+    "the source — never say 'the article says' or 'according to the article'. Every sentence "
+    "must carry a specific fact, number, or named entity. If you have nothing specific to add, "
+    "stop writing."
 )
 
-USER_PROMPT = """Summarize the following AI industry article for a daily digest.
+USER_PROMPT = """Write a tight, useful summary of the following AI industry news for an expert audience.
 
 First line must be:
 META: <one sentence, 120–155 characters, describing the news for search snippets. No quotes.>
 
-Then the article body:
-- Lead (2–3 sentences): what happened, who is involved, why it matters now.
-- Body (3–4 paragraphs): key facts, numbers if cited, claims attributed to whom, competitive context (who else is affected), and the so-what — what changes for users, the market, or competitors. Include at least one data point or named comparison if the article provides one.
-- Closing line (1 sentence): what to watch next.
+Then the body:
+- Open with the single most specific, concrete fact (a number, a name, a decision) — not scene-setting.
+- Cover what happened, who is involved, the concrete figures, and who else is affected. Attribute claims to whom.
+- If there is a genuine, specific consequence for practitioners (what this changes about what they can build, buy, or rely on), state it in one concrete sentence. If there isn't one, do not invent generic "implications".
+- {context_block}
 
-Constraints:
-- {min_words}–{max_words} words total (not counting the META line). Do not invent facts.
-- If the source is speculative, say so explicitly.
-- You MUST reference the source publication naturally within the body at least once using journalistic citation style — e.g. "according to [Publisher Name]({url})", "as [Publisher Name]({url}) reported", "[Publisher Name]({url}) noted that". Use a markdown hyperlink on the publisher name. Do not add a standalone source label or footer.
+Hard rules:
+- Length follows substance: roughly {min_words}–{max_words} words, but a shorter, denser summary is better than a padded one. Never add a paragraph just to reach a length.
+- Do NOT invent facts, numbers, or quotes. Use only what the source supports.
+- BANNED — do not write any of these or similar filler: "the competitive landscape is heating up", "implications could be substantial", "for users, this means", "looking ahead", "it will be crucial/important to monitor", "remains to be seen", "game-changer", "in a rapidly evolving". Do not end with a vague "what to watch next" sentence — end on a concrete fact.
+- You MUST reference the source publication once using a markdown hyperlink, e.g. "according to [{source_name}]({url})" or "[{source_name}]({url}) reported". No standalone source footer.
 
 Article title: {title}
-Article body:
+Article facts (structured):
 {body}
 Source publisher: {source_name}
 URL: {url}"""
@@ -110,10 +119,69 @@ def _call(client: OpenAI, system: str, user: str, temperature: float = TEMPERATU
     return (response.choices[0].message.content or "").strip()
 
 
-def summarize_one(client: OpenAI, article: dict) -> tuple[str, str]:
+def _read_front_matter(path: Path) -> dict:
+    fm: dict[str, str] = {}
+    try:
+        with path.open() as f:
+            if f.readline().strip() != "---":
+                return fm
+            for line in f:
+                if line.strip() == "---":
+                    break
+                m = re.match(r"(\w+):\s*(.*)$", line.rstrip("\n"))
+                if m:
+                    fm[m.group(1)] = m.group(2).strip().strip('"')
+    except OSError:
+        pass
+    return fm
+
+
+def build_post_index() -> list[dict]:
+    """Lightweight index of existing posts for cross-article synthesis."""
+    index = []
+    for path in POSTS_DIR.rglob("*.md"):
+        fm = _read_front_matter(path)
+        if not fm.get("title"):
+            continue
+        index.append(
+            {
+                "title": fm.get("title", ""),
+                "date": fm.get("date", "")[:10],
+                "company": (fm.get("company") or "").lower(),
+                "subcategory": fm.get("subcategory", ""),
+            }
+        )
+    index.sort(key=lambda e: e["date"], reverse=True)
+    log.info("indexed %d existing posts for cross-linking", len(index))
+    return index
+
+
+def related_context(index: list[dict], company: str | None, subcategory: str, title: str, limit: int = 5) -> str:
+    """Build a prior-coverage block to inject into the prompt, or guidance if none."""
+    company_l = (company or "").lower()
+    same_title = title.strip().lower()
+    picks: list[dict] = []
+    if company_l:
+        picks = [e for e in index if e["company"] == company_l and e["title"].strip().lower() != same_title]
+    if len(picks) < 2 and subcategory:
+        more = [e for e in index if e["subcategory"] == subcategory and e["title"].strip().lower() != same_title]
+        picks = (picks + more)[:limit]
+    picks = picks[:limit]
+    if not picks:
+        return "If this clearly continues an earlier development, note that in one clause; otherwise do not speculate about history."
+    lines = "\n".join(f"  - {e['title']} ({e['date']})" for e in picks)
+    return (
+        "Turing Wire has covered related stories before. Where genuinely relevant, connect this "
+        "to that timeline in one specific clause (e.g. 'this follows ...'). Do NOT force a "
+        "connection if none is real.\nPrior coverage:\n" + lines
+    )
+
+
+def summarize_one(client: OpenAI, article: dict, index: list[dict] | None = None) -> tuple[str, str]:
     """Two-stage pipeline: extract facts → write article. Returns (description, summary_body)."""
     raw_body = (article.get("body") or "")[:6000]
     title = article.get("title", "")
+    classification = article.get("classification", {})
 
     # Stage 1 — extract structured facts (temperature 0 for determinism)
     extracted = _call(
@@ -124,12 +192,20 @@ def summarize_one(client: OpenAI, article: dict) -> tuple[str, str]:
     )
     log.debug("extracted facts (%d chars) for: %s", len(extracted), title)
 
+    context_block = related_context(
+        index or [],
+        classification.get("company") or article.get("source_company"),
+        classification.get("subcategory", "other"),
+        title,
+    )
+
     # Stage 2 — write article from structured facts
     prompt = USER_PROMPT.format(
         min_words=MIN_WORDS,
         max_words=MAX_WORDS,
         title=title,
         body=extracted,
+        context_block=context_block,
         source_name=article.get("source_name", ""),
         url=article.get("url", ""),
     )
@@ -161,7 +237,7 @@ def has_source_link(summary: str) -> bool:
     return bool(re.search(r'\[.+?\]\(https?://', summary))
 
 
-def build_front_matter(article: dict, summary: str, pub_date: datetime, description: str = "") -> str:
+def build_front_matter(article: dict, summary: str, pub_date: datetime, description: str = "", quality: bool = False) -> str:
     classification = article.get("classification", {})
     categories = article.get("categories", ["news"])
     company = classification.get("company") or article.get("source_company")
@@ -202,13 +278,15 @@ def build_front_matter(article: dict, summary: str, pub_date: datetime, descript
         f"source_truncated: {str(article.get('source_truncated', False)).lower()}",
         f'layout: post',
     ]
+    if quality:
+        lines.append("quality: high")
     if desc_escaped:
         lines.append(f'description: "{desc_escaped}"')
     lines.append("---")
     return "\n".join(lines)
 
 
-def write_post(article: dict, summary: str, pub_date: datetime, description: str = "") -> Path:
+def write_post(article: dict, summary: str, pub_date: datetime, description: str = "", quality: bool = False) -> Path:
     year = pub_date.strftime("%Y")
     month = pub_date.strftime("%m")
     date_prefix = pub_date.strftime("%Y-%m-%d")
@@ -225,7 +303,7 @@ def write_post(article: dict, summary: str, pub_date: datetime, description: str
         log.debug("post already exists, skipping: %s", post_path)
         return post_path
 
-    front_matter = build_front_matter(article, summary, pub_date, description)
+    front_matter = build_front_matter(article, summary, pub_date, description, quality)
     content = f"{front_matter}\n\n{summary}\n"
 
     with post_path.open("w") as f:
@@ -257,11 +335,14 @@ def main() -> int:
     news_articles = [a for a in articles if "news" in a.get("categories", [])]
     log.info("summarizing %d news articles", len(news_articles))
 
+    index = build_post_index()
+
     new_posts = 0
+    skipped = 0
     for article in news_articles:
         title = article.get("title", "")
         try:
-            description, summary = summarize_one(client, article)
+            description, summary = summarize_one(client, article, index)
         except Exception as exc:
             log.warning("summarization failed for '%s': %s", title, exc)
             continue
@@ -275,19 +356,28 @@ def main() -> int:
             log.warning("summary missing source hyperlink, skipping: %s", title)
             continue
 
+        # Quality gate — boilerplate / deceptive headline / fabricated figures.
+        ok, reason = passes_quality(summary, title, article.get("body", ""), check_numbers=True)
+        if not ok:
+            log.warning("quality gate failed (%s), skipping: %s", reason, title)
+            skipped += 1
+            continue
+
         pub_str = article.get("published", "")
         try:
             pub_date = datetime.fromisoformat(pub_str.replace("Z", "+00:00"))
         except Exception:
             pub_date = datetime.now(timezone.utc)
 
-        path = write_post(article, summary, pub_date, description)
+        path = write_post(article, summary, pub_date, description, quality=True)
         seen[article["guid"]] = datetime.now(timezone.utc).isoformat()
 
         log.info("wrote post: %s (%d words)", path.name, wc)
         new_posts += 1
 
         time.sleep(0.3)
+
+    log.info("quality gate skipped %d summaries", skipped)
 
     # Persist seen cache
     DATA_DIR.mkdir(parents=True, exist_ok=True)

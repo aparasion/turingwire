@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+"""
+quality.py — shared quality gate for the summarizer pipeline.
+
+Rejects thin/boilerplate/fabricated summaries before they are written to _posts/.
+The goal is Google's test: an original, satisfying answer the reader can't easily
+find elsewhere. A summary that fails the gate is not published.
+"""
+from __future__ import annotations
+
+import re
+
+# Boilerplate phrases observed in the thin-content audit. These are filler that
+# pads length without adding information; any match fails the gate.
+BAN_PHRASES = [
+    "competitive landscape is heating up",
+    "heating up",
+    "implications could be substantial",
+    "implications are substantial",
+    "could be substantial",
+    "for users, this means",
+    "for users, the",
+    "looking ahead",
+    "crucial to monitor",
+    "important to monitor",
+    "remains to be seen",
+    "game-changer",
+    "game changer",
+    "in a rapidly evolving",
+    "rapidly evolving",
+    "only time will tell",
+    "it will be crucial",
+    "it will be important",
+    "this could lead to a cascade",
+]
+
+# Headlines that promise instructional content the summaries never deliver.
+_GUIDE_RE = re.compile(r"\b(guide|how to|how-to|tutorial|step[-\s]?by[-\s]?step|walkthrough)\b", re.I)
+_STEP_RE = re.compile(r"(^\s*\d+[\.\)]\s)|(\bstep\s*\d)|(^\s*[-*]\s)", re.I | re.M)
+
+# Numeric tokens (percentages, money, multi-digit figures) for source grounding.
+_NUM_RE = re.compile(r"\d[\d,]*\.?\d*")
+
+
+def find_banned_phrases(text: str) -> list[str]:
+    low = text.lower()
+    return [p for p in BAN_PHRASES if p in low]
+
+
+def is_deceptive_headline(title: str, summary: str) -> bool:
+    """Title promises a guide/tutorial but the body has no enumerated steps."""
+    if not _GUIDE_RE.search(title or ""):
+        return False
+    return not _STEP_RE.search(summary or "")
+
+
+def _norm_nums(text: str) -> set[str]:
+    out = set()
+    for m in _NUM_RE.findall(text or ""):
+        digits = m.replace(",", "").rstrip(".")
+        # ignore 1–3 digit values (years, counts, list numbers) — too noisy to ground
+        if len(digits.replace(".", "")) >= 4 or "%" in text:
+            out.add(digits)
+    return out
+
+
+def ungrounded_numbers(summary: str, source_body: str) -> list[str]:
+    """Return numeric tokens asserted in the summary but absent from the source.
+
+    Used to catch fabricated statistics (e.g. invented benchmark scores). Only the
+    digit string must appear somewhere in the source; this is a conservative check.
+    """
+    src = (source_body or "").replace(",", "")
+    bad = []
+    for m in _NUM_RE.findall(summary or ""):
+        digits = m.replace(",", "").rstrip(".")
+        core = digits.replace(".", "")
+        if len(core) < 2:
+            continue  # skip single digits (list markers, trivial counts)
+        if digits not in src and core not in src:
+            bad.append(digits)
+    return bad
+
+
+def passes_quality(
+    summary: str,
+    title: str,
+    source_body: str = "",
+    *,
+    check_numbers: bool = False,
+) -> tuple[bool, str]:
+    """Return (ok, reason). reason is empty when ok."""
+    banned = find_banned_phrases(summary)
+    if banned:
+        return False, f"boilerplate phrase(s): {', '.join(banned[:3])}"
+    if is_deceptive_headline(title, summary):
+        return False, "headline promises a guide but body has no steps"
+    if check_numbers and source_body:
+        bad = ungrounded_numbers(summary, source_body)
+        if bad:
+            return False, f"ungrounded number(s) not in source: {', '.join(bad[:5])}"
+    return True, ""

@@ -19,6 +19,8 @@ from openai import OpenAI
 from slugify import slugify
 from tenacity import retry, stop_after_attempt, wait_exponential
 
+from quality import passes_quality
+
 ROOT = Path(__file__).parent.parent
 DATA_DIR = ROOT / "_data"
 CLASSIFIED_FILE = DATA_DIR / "classified_articles.json"
@@ -26,8 +28,25 @@ SEEN_FILE = DATA_DIR / "seen_articles.json"
 
 MODEL = "gpt-4o-mini"
 TEMPERATURE = 0.0
-MIN_WORDS = 450
+MIN_WORDS = 200
 MAX_WORDS = 550
+
+# Source venues that genuinely host primary research (papers), beyond arXiv.
+PAPER_VENUES = (
+    "arxiv", "openreview", "papers with code", "paperswithcode",
+    "nature", "jmlr", "neurips", "icml", "iclr", "acl", "aclanthology",
+    "proceedings", "pmlr", "semantic scholar", "biorxiv",
+)
+
+
+def is_real_paper(article: dict) -> bool:
+    """True only when we have a primary paper to summarize (avoids fabricating
+    Method/Results sections for news *about* research)."""
+    if (article.get("arxiv_id") or "").strip():
+        return True
+    src = (article.get("source_name") or "").lower()
+    url = (article.get("url") or "").lower()
+    return any(v in src or v in url for v in PAPER_VENUES)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -51,13 +70,14 @@ Then use these exact Markdown headings:
 
 **Problem** — what gap in capability or literature does this address?
 **Method** — the core technical contribution. Be specific: architecture, loss, data, training compute if disclosed.
-**Results** — headline numbers vs named baselines on named benchmarks. Effect sizes, not just p-values.
+**Results** — headline numbers vs named baselines on named benchmarks, ONLY where the source provides them.
 **Limitations** — what the authors flag, plus any obvious ones they don't.
 **Why it matters** — implications for downstream work. This section MUST include a natural contextual citation linking to the source: e.g. "as published in [{source_name}]({url})" or "available on [arXiv]({url})".
 
 Constraints:
-- {min_words}–{max_words} words total across all sections (not counting the META line).
+- Length follows substance: up to {min_words}–{max_words} words, but never pad. A dense, shorter summary is better than a long one.
 - Use precise ML terminology. This is for an expert audience.
+- CRITICAL — do not fabricate. Cite ONLY numbers, baselines, benchmarks, and method details that appear in the provided text. If the text gives no quantitative results, write "the available text does not report quantitative results" in the Results section. Never estimate, infer, or supply plausible-sounding figures or model names that are not in the source.
 - If the work is preprint and unreviewed, state that in the Problem section.
 - Do not add a standalone Authors/Source footer block — author names belong in the Method or Problem section if relevant.
 
@@ -69,6 +89,28 @@ Source: {source_name}
 URL: {url}
 arXiv ID: {arxiv_id}"""
 
+# Used when the item is news *about* research (no primary paper). Avoids the
+# Method/Results template that induces fabricated metrics.
+REPORTING_PROMPT = """Summarize the following article, which reports on AI research but is NOT the primary paper.
+
+First line must be:
+META: <one sentence, 120–155 characters, for search snippets. No quotes.>
+
+Then write 2–4 tight paragraphs covering: what the research claims, who did it, and any concrete
+findings the article actually states. Treat this as secondary reporting.
+
+Hard rules:
+- Length follows substance ({min_words}–{max_words} words max); never pad.
+- Do NOT fabricate. Use only figures, model names, and benchmarks explicitly present in the text below. Do not produce a Method/Results breakdown or invent metrics.
+- Make clear this is reporting on research, not a primary paper.
+- Reference the source once as a markdown link: "[{source_name}]({url})".
+
+Article title: {title}
+Article body:
+{body}
+Source: {source_name}
+URL: {url}"""
+
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
 def summarize_one(client: OpenAI, article: dict) -> tuple[str, str]:
@@ -78,16 +120,27 @@ def summarize_one(client: OpenAI, article: dict) -> tuple[str, str]:
     if len(article.get("authors", [])) > 8:
         authors_str += " et al."
 
-    prompt = USER_PROMPT.format(
-        min_words=MIN_WORDS,
-        max_words=MAX_WORDS,
-        title=article.get("title", ""),
-        authors=authors_str or "unknown",
-        body=body,
-        source_name=article.get("source_name", ""),
-        url=article.get("url", ""),
-        arxiv_id=article.get("arxiv_id", ""),
-    )
+    if is_real_paper(article):
+        prompt = USER_PROMPT.format(
+            min_words=MIN_WORDS,
+            max_words=MAX_WORDS,
+            title=article.get("title", ""),
+            authors=authors_str or "unknown",
+            body=body,
+            source_name=article.get("source_name", ""),
+            url=article.get("url", ""),
+            arxiv_id=article.get("arxiv_id", ""),
+        )
+    else:
+        # News about research — softer prompt, no Method/Results template.
+        prompt = REPORTING_PROMPT.format(
+            min_words=MIN_WORDS,
+            max_words=MAX_WORDS,
+            title=article.get("title", ""),
+            body=body,
+            source_name=article.get("source_name", ""),
+            url=article.get("url", ""),
+        )
     response = client.chat.completions.create(
         model=MODEL,
         temperature=TEMPERATURE,
@@ -118,7 +171,7 @@ def word_count(text: str) -> int:
     return len(text.split())
 
 
-def build_front_matter(article: dict, summary: str, pub_date: datetime, description: str = "") -> str:
+def build_front_matter(article: dict, summary: str, pub_date: datetime, description: str = "", quality: bool = False) -> str:
     classification = article.get("classification", {})
     company = classification.get("company") or article.get("source_company")
     secondary = classification.get("secondary_companies", [])
@@ -158,13 +211,15 @@ def build_front_matter(article: dict, summary: str, pub_date: datetime, descript
         f"source_truncated: false",
         f"layout: post",
     ]
+    if quality:
+        lines.append("quality: high")
     if desc_escaped:
         lines.append(f'description: "{desc_escaped}"')
     lines.append("---")
     return "\n".join(lines)
 
 
-def write_post(article: dict, summary: str, pub_date: datetime, description: str = "") -> Path:
+def write_post(article: dict, summary: str, pub_date: datetime, description: str = "", quality: bool = False) -> Path:
     year = pub_date.strftime("%Y")
     month = pub_date.strftime("%m")
     date_prefix = pub_date.strftime("%Y-%m-%d")
@@ -179,7 +234,7 @@ def write_post(article: dict, summary: str, pub_date: datetime, description: str
         log.debug("post already exists, skipping: %s", post_path)
         return post_path
 
-    front_matter = build_front_matter(article, summary, pub_date, description)
+    front_matter = build_front_matter(article, summary, pub_date, description, quality)
     content = f"{front_matter}\n\n{summary}\n"
 
     with post_path.open("w") as f:
@@ -211,6 +266,7 @@ def main() -> int:
     log.info("summarizing %d research articles", len(research_articles))
 
     new_posts = 0
+    skipped = 0
     for article in research_articles:
         title = article.get("title", "")
         try:
@@ -224,18 +280,27 @@ def main() -> int:
             log.warning("summary too short (%d words), skipping: %s", wc, title)
             continue
 
+        # Quality gate — boilerplate / fabricated figures (numbers must be in source).
+        ok, reason = passes_quality(summary, title, article.get("body", ""), check_numbers=True)
+        if not ok:
+            log.warning("quality gate failed (%s), skipping: %s", reason, title)
+            skipped += 1
+            continue
+
         pub_str = article.get("published", "")
         try:
             pub_date = datetime.fromisoformat(pub_str.replace("Z", "+00:00"))
         except Exception:
             pub_date = datetime.now(timezone.utc)
 
-        path = write_post(article, summary, pub_date, description)
+        path = write_post(article, summary, pub_date, description, quality=True)
         seen[article["guid"]] = datetime.now(timezone.utc).isoformat()
 
         log.info("wrote research post: %s (%d words)", path.name, wc)
         new_posts += 1
         time.sleep(0.3)
+
+    log.info("quality gate skipped %d summaries", skipped)
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     with SEEN_FILE.open("w") as f:

@@ -116,6 +116,11 @@ organization:
 # Search Console — paste the verification token after launch (leave blank to omit the tag).
 google_site_verification: ""
 
+# Index only posts the improved pipeline marked `quality: high`. Withdraws the thin
+# AI-summary backlog from Google's index while it ages out of the 90-day window.
+# Set to false to fall back to the word-count-only noindex rule.
+require_quality_flag: true
+
 # Newsletter capture — set `action` to your provider's form endpoint
 # (e.g. Buttondown/Substack/Mailchimp) to render the signup block. Blank = hidden.
 newsletter:
