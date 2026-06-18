@@ -160,6 +160,26 @@ layout: default
   </aside>
   {% endif %}
 
+  <!-- Related Story (multi-source synthesis) -->
+  {% if page.company %}
+  {% assign matched_story = "" %}
+  {% for story in site.stories %}
+    {% if story.companies contains page.company and matched_story == "" %}
+      {% assign matched_story = story %}
+    {% endif %}
+  {% endfor %}
+  {% if matched_story != "" %}
+  <aside class="mt-10 pt-6 border-t tw-border">
+    <h2 class="text-xs font-mono tw-muted uppercase tracking-widest mb-3">In-depth story</h2>
+    <a href="{{ matched_story.url }}" class="block group">
+      <p class="text-sm font-semibold tw-heading leading-snug group-hover:text-cyan-600 transition-colors">{{ matched_story.title }}</p>
+      {% if matched_story.lead %}<p class="mt-1 text-xs tw-muted leading-relaxed line-clamp-2">{{ matched_story.lead }}</p>{% endif %}
+      <span class="mt-2 inline-block text-xs font-mono text-cyan-600 group-hover:text-cyan-500">Multi-source coverage →</span>
+    </a>
+  </aside>
+  {% endif %}
+  {% endif %}
+
   <!-- Navigation between posts -->
   <nav class="mt-6 flex justify-between items-center gap-4 text-sm" aria-label="Post navigation">
     {% if page.previous %}
