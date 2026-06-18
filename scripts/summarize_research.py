@@ -28,8 +28,9 @@ SEEN_FILE = DATA_DIR / "seen_articles.json"
 
 MODEL = os.environ.get("SUMMARIZER_MODEL", "gpt-4o-mini")
 TEMPERATURE = 0.0
+# No floor that forces padding; ceiling allows real depth for genuine papers.
 MIN_WORDS = 200
-MAX_WORDS = 550
+MAX_WORDS = 750
 
 # Source venues that genuinely host primary research (papers), beyond arXiv.
 PAPER_VENUES = (
@@ -115,7 +116,7 @@ URL: {url}"""
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
 def summarize_one(client: OpenAI, article: dict) -> tuple[str, str]:
     """Returns (description, summary_body)."""
-    body = (article.get("body") or "")[:5000]
+    body = (article.get("body") or "")[:10000]
     authors_str = ", ".join(article.get("authors", [])[:8])
     if len(article.get("authors", [])) > 8:
         authors_str += " et al."
