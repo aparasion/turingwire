@@ -20,7 +20,7 @@ from openai import OpenAI
 from slugify import slugify
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from quality import passes_quality
+from quality import clean_headline, passes_quality
 
 ROOT = Path(__file__).parent.parent
 DATA_DIR = ROOT / "_data"
@@ -28,7 +28,8 @@ POSTS_DIR = ROOT / "_posts"
 CLASSIFIED_FILE = DATA_DIR / "classified_articles.json"
 SEEN_FILE = DATA_DIR / "seen_articles.json"
 
-MODEL = "gpt-4o-mini"
+# Override with SUMMARIZER_MODEL (e.g. gpt-4o) to upgrade quality; default keeps cost low.
+MODEL = os.environ.get("SUMMARIZER_MODEL", "gpt-4o-mini")
 TEMPERATURE = 0.3
 # Length follows substance, not a target. A tight 150-word summary beats a padded
 # 400-word one. These are guard rails, not goals.
@@ -84,7 +85,8 @@ SYSTEM_PROMPT = (
 
 USER_PROMPT = """Write a tight, useful summary of the following AI industry news for an expert audience.
 
-First line must be:
+First two lines must be:
+TITLE: <a clear, accurate, specific headline (≤ ~80 chars) drawn only from the facts. No marketing superlatives (fastest/best/strongest/revolutionary), no clickbait, no promising content you don't deliver. Do not copy a promotional source headline verbatim.>
 META: <one sentence, 120–155 characters, describing the news for search snippets. No quotes.>
 
 Then the body:
@@ -177,8 +179,8 @@ def related_context(index: list[dict], company: str | None, subcategory: str, ti
     )
 
 
-def summarize_one(client: OpenAI, article: dict, index: list[dict] | None = None) -> tuple[str, str]:
-    """Two-stage pipeline: extract facts → write article. Returns (description, summary_body)."""
+def summarize_one(client: OpenAI, article: dict, index: list[dict] | None = None) -> tuple[str, str, str]:
+    """Two-stage pipeline: extract facts → write article. Returns (title, description, summary_body)."""
     raw_body = (article.get("body") or "")[:6000]
     title = article.get("title", "")
     classification = article.get("classification", {})
@@ -213,19 +215,31 @@ def summarize_one(client: OpenAI, article: dict, index: list[dict] | None = None
     return _parse_meta(raw)
 
 
-def _parse_meta(raw: str) -> tuple[str, str]:
-    """Split META: first line from the article body."""
+def _parse_meta(raw: str) -> tuple[str, str, str]:
+    """Split optional TITLE: and META: header lines from the article body.
+
+    Returns (title, description, summary). title/description are "" if absent.
+    """
     lines = raw.splitlines()
+    title = ""
     description = ""
-    body_start = 0
-    if lines and lines[0].startswith("META:"):
-        description = lines[0][5:].strip().strip('"').strip("'")
-        body_start = 1
-        # skip blank line after META
-        if len(lines) > 1 and lines[1].strip() == "":
-            body_start = 2
-    summary = "\n".join(lines[body_start:]).strip()
-    return description, summary
+    i = 0
+    # Header lines (TITLE/META) may appear in either order; consume them then any blank.
+    while i < len(lines):
+        stripped = lines[i].strip()
+        if stripped.upper().startswith("TITLE:"):
+            title = stripped[6:].strip().strip('"').strip("'")
+            i += 1
+        elif stripped.upper().startswith("META:"):
+            description = stripped[5:].strip().strip('"').strip("'")
+            i += 1
+        elif stripped == "" and (title or description):
+            i += 1
+            break
+        else:
+            break
+    summary = "\n".join(lines[i:]).strip()
+    return title, description, summary
 
 
 def word_count(text: str) -> int:
@@ -342,10 +356,17 @@ def main() -> int:
     for article in news_articles:
         title = article.get("title", "")
         try:
-            description, summary = summarize_one(client, article, index)
+            gen_title, description, summary = summarize_one(client, article, index)
         except Exception as exc:
             log.warning("summarization failed for '%s': %s", title, exc)
             continue
+
+        # Use the editorial headline if it is clean; otherwise keep the source title.
+        final_title = clean_headline(gen_title) or title
+        if final_title != title:
+            log.info("headline rewritten: %r -> %r", title, final_title)
+            article["title"] = final_title
+            title = final_title
 
         wc = word_count(summary)
         if wc < 100:

@@ -26,7 +26,7 @@ DATA_DIR = ROOT / "_data"
 CLASSIFIED_FILE = DATA_DIR / "classified_articles.json"
 SEEN_FILE = DATA_DIR / "seen_articles.json"
 
-MODEL = "gpt-4o-mini"
+MODEL = os.environ.get("SUMMARIZER_MODEL", "gpt-4o-mini")
 TEMPERATURE = 0.0
 MIN_WORDS = 200
 MAX_WORDS = 550

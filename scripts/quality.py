@@ -42,6 +42,33 @@ _STEP_RE = re.compile(r"(^\s*\d+[\.\)]\s)|(\bstep\s*\d)|(^\s*[-*]\s)", re.I | re
 _NUM_RE = re.compile(r"\d[\d,]*\.?\d*")
 
 
+# Marketing superlatives / clickbait that should not appear in an editorial headline.
+SUPERLATIVE_RE = re.compile(
+    r"\b(fastest|largest|strongest|biggest|best|smartest|most powerful|revolutionary|"
+    r"groundbreaking|game[-\s]?chang\w+|unbelievable|insane|mind[-\s]?blowing|"
+    r"you won'?t believe|shocking|stunning|jaw[-\s]?dropping)\b",
+    re.I,
+)
+
+
+def clean_headline(raw: str) -> str | None:
+    """Normalize a generated headline; return None if it should be rejected
+    (empty, too short/long, or marketing/clickbait) so the caller can fall back
+    to the source title."""
+    if not raw:
+        return None
+    h = raw.strip()
+    if h.upper().startswith("TITLE:"):
+        h = h[6:].strip()
+    h = h.strip().strip('"').strip("'")
+    h = re.sub(r"\s+", " ", h)
+    if not (15 <= len(h) <= 110):
+        return None
+    if SUPERLATIVE_RE.search(h):
+        return None
+    return h
+
+
 def find_banned_phrases(text: str) -> list[str]:
     low = text.lower()
     return [p for p in BAN_PHRASES if p in low]
