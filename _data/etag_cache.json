@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"f1GLww\"",
+    "etag": "\"WRBTvQ\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -16,8 +16,8 @@
     "last_modified": "Wed, 24 Jun 2026 01:00:00 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"8f516d19da1fbfc33df18a847b617283-gzip\"",
-    "last_modified": "Tue, 23 Jun 2026 17:43:52 GMT"
+    "etag": "W/\"ddd0209867c14cc6d83f52dce3c61e85-gzip\"",
+    "last_modified": "Wed, 24 Jun 2026 09:03:24 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
     "etag": "W/\"3a000-x0ekAiD2NdAN1k4kmdAvZ1CE4YA\"",
@@ -40,12 +40,12 @@
     "last_modified": "Wed, 24 Jun 2026 00:16:22 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"499eeb8118d9d82cc01fed84041e5699\"",
-    "last_modified": "Tue, 23 Jun 2026 21:09:49 GMT"
+    "etag": "W/\"94f4de38985dea0efcfd40e32374dd6f\"",
+    "last_modified": "Wed, 24 Jun 2026 11:16:16 GMT"
   },
   "https://stratechery.com/feed/": {
-    "etag": "W/\"dd1a296410dd8cf92815763ef11a3bf5\"",
-    "last_modified": "Tue, 23 Jun 2026 10:00:00 GMT"
+    "etag": "W/\"792eee6c14e7bfca8ab81cc83a602148\"",
+    "last_modified": "Wed, 24 Jun 2026 10:00:00 GMT"
   },
   "https://www.theinformation.com/feed": {
     "etag": "W/\"9a43aa14d31ec6487148134a4420f4f8\"",
@@ -64,7 +64,7 @@
     "last_modified": "Wed, 27 May 2026 21:32:45 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"1747d3-ZbtPPDg8Z319imBjc6QrWZUFbXI\"",
+    "etag": "W/\"1747d5-GWVXjosXLoCOZ70POsIMNyberhI\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"5cd4f127a611dcc21f43d24c97bf0f46\"",
-    "last_modified": "Tue, 23 Jun 2026 12:16:20 GMT"
+    "etag": "\"abba45e23dabb1712a917f45dd0bc0e4\"",
+    "last_modified": "Wed, 24 Jun 2026 11:26:29 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"1b37c-iZE4qGYlGyZ/alf/vKbnDgiDEE0\"",
