@@ -41,6 +41,8 @@ _STEP_RE = re.compile(r"(^\s*\d+[\.\)]\s)|(\bstep\s*\d)|(^\s*[-*]\s)", re.I | re
 
 # Numeric tokens (percentages, money, multi-digit figures) for source grounding.
 _NUM_RE = re.compile(r"\d[\d,]*\.?\d*")
+# arXiv IDs look like decimal numbers (e.g. 2606.25886) but are identifiers, not stats.
+_ARXIV_ID_RE = re.compile(r"\b\d{4}\.\d{4,5}\b")
 
 
 # Marketing superlatives / clickbait that should not appear in an editorial headline.
@@ -144,12 +146,15 @@ def ungrounded_numbers(summary: str, source_body: str) -> list[str]:
     digit string must appear somewhere in the source; this is a conservative check.
     """
     src = (source_body or "").replace(",", "")
+    arxiv_ids = {m.replace(",", "") for m in _ARXIV_ID_RE.findall(summary or "")}
     bad = []
     for m in _NUM_RE.findall(summary or ""):
         digits = m.replace(",", "").rstrip(".")
         core = digits.replace(".", "")
         if len(core) < 2:
             continue  # skip single digits (list markers, trivial counts)
+        if digits in arxiv_ids:
+            continue  # arXiv IDs are identifiers, not grounded statistics
         if digits not in src and core not in src:
             bad.append(digits)
     return bad
