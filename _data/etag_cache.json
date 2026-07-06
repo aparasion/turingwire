@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"-f7yRQ\"",
+    "etag": "\"q1czHQ\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,8 +12,8 @@
     "last_modified": "Sat, 27 Jun 2026 20:27:46 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"c9ca2c713552bbc0818d13e85ccba3a8-gzip\"",
-    "last_modified": "Mon, 06 Jul 2026 16:06:08 GMT"
+    "etag": "\"f12a4e6932a66e4913efe0c641243445-gzip\"",
+    "last_modified": "Mon, 06 Jul 2026 16:40:49 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"de4429ea02f93be587fca3388ceed84e-gzip\"",
@@ -32,20 +32,20 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"5465e7db353fc73f01eb15a12d55e45b\"",
-    "last_modified": "Mon, 06 Jul 2026 16:22:01 GMT"
+    "etag": "W/\"64a265d7b1020d6a1df86c1912c5137f\"",
+    "last_modified": "Mon, 06 Jul 2026 19:01:40 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Mon, 6 Jul 2026 16:26:52 GMT"
+    "last_modified": "Mon, 6 Jul 2026 18:59:10 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"04c9a3bae399ed473b098c8ac70d2ba2\"",
-    "last_modified": "Mon, 06 Jul 2026 16:12:11 GMT"
+    "etag": "W/\"78fc55593084acbd9e3239914c8a01f9\"",
+    "last_modified": "Mon, 06 Jul 2026 16:10:09 GMT"
   },
   "https://stratechery.com/feed/": {
-    "etag": "W/\"8ef94c2e492c0736739573081a68e2bb\"",
-    "last_modified": "Mon, 06 Jul 2026 04:44:52 GMT"
+    "etag": "W/\"d00246b81a3e2b4d8ec8e0e492710fc2\"",
+    "last_modified": "Mon, 06 Jul 2026 17:10:47 GMT"
   },
   "https://www.theinformation.com/feed": {
     "etag": "W/\"9a43aa14d31ec6487148134a4420f4f8\"",
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Mon, 06 Jul 2026 15:34:14 GMT"
+    "last_modified": "Mon, 06 Jul 2026 18:34:15 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"176dc0-XMyaE6l7cXbc/e3Zz2r0deS8Slk\"",
+    "etag": "W/\"175919-EHCGXNlPvRi/aj4eIP40dTEkQVg\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"703cd190f3e270fd571151deee68acb1\"",
-    "last_modified": "Mon, 06 Jul 2026 12:33:36 GMT"
+    "etag": "\"ad79a090d6c604b70194bfa615acbca8\"",
+    "last_modified": "Mon, 06 Jul 2026 18:55:25 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"193cf-yJOjtqPIKH9/AXYb477s9ymWEms\"",
