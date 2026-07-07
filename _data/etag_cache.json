@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"D6_BJw\"",
+    "etag": "\"h2iFrg\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,15 +12,15 @@
     "last_modified": "Sat, 27 Jun 2026 20:27:46 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"9b2efa87ee60737dd0159d0692e9b51a-gzip\"",
-    "last_modified": "Tue, 07 Jul 2026 20:27:36 GMT"
+    "etag": "\"38618c54a68fb8603ef6780758286785-gzip\"",
+    "last_modified": "Tue, 07 Jul 2026 22:28:27 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"7a3b173a319b0c8926817f921d9169a2-gzip\"",
     "last_modified": "Tue, 07 Jul 2026 14:12:41 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
-    "etag": "W/\"3acf5-F9k27lX9NP/jYQGrL0u7a7rZqHA\"",
+    "etag": "W/\"3ae3e-gDTHgdT2RQJM3Vzx8QzYQgFnK8k\"",
     "last_modified": ""
   },
   "https://cohere.com/blog/rss": {
@@ -32,12 +32,12 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"5882dbddc74173a8c350b0dbcb12d275\"",
-    "last_modified": "Tue, 07 Jul 2026 20:31:28 GMT"
+    "etag": "W/\"6140074e9381f2b34205e8368925d3d9\"",
+    "last_modified": "Tue, 07 Jul 2026 22:18:10 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Tue, 7 Jul 2026 19:42:21 GMT"
+    "last_modified": "Tue, 7 Jul 2026 21:47:49 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"7e459a24cec0fb8534b19dcde9420371\"",
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Tue, 07 Jul 2026 20:36:07 GMT"
+    "last_modified": "Tue, 07 Jul 2026 22:04:52 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"176eff-DE3r/bE5N72gQHB2n2oaPL3wZig\"",
+    "etag": "W/\"176eff-GVbfiM5qus3vdZmwjBH4FqRf0RA\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
