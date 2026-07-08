@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"_AqZDA\"",
+    "etag": "\"AZ_TOA\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -40,12 +40,12 @@
     "last_modified": "Wed, 8 Jul 2026 07:39:53 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"b1c91e13250b074962ec7d9a8e7dfd41\"",
-    "last_modified": "Wed, 08 Jul 2026 09:23:09 GMT"
+    "etag": "W/\"5c45830a3cbc523e8b70d09e24d3b7fa\"",
+    "last_modified": "Wed, 08 Jul 2026 10:57:13 GMT"
   },
   "https://stratechery.com/feed/": {
-    "etag": "W/\"f6b92601c97e255f8a4790a8f229c664\"",
-    "last_modified": "Tue, 07 Jul 2026 10:00:00 GMT"
+    "etag": "W/\"aea59457939768186c8f21718b5337da\"",
+    "last_modified": "Wed, 08 Jul 2026 10:00:00 GMT"
   },
   "https://www.theinformation.com/feed": {
     "etag": "W/\"9a43aa14d31ec6487148134a4420f4f8\"",
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Wed, 08 Jul 2026 09:38:13 GMT"
+    "last_modified": "Wed, 08 Jul 2026 11:05:13 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"178bda-mq+Cy2mvsU/tMPoeh8VZu6NF9oo\"",
+    "etag": "W/\"178bda-Zk0Ik8gFe37H0NgMWIxumLomiKY\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,11 +84,11 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"4c86f9cc706e7ede88325d290192f88a\"",
-    "last_modified": "Wed, 08 Jul 2026 08:04:28 GMT"
+    "etag": "\"82846f67fb0a5f9293c05d31ed04d3cb\"",
+    "last_modified": "Wed, 08 Jul 2026 11:48:30 GMT"
   },
   "https://www.404media.co/rss": {
-    "etag": "W/\"11eaa-NMdrm9l4aQcf6gvWBpgamKw9O9o\"",
+    "etag": "W/\"1114e-XUUT7/74BSAPQDPXed2Z+8AeUfY\"",
     "last_modified": ""
   },
   "https://news.google.com/rss/search?q=%22Scale+AI%22+%28model+OR+data+OR+labeling+OR+enterprise+OR+contract+OR+funding+OR+release%29&hl=en-US&gl=US&ceid=US:en": {
