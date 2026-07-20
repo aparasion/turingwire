@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"7btBQg\"",
+    "etag": "\"ZYeEfA\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,12 +12,12 @@
     "last_modified": "Thu, 16 Jul 2026 08:25:16 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"a713cd8f0efaeabc0bafea91ba3f3e9d-gzip\"",
-    "last_modified": "Mon, 20 Jul 2026 15:58:24 GMT"
+    "etag": "\"f54e37bf58c28db70e2b1fef238b34c6-gzip\"",
+    "last_modified": "Mon, 20 Jul 2026 17:31:10 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"cc08c33f5892fbeb93c7b19e5159be54-gzip\"",
-    "last_modified": "Fri, 17 Jul 2026 13:00:05 GMT"
+    "etag": "W/\"15dc20f411cf16a64aeb1f9a6f412eba-gzip\"",
+    "last_modified": "Mon, 20 Jul 2026 17:00:58 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
     "etag": "W/\"3b8db-cKzWcYF1d7qAdJ3f9MPUlW0lzGY\"",
@@ -32,12 +32,12 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"e142db8eb97f0eb22d23966ffd4f3c97\"",
-    "last_modified": "Mon, 20 Jul 2026 15:54:12 GMT"
+    "etag": "W/\"f4cf97d2862fe97d3be0b3dddfd5d55f\"",
+    "last_modified": "Mon, 20 Jul 2026 17:58:50 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Mon, 20 Jul 2026 14:26:29 GMT"
+    "last_modified": "Mon, 20 Jul 2026 17:40:33 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"38311a50e5450f7eb14fddf36b683004\"",
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Mon, 20 Jul 2026 15:48:21 GMT"
+    "last_modified": "Mon, 20 Jul 2026 17:48:14 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"17bbc6-J/k8WhniZMuaNSmdCO5IQy5pQC4\"",
+    "etag": "W/\"177a0e-cpKXBk8P0vgJNsH3nq45Sr0rvhE\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"a384e4a0240de9de470d403fc422acfe\"",
-    "last_modified": "Mon, 20 Jul 2026 14:05:45 GMT"
+    "etag": "\"490ee06040e311ebd3cd54f0c3b40df8\"",
+    "last_modified": "Mon, 20 Jul 2026 18:10:50 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"2131a-q1OpcQ0s8QgTFd1CGcjKVR3m+1Y\"",
