@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"z8m7YQ\"",
+    "etag": "\"vR0GnQ\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,8 +12,8 @@
     "last_modified": "Thu, 16 Jul 2026 08:25:16 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"6b6651ce0a641e92058e1cc646ddb3a8-gzip\"",
-    "last_modified": "Wed, 22 Jul 2026 17:38:48 GMT"
+    "etag": "\"f796115f61d85db6c73d4593cc63d9a5-gzip\"",
+    "last_modified": "Wed, 22 Jul 2026 19:25:24 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"f291aa144911a18e8836a901c7ff268a-gzip\"",
@@ -32,16 +32,16 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"5cab940f0e78c4d66e283e6b4b3fbb40\"",
-    "last_modified": "Wed, 22 Jul 2026 18:37:27 GMT"
+    "etag": "W/\"87ac260a55c38f718f3696e3841ce44a\"",
+    "last_modified": "Wed, 22 Jul 2026 20:33:13 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Wed, 22 Jul 2026 15:06:38 GMT"
+    "last_modified": "Wed, 22 Jul 2026 19:27:26 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"5c80b14858d8ef8e3caf3214b7b19b7e\"",
-    "last_modified": "Wed, 22 Jul 2026 11:55:36 GMT"
+    "etag": "W/\"2f2ede55408e45c43ef78023b4792808\"",
+    "last_modified": "Wed, 22 Jul 2026 18:34:56 GMT"
   },
   "https://stratechery.com/feed/": {
     "etag": "W/\"eaee65657b2fe4b8b835b5282a535144\"",
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Wed, 22 Jul 2026 17:50:45 GMT"
+    "last_modified": "Wed, 22 Jul 2026 19:51:16 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"17a6ab-27yNVEnb1yN0CE4LOUFTnW+Lt8A\"",
+    "etag": "W/\"17aceb-5FwYuO6ARwLQYwbjFWuF7wVD/Co\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"0c7da6c9fb56bfea9df73fb363db6026\"",
-    "last_modified": "Wed, 22 Jul 2026 16:56:18 GMT"
+    "etag": "\"281574f760e8ab9f5bf64d5d648a5031\"",
+    "last_modified": "Wed, 22 Jul 2026 19:35:10 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"1e700-m6A+gWFg/07/C4Bay5XcDFs1M4k\"",
