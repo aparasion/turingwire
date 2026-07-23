@@ -4,8 +4,8 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"w03VRA\"",
-    "last_modified": ""
+    "etag": "",
+    "last_modified": "Wed, 22 Jul 2026 13:38:54 GMT"
   },
   "https://blog.research.google/feeds/posts/default": {
     "etag": "",
@@ -16,11 +16,11 @@
     "last_modified": "Thu, 23 Jul 2026 03:54:14 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"f291aa144911a18e8836a901c7ff268a-gzip\"",
-    "last_modified": "Tue, 21 Jul 2026 15:46:54 GMT"
+    "etag": "W/\"c89dd9e63c32b2751e1963ed9c520360-gzip\"",
+    "last_modified": "Thu, 23 Jul 2026 09:29:03 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
-    "etag": "W/\"3ba37-VfRuL5shNZtxR/J1sWnMiy8GwjY\"",
+    "etag": "W/\"3bb5a-+2C+pfv9JRy4adKXi+B0VbAv4FY\"",
     "last_modified": ""
   },
   "https://cohere.com/blog/rss": {
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Thu, 23 Jul 2026 05:51:41 GMT"
+    "last_modified": "Thu, 23 Jul 2026 09:12:25 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"177570-xSP4BSKGsfiDVanG4IrAiUtUQac\"",
+    "etag": "W/\"177570-ozTdAz+eEmB7OidpiHSnEwqt2sg\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
