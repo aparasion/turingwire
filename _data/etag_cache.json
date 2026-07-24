@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"6upjbw\"",
+    "etag": "\"aJ_owg\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,8 +12,8 @@
     "last_modified": "Thu, 23 Jul 2026 13:05:52 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"e95037332cdb93f394e5807323100853-gzip\"",
-    "last_modified": "Fri, 24 Jul 2026 04:34:27 GMT"
+    "etag": "\"c0110f9a04aa82c99cbab92eec416576-gzip\"",
+    "last_modified": "Fri, 24 Jul 2026 20:40:17 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"b021920fe6f9e2268fb181a6a00d8376-gzip\"",
@@ -32,16 +32,16 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"a6e7db01cad993c42cd006e9507ece86\"",
-    "last_modified": "Fri, 24 Jul 2026 19:44:27 GMT"
+    "etag": "W/\"b20f594b20abd3a4b2363c850fdfec12\"",
+    "last_modified": "Fri, 24 Jul 2026 21:25:09 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Fri, 24 Jul 2026 19:10:36 GMT"
+    "last_modified": "Fri, 24 Jul 2026 20:32:35 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"444aa57c7bfd2a18a1a881a32dee6e03\"",
-    "last_modified": "Fri, 24 Jul 2026 18:10:11 GMT"
+    "etag": "W/\"50dd36d8c6e8941cba66d97e14701882\"",
+    "last_modified": "Fri, 24 Jul 2026 20:48:25 GMT"
   },
   "https://stratechery.com/feed/": {
     "etag": "W/\"b10dd305ca4189f642e181d6b5d974f4\"",
@@ -61,10 +61,10 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Fri, 24 Jul 2026 19:11:47 GMT"
+    "last_modified": "Fri, 24 Jul 2026 21:11:50 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"17847c-EAdH0+TazHWEbT0Doarrfb8U+XY\"",
+    "etag": "W/\"1797a4-UvaEheqhrggGI/ZS2m7vdKVvPVs\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
