@@ -5,15 +5,15 @@
   },
   "https://deepmind.google/blog/rss.xml": {
     "etag": "",
-    "last_modified": "Wed, 22 Jul 2026 13:38:54 GMT"
+    "last_modified": "Wed, 29 Jul 2026 16:02:10 GMT"
   },
   "https://blog.research.google/feeds/posts/default": {
     "etag": "",
     "last_modified": "Thu, 23 Jul 2026 13:05:52 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"dc6ff542007dc4201de92233a36cf86c-gzip\"",
-    "last_modified": "Wed, 29 Jul 2026 15:10:51 GMT"
+    "etag": "\"b5b8f0290631818e945209a02f94d669-gzip\"",
+    "last_modified": "Wed, 29 Jul 2026 17:00:02 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"ea3c7ea1ef15c420abbfa0a0062f381a-gzip\"",
@@ -32,12 +32,12 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"ae47a377b231882f3f1204920958f8b2\"",
-    "last_modified": "Wed, 29 Jul 2026 15:20:34 GMT"
+    "etag": "W/\"a981bee67b5d3f709e7d9443eb37d133\"",
+    "last_modified": "Wed, 29 Jul 2026 17:28:22 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Wed, 29 Jul 2026 14:26:30 GMT"
+    "last_modified": "Wed, 29 Jul 2026 17:24:31 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"a734e15c98e46dca5135c64cdc9d4119\"",
@@ -64,7 +64,7 @@
     "last_modified": "Fri, 24 Jul 2026 23:11:51 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"182822-bdnOY/cosmd9rL7Qp0bOKiHlnNY\"",
+    "etag": "W/\"182ba2-Rtp4mZ/bOdklg6mPEy12HAvID90\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"ac8eaf5cbe06e263e4806310d802a3a8\"",
-    "last_modified": "Wed, 29 Jul 2026 13:48:45 GMT"
+    "etag": "\"d3d9e7fb5342f04969fa20740093e00c\"",
+    "last_modified": "Wed, 29 Jul 2026 17:17:24 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"1f62b-5VBOhLDYmSjB6Exy+ppigR7n0RI\"",
