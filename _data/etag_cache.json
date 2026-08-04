@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"MCP0Sw\"",
+    "etag": "\"TTsChw\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,8 +12,8 @@
     "last_modified": "Sun, 2 Aug 2026 10:54:52 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"b2ca18a23da1a76c14565c712dad231e-gzip\"",
-    "last_modified": "Tue, 04 Aug 2026 15:00:49 GMT"
+    "etag": "\"8b2f7eff53281a28607b42366e419f72-gzip\"",
+    "last_modified": "Tue, 04 Aug 2026 17:09:16 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"690e7e7d2478a9465e93f00c979f458d-gzip\"",
@@ -32,12 +32,12 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"e171c49b09e31e15d37ce81d0e53e399\"",
-    "last_modified": "Tue, 04 Aug 2026 15:29:10 GMT"
+    "etag": "W/\"7374092a0462e385e23bcebe80d3334b\"",
+    "last_modified": "Tue, 04 Aug 2026 17:57:29 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Tue, 4 Aug 2026 13:29:57 GMT"
+    "last_modified": "Tue, 4 Aug 2026 17:29:43 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"ad1cde5ba4a96bb4f6c1e4398c5a8815\"",
@@ -64,7 +64,7 @@
     "last_modified": "Fri, 24 Jul 2026 23:11:51 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"180db5-JXXKGuDmJD3y4FUSsqqUu4gTPaI\"",
+    "etag": "W/\"17f677-kACyAexsgMHum4zo9oGyCD8Vz7g\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,11 +84,11 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"64fc803b95f175146861c1ce6a8ba061\"",
-    "last_modified": "Tue, 04 Aug 2026 15:35:23 GMT"
+    "etag": "\"2d975553e8b52033a5cc130497e36058\"",
+    "last_modified": "Tue, 04 Aug 2026 17:27:24 GMT"
   },
   "https://www.404media.co/rss": {
-    "etag": "W/\"1a860-H8NsCObsjCMbKDS0V6n32oxMLl8\"",
+    "etag": "W/\"1c3fc-1H8sVNBeBgsv4L9KZFhUXrEIY+0\"",
     "last_modified": ""
   },
   "https://news.google.com/rss/search?q=%22Scale+AI%22+%28model+OR+data+OR+labeling+OR+enterprise+OR+contract+OR+funding+OR+release%29&hl=en-US&gl=US&ceid=US:en": {
