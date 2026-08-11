@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"TBaV_g\"",
+    "etag": "\"zogkhQ\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,8 +12,8 @@
     "last_modified": "Mon, 10 Aug 2026 07:39:55 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"9f8792735fc576d2ba77ac525f51284d-gzip\"",
-    "last_modified": "Tue, 11 Aug 2026 16:00:12 GMT"
+    "etag": "\"6385bb98d2c1d2add43595b5b8c9e8cd-gzip\"",
+    "last_modified": "Tue, 11 Aug 2026 17:02:42 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"6a21ab9957dcb68074636e2927abaf7b-gzip\"",
@@ -32,16 +32,16 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"a333052975a9df0b495a69db9a5e1d88\"",
-    "last_modified": "Tue, 11 Aug 2026 16:04:58 GMT"
+    "etag": "W/\"0467f64719cb12ac2d8067241e818f87\"",
+    "last_modified": "Tue, 11 Aug 2026 17:13:25 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Tue, 11 Aug 2026 14:42:58 GMT"
+    "last_modified": "Tue, 11 Aug 2026 17:13:41 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"7da27e7844b75743d9292e827d83a72e\"",
-    "last_modified": "Tue, 11 Aug 2026 15:26:46 GMT"
+    "etag": "W/\"3aa2d84a25113277712bf51868aa1fa8\"",
+    "last_modified": "Tue, 11 Aug 2026 16:43:13 GMT"
   },
   "https://stratechery.com/feed/": {
     "etag": "W/\"d52bba06791aa0841f1bd8979b6c04d6\"",
@@ -64,12 +64,12 @@
     "last_modified": "Fri, 24 Jul 2026 23:11:51 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"17a9ef-vWF8XxkZdziQkTTf/3vm7jGxVB0\"",
+    "etag": "W/\"17adda-JmQ1q1ydOIyZ0K8iqMi9VSeauLA\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
     "etag": "",
-    "last_modified": "Mon, 10 Aug 2026 17:41:13 GMT"
+    "last_modified": "Tue, 11 Aug 2026 14:50:33 GMT"
   },
   "https://news.google.com/rss/search?q=%22xAI%22+%28Grok+OR+model+OR+API+OR+release+OR+safety+OR+benchmark+OR+reasoning%29&hl=en-US&gl=US&ceid=US:en": {
     "etag": "",
