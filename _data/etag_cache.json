@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"UVyhfA\"",
+    "etag": "\"8j8dHg\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,15 +12,15 @@
     "last_modified": "Mon, 10 Aug 2026 07:39:55 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"5ed8223e7b7e05a2cf1298cdeae3a570-gzip\"",
-    "last_modified": "Wed, 12 Aug 2026 14:07:39 GMT"
+    "etag": "\"1491f0109ed82d6ae3155a549a77f7ef-gzip\"",
+    "last_modified": "Wed, 12 Aug 2026 15:58:59 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"99ca99c0c2974cfa57cb593d2d9a1eed-gzip\"",
     "last_modified": "Tue, 11 Aug 2026 18:00:54 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
-    "etag": "W/\"3c582-sk0d0yp3qDyo8qHL7Z4twcGojBg\"",
+    "etag": "W/\"3c5b7-p/vDyW62TOgN8qrJTX86xyLZaic\"",
     "last_modified": ""
   },
   "https://cohere.com/blog/rss": {
@@ -32,12 +32,12 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"c78cd084983e80bb0f3823ed58ad516a\"",
-    "last_modified": "Wed, 12 Aug 2026 15:10:27 GMT"
+    "etag": "W/\"b12d1d2cfa3edfe8ad5d3c7e225ab876\"",
+    "last_modified": "Wed, 12 Aug 2026 16:12:31 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Wed, 12 Aug 2026 14:04:57 GMT"
+    "last_modified": "Wed, 12 Aug 2026 15:56:11 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"846d67e35d781fd833bd56e71c32cd58\"",
@@ -64,7 +64,7 @@
     "last_modified": "Fri, 24 Jul 2026 23:11:51 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"18250c-pzKUeceQr9zNbBefa0VsVD4B1kE\"",
+    "etag": "W/\"18162e-O0cZOLEFRB4dJY5vlgO6ueXl57Y\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"a806db97c650cf5cb9da219be8fcbf66\"",
-    "last_modified": "Wed, 12 Aug 2026 15:16:40 GMT"
+    "etag": "\"96a8cbb7af80b0dfe37f530688413e92\"",
+    "last_modified": "Wed, 12 Aug 2026 15:57:31 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"1f8fc-w8XPKUWqkCKSHUKn8zr2FlTzjjY\"",
