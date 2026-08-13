@@ -4,8 +4,8 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"7p44mQ\"",
-    "last_modified": ""
+    "etag": "",
+    "last_modified": "Thu, 13 Aug 2026 17:04:18 GMT"
   },
   "https://blog.research.google/feeds/posts/default": {
     "etag": "",
@@ -16,11 +16,11 @@
     "last_modified": "Thu, 13 Aug 2026 13:00:33 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"33ab4992fb4343c178568b5383163751-gzip\"",
-    "last_modified": "Thu, 13 Aug 2026 10:01:46 GMT"
+    "etag": "W/\"ff45f6e9d853ff2aeb60edc78abfaa46-gzip\"",
+    "last_modified": "Thu, 13 Aug 2026 16:30:07 GMT"
   },
   "https://huggingface.co/blog/feed.xml": {
-    "etag": "W/\"3c5b7-p/vDyW62TOgN8qrJTX86xyLZaic\"",
+    "etag": "W/\"3c86e-Sx3l5mhApAjqqEp72nlAzczXcOY\"",
     "last_modified": ""
   },
   "https://cohere.com/blog/rss": {
@@ -32,8 +32,8 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"aa75ed25f574f23f7a2f7e7c939e82fb\"",
-    "last_modified": "Thu, 13 Aug 2026 16:13:33 GMT"
+    "etag": "W/\"3f3b90aa5a90d9a31eb19cb49f0ebe84\"",
+    "last_modified": "Thu, 13 Aug 2026 17:07:13 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
@@ -64,7 +64,7 @@
     "last_modified": "Fri, 24 Jul 2026 23:11:51 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"17f5e5-q1+JPBOGAGV6wbtj0YEItfiDmvI\"",
+    "etag": "W/\"17f2d5-SxC42JYd/HTB5OVd5laeM9tWC7o\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"4de97fce427baa3e18a10574609aa4d7\"",
-    "last_modified": "Thu, 13 Aug 2026 15:03:04 GMT"
+    "etag": "\"6093440e411c6a6b7fa9853ef0b9fc62\"",
+    "last_modified": "Thu, 13 Aug 2026 16:29:24 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"1b62c-3gWLWHi8YgdLy/VG/oaum9v/eGQ\"",
