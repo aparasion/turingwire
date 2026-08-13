@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"X66bDg\"",
+    "etag": "\"vRznnQ\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -12,8 +12,8 @@
     "last_modified": "Mon, 10 Aug 2026 07:39:55 GMT"
   },
   "https://blogs.nvidia.com/feed/": {
-    "etag": "\"857c676850da0deab53b9762ecca7333-gzip\"",
-    "last_modified": "Thu, 13 Aug 2026 13:00:33 GMT"
+    "etag": "\"d068ffdf184b00a36917701fa26396a4-gzip\"",
+    "last_modified": "Thu, 13 Aug 2026 20:50:15 GMT"
   },
   "https://newsroom.intel.com/feed/": {
     "etag": "W/\"ff45f6e9d853ff2aeb60edc78abfaa46-gzip\"",
@@ -32,16 +32,16 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"43e7618b8c374eef02ac7985107c915b\"",
-    "last_modified": "Thu, 13 Aug 2026 19:27:12 GMT"
+    "etag": "W/\"7cf1ea453d8562f8c07466260b7eea2d\"",
+    "last_modified": "Thu, 13 Aug 2026 21:03:51 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Thu, 13 Aug 2026 16:04:43 GMT"
+    "last_modified": "Thu, 13 Aug 2026 19:45:07 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"84591193eef275b2597479d4d212cee3\"",
-    "last_modified": "Thu, 13 Aug 2026 18:11:42 GMT"
+    "etag": "W/\"986a1ddd7d0c96cb149db29afad652c2\"",
+    "last_modified": "Thu, 13 Aug 2026 19:45:32 GMT"
   },
   "https://stratechery.com/feed/": {
     "etag": "W/\"34fe1f010c182368b9ffe34cda9d700f\"",
@@ -64,7 +64,7 @@
     "last_modified": "Fri, 24 Jul 2026 23:11:51 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"17f2db-ISI+bNTd8UMWiG+tK9mWRhnLvGo\"",
+    "etag": "W/\"18022c-8PVWkAQ/5hKzsxiw99Q0OSb/P+4\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"1546380b688e69626bcd89403b22b3dc\"",
-    "last_modified": "Thu, 13 Aug 2026 18:43:30 GMT"
+    "etag": "\"b69c4d9d2638480584a7bbf3539ff687\"",
+    "last_modified": "Thu, 13 Aug 2026 19:41:09 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"19f9f-iCj4Hdfso3CxZb2lFaipuIbqxxo\"",
