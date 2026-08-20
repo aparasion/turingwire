@@ -1,19 +1,19 @@
 {
-  "updated_at": "2026-08-20T20:01:27.604019+00:00",
+  "updated_at": "2026-08-20T20:44:08.954644+00:00",
   "error_count": 0,
   "quotes": {
     "NVDA": {
       "symbol": "NVDA",
       "name": "NVIDIA Corporation",
       "sector": "semiconductors",
-      "price": 216.92,
-      "change": -0.64,
-      "change_pct": -0.29,
+      "price": 216.85,
+      "change": -0.71,
+      "change_pct": -0.33,
       "high": 219.86,
       "low": 215.66,
       "open": 218.36,
       "prev_close": 217.56,
-      "updated_at": "2026-08-20T20:00:53.128551+00:00"
+      "updated_at": "2026-08-20T20:43:33.648642+00:00"
     },
     "AMD": {
       "symbol": "AMD",
@@ -26,46 +26,46 @@
       "low": 460.27,
       "open": 465.67,
       "prev_close": 466.42,
-      "updated_at": "2026-08-20T20:00:54.341392+00:00"
+      "updated_at": "2026-08-20T20:43:34.909667+00:00"
     },
     "INTC": {
       "symbol": "INTC",
       "name": "Intel Corporation",
       "sector": "semiconductors",
-      "price": 92.11,
-      "change": -0.69,
-      "change_pct": -0.74,
+      "price": 92.13,
+      "change": -0.67,
+      "change_pct": -0.72,
       "high": 92.68,
       "low": 89.85,
       "open": 91.87,
       "prev_close": 92.8,
-      "updated_at": "2026-08-20T20:00:55.551261+00:00"
+      "updated_at": "2026-08-20T20:43:36.168645+00:00"
     },
     "TSM": {
       "symbol": "TSM",
       "name": "Taiwan Semiconductor Manufacturing",
       "sector": "semiconductors",
-      "price": 416.13,
-      "change": 4.04,
-      "change_pct": 0.98,
+      "price": 416.0,
+      "change": 3.91,
+      "change_pct": 0.95,
       "high": 417.96,
       "low": 407.72,
       "open": 408.6,
       "prev_close": 412.09,
-      "updated_at": "2026-08-20T20:00:56.761739+00:00"
+      "updated_at": "2026-08-20T20:43:37.427637+00:00"
     },
     "GOOGL": {
       "symbol": "GOOGL",
       "name": "Alphabet Inc.",
       "sector": "hyperscaler",
-      "price": 340.57,
-      "change": -4.15,
-      "change_pct": -1.2,
+      "price": 340.67,
+      "change": -4.05,
+      "change_pct": -1.17,
       "high": 343.9,
       "low": 338.57,
       "open": 343.06,
       "prev_close": 344.72,
-      "updated_at": "2026-08-20T20:00:58.000703+00:00"
+      "updated_at": "2026-08-20T20:43:38.687294+00:00"
     },
     "MSFT": {
       "symbol": "MSFT",
@@ -78,59 +78,59 @@
       "low": 479.5,
       "open": 483.3,
       "prev_close": 484.31,
-      "updated_at": "2026-08-20T20:00:59.210702+00:00"
+      "updated_at": "2026-08-20T20:43:39.945978+00:00"
     },
     "META": {
       "symbol": "META",
       "name": "Meta Platforms",
       "sector": "hyperscaler",
-      "price": 545.89,
-      "change": -0.14,
-      "change_pct": -0.03,
+      "price": 545.83,
+      "change": -0.2,
+      "change_pct": -0.04,
       "high": 549.99,
       "low": 539.31,
       "open": 546.95,
       "prev_close": 546.03,
-      "updated_at": "2026-08-20T20:01:00.420326+00:00"
+      "updated_at": "2026-08-20T20:43:41.248581+00:00"
     },
     "AMZN": {
       "symbol": "AMZN",
       "name": "Amazon.com Inc.",
       "sector": "hyperscaler",
-      "price": 260.22,
-      "change": -5.62,
-      "change_pct": -2.11,
+      "price": 260.11,
+      "change": -5.73,
+      "change_pct": -2.16,
       "high": 263.84,
       "low": 259.52,
       "open": 263.16,
       "prev_close": 265.84,
-      "updated_at": "2026-08-20T20:01:01.649258+00:00"
+      "updated_at": "2026-08-20T20:43:42.507107+00:00"
     },
     "AAPL": {
       "symbol": "AAPL",
       "name": "Apple Inc.",
       "sector": "hyperscaler",
-      "price": 311.31,
-      "change": -5.52,
-      "change_pct": -1.74,
+      "price": 311.3,
+      "change": -5.53,
+      "change_pct": -1.75,
       "high": 320.28,
       "low": 310.65,
       "open": 317.45,
       "prev_close": 316.83,
-      "updated_at": "2026-08-20T20:01:02.875392+00:00"
+      "updated_at": "2026-08-20T20:43:43.765761+00:00"
     },
     "ORCL": {
       "symbol": "ORCL",
       "name": "Oracle Corporation",
       "sector": "enterprise_ai",
-      "price": 142.06,
-      "change": -1.75,
-      "change_pct": -1.22,
+      "price": 142.07,
+      "change": -1.74,
+      "change_pct": -1.21,
       "high": 145.92,
       "low": 141.02,
       "open": 144.3,
       "prev_close": 143.81,
-      "updated_at": "2026-08-20T20:01:04.091500+00:00"
+      "updated_at": "2026-08-20T20:43:45.024474+00:00"
     },
     "PLTR": {
       "symbol": "PLTR",
@@ -143,7 +143,7 @@
       "low": 172.03,
       "open": 175.88,
       "prev_close": 175.19,
-      "updated_at": "2026-08-20T20:01:05.353003+00:00"
+      "updated_at": "2026-08-20T20:43:46.287454+00:00"
     },
     "SMCI": {
       "symbol": "SMCI",
@@ -156,59 +156,59 @@
       "low": 35.58,
       "open": 36.9,
       "prev_close": 36.58,
-      "updated_at": "2026-08-20T20:01:06.569030+00:00"
+      "updated_at": "2026-08-20T20:43:47.551851+00:00"
     },
     "AVGO": {
       "symbol": "AVGO",
       "name": "Broadcom Inc.",
       "sector": "semiconductors",
-      "price": 364.06,
-      "change": 1.58,
-      "change_pct": 0.44,
+      "price": 364.03,
+      "change": 1.55,
+      "change_pct": 0.43,
       "high": 367.12,
       "low": 362.25,
       "open": 364.39,
       "prev_close": 362.48,
-      "updated_at": "2026-08-20T20:01:07.805013+00:00"
+      "updated_at": "2026-08-20T20:43:48.810873+00:00"
     },
     "ARM": {
       "symbol": "ARM",
       "name": "Arm Holdings",
       "sector": "semiconductors",
-      "price": 250.74,
-      "change": 1.4,
-      "change_pct": 0.56,
+      "price": 250.72,
+      "change": 1.38,
+      "change_pct": 0.55,
       "high": 251.23,
       "low": 242.28,
       "open": 246.4,
       "prev_close": 249.34,
-      "updated_at": "2026-08-20T20:01:09.087162+00:00"
+      "updated_at": "2026-08-20T20:43:50.069772+00:00"
     },
     "ASML": {
       "symbol": "ASML",
       "name": "ASML Holding",
       "sector": "semiconductor_equipment",
-      "price": 1750.6,
-      "change": -1.13,
-      "change_pct": -0.06,
+      "price": 1750.31,
+      "change": -1.42,
+      "change_pct": -0.08,
       "high": 1775.82,
       "low": 1741.02,
       "open": 1743.76,
       "prev_close": 1751.73,
-      "updated_at": "2026-08-20T20:01:10.300524+00:00"
+      "updated_at": "2026-08-20T20:43:51.335269+00:00"
     },
     "AMAT": {
       "symbol": "AMAT",
       "name": "Applied Materials",
       "sector": "semiconductor_equipment",
-      "price": 496.26,
-      "change": 0.09,
-      "change_pct": 0.02,
+      "price": 496.21,
+      "change": 0.04,
+      "change_pct": 0.01,
       "high": 499.89,
       "low": 487.47,
       "open": 489.58,
       "prev_close": 496.17,
-      "updated_at": "2026-08-20T20:01:11.509865+00:00"
+      "updated_at": "2026-08-20T20:43:52.594036+00:00"
     },
     "LRCX": {
       "symbol": "LRCX",
@@ -221,7 +221,7 @@
       "low": 302.95,
       "open": 305.23,
       "prev_close": 307.17,
-      "updated_at": "2026-08-20T20:01:12.763822+00:00"
+      "updated_at": "2026-08-20T20:43:53.854359+00:00"
     },
     "MU": {
       "symbol": "MU",
@@ -234,72 +234,72 @@
       "low": 929.07,
       "open": 935.01,
       "prev_close": 937.11,
-      "updated_at": "2026-08-20T20:01:14.186259+00:00"
+      "updated_at": "2026-08-20T20:43:55.114719+00:00"
     },
     "IBM": {
       "symbol": "IBM",
       "name": "IBM",
       "sector": "enterprise_ai",
-      "price": 233.74,
-      "change": -3.42,
-      "change_pct": -1.44,
+      "price": 233.69,
+      "change": -3.47,
+      "change_pct": -1.46,
       "high": 237.5,
       "low": 233.03,
       "open": 236.0,
       "prev_close": 237.16,
-      "updated_at": "2026-08-20T20:01:15.397553+00:00"
+      "updated_at": "2026-08-20T20:43:56.379251+00:00"
     },
     "CRM": {
       "symbol": "CRM",
       "name": "Salesforce Inc.",
       "sector": "enterprise_ai",
-      "price": 205.71,
-      "change": -0.38,
-      "change_pct": -0.18,
+      "price": 205.43,
+      "change": -0.66,
+      "change_pct": -0.32,
       "high": 207.88,
       "low": 203.0,
       "open": 205.22,
       "prev_close": 206.09,
-      "updated_at": "2026-08-20T20:01:16.607120+00:00"
+      "updated_at": "2026-08-20T20:43:57.638347+00:00"
     },
     "NOW": {
       "symbol": "NOW",
       "name": "ServiceNow",
       "sector": "enterprise_ai",
-      "price": 129.73,
-      "change": 2.53,
-      "change_pct": 1.99,
+      "price": 129.75,
+      "change": 2.55,
+      "change_pct": 2.0,
       "high": 131.15,
       "low": 127.1,
       "open": 128.15,
       "prev_close": 127.2,
-      "updated_at": "2026-08-20T20:01:17.826396+00:00"
+      "updated_at": "2026-08-20T20:43:58.897329+00:00"
     },
     "SNOW": {
       "symbol": "SNOW",
       "name": "Snowflake Inc.",
       "sector": "enterprise_ai",
-      "price": 321.14,
-      "change": -3.87,
-      "change_pct": -1.19,
+      "price": 321.29,
+      "change": -3.72,
+      "change_pct": -1.14,
       "high": 325.0,
       "low": 317.12,
       "open": 322.72,
       "prev_close": 325.01,
-      "updated_at": "2026-08-20T20:01:19.138909+00:00"
+      "updated_at": "2026-08-20T20:44:00.156855+00:00"
     },
     "PATH": {
       "symbol": "PATH",
       "name": "UiPath Inc.",
       "sector": "enterprise_ai",
-      "price": 15.91,
-      "change": 0.13,
-      "change_pct": 0.82,
+      "price": 15.92,
+      "change": 0.14,
+      "change_pct": 0.89,
       "high": 15.99,
       "low": 15.4,
       "open": 15.55,
       "prev_close": 15.78,
-      "updated_at": "2026-08-20T20:01:20.348350+00:00"
+      "updated_at": "2026-08-20T20:44:01.453935+00:00"
     },
     "AI": {
       "symbol": "AI",
@@ -312,7 +312,7 @@
       "low": 10.04,
       "open": 10.3,
       "prev_close": 10.38,
-      "updated_at": "2026-08-20T20:01:21.557628+00:00"
+      "updated_at": "2026-08-20T20:44:02.712356+00:00"
     },
     "BBAI": {
       "symbol": "BBAI",
@@ -325,7 +325,7 @@
       "low": 3.03,
       "open": 3.16,
       "prev_close": 3.17,
-      "updated_at": "2026-08-20T20:01:22.771403+00:00"
+      "updated_at": "2026-08-20T20:44:03.972471+00:00"
     },
     "CRWV": {
       "symbol": "CRWV",
@@ -338,7 +338,7 @@
       "low": 88.78,
       "open": 90.31,
       "prev_close": 90.87,
-      "updated_at": "2026-08-20T20:01:23.983936+00:00"
+      "updated_at": "2026-08-20T20:44:05.232772+00:00"
     },
     "BIDU": {
       "symbol": "BIDU",
@@ -351,20 +351,20 @@
       "low": 91.3,
       "open": 93.3,
       "prev_close": 92.87,
-      "updated_at": "2026-08-20T20:01:25.194402+00:00"
+      "updated_at": "2026-08-20T20:44:06.495860+00:00"
     },
     "BABA": {
       "symbol": "BABA",
       "name": "Alibaba Group",
       "sector": "hyperscaler",
-      "price": 130.56,
-      "change": 1.66,
-      "change_pct": 1.29,
+      "price": 130.53,
+      "change": 1.63,
+      "change_pct": 1.26,
       "high": 130.62,
       "low": 121.88,
       "open": 123.47,
       "prev_close": 128.9,
-      "updated_at": "2026-08-20T20:01:26.403809+00:00"
+      "updated_at": "2026-08-20T20:44:07.754405+00:00"
     }
   }
 }
