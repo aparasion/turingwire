@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"BUQ_Pg\"",
+    "etag": "\"vlRfhg\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -32,16 +32,16 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"e6507e5290df7fdc84f39efbf3599070\"",
-    "last_modified": "Wed, 26 Aug 2026 23:16:11 GMT"
+    "etag": "W/\"a8baf072e5cd34758cff78c74093de3b\"",
+    "last_modified": "Thu, 27 Aug 2026 06:47:07 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Wed, 26 Aug 2026 23:08:55 GMT"
+    "last_modified": "Thu, 27 Aug 2026 01:01:14 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"15060b7a34f95f59919120589908776f\"",
-    "last_modified": "Wed, 26 Aug 2026 22:53:56 GMT"
+    "etag": "W/\"60d4f336eabddcc3ca12227b40950a47\"",
+    "last_modified": "Thu, 27 Aug 2026 04:26:59 GMT"
   },
   "https://stratechery.com/feed/": {
     "etag": "W/\"885f89bf4a661e9229e1f43d7f185e1b\"",
@@ -64,7 +64,7 @@
     "last_modified": "Fri, 24 Jul 2026 23:11:51 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"17039b-TBSYFUMZJ4Flns0mv5InQz0Kauc\"",
+    "etag": "W/\"1769e2-Gue2POFRFvmhChIkUnyKZeGcOys\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"a15b478e1faaed9c75cee34b680459ed\"",
-    "last_modified": "Wed, 26 Aug 2026 17:31:34 GMT"
+    "etag": "\"a148a7935d8a8117c169ebfae9dc9317\"",
+    "last_modified": "Thu, 27 Aug 2026 09:54:46 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"1e893-ofgsC4QSLyvD0kPXW+u3589K9KM\"",
@@ -100,7 +100,7 @@
     "last_modified": ""
   },
   "https://mistral.ai/news/rss": {
-    "etag": "W/\"079dd5399bdfe2f4121a17cfcbebce53-ssl-df\"",
+    "etag": "W/\"c3a2f70b460cfb2538391a2482814ec7-ssl-df\"",
     "last_modified": ""
   }
 }
