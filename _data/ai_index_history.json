@@ -34,14 +34,6 @@
   },
   "series": [
     {
-      "timestamp": "2026-06-25T17:34:18.631168+00:00",
-      "date": "2026-06-25",
-      "value": 230.95,
-      "change": 3.36,
-      "change_pct": 1.48,
-      "n_tickers": 28
-    },
-    {
       "timestamp": "2026-06-25T19:30:08.179700+00:00",
       "date": "2026-06-25",
       "value": 229.14,
@@ -3232,14 +3224,22 @@
       "change": 0.34,
       "change_pct": 0.16,
       "n_tickers": 28
+    },
+    {
+      "timestamp": "2026-09-03T23:01:30.303667+00:00",
+      "date": "2026-09-03",
+      "value": 210.11,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "n_tickers": 28
     }
   ],
   "latest": {
-    "timestamp": "2026-09-03T21:49:39.995315+00:00",
+    "timestamp": "2026-09-03T23:01:30.303667+00:00",
     "date": "2026-09-03",
     "value": 210.11,
-    "change": 0.34,
-    "change_pct": 0.16,
+    "change": 0.0,
+    "change_pct": 0.0,
     "n_tickers": 28
   }
 }
