@@ -16,7 +16,7 @@
     "last_modified": "Wed, 02 Sep 2026 22:14:32 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"82f9f-65a89c515b1d9-gzip\"",
+    "etag": "\"82f9e-65a8c6b56e04c-gzip\"",
     "last_modified": ""
   },
   "https://huggingface.co/blog/feed.xml": {
@@ -61,15 +61,15 @@
   },
   "https://www.science.org/rss/news_current.xml": {
     "etag": "",
-    "last_modified": "Thu, 03 Sep 2026 01:09:00 GMT"
+    "last_modified": "Thu, 03 Sep 2026 05:09:05 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"17070a-xaSEFXlfE2wJ2lvw+JnS6RzfFZ0\"",
+    "etag": "W/\"17070a-t6Yt7f1YP/sWI0L3xbHqryY1NAc\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
     "etag": "",
-    "last_modified": "Wed, 02 Sep 2026 04:15:56 GMT"
+    "last_modified": "Wed, 02 Sep 2026 14:02:35 GMT"
   },
   "https://news.google.com/rss/search?q=%22xAI%22+%28Grok+OR+model+OR+API+OR+release+OR+safety+OR+benchmark+OR+reasoning%29&hl=en-US&gl=US&ceid=US:en": {
     "etag": "",
