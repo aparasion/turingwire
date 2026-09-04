@@ -4,7 +4,7 @@
     "last_modified": ""
   },
   "https://deepmind.google/blog/rss.xml": {
-    "etag": "\"OCNM5A\"",
+    "etag": "\"WmxGMQ\"",
     "last_modified": ""
   },
   "https://blog.research.google/feeds/posts/default": {
@@ -16,7 +16,7 @@
     "last_modified": "Thu, 03 Sep 2026 20:54:05 GMT"
   },
   "https://newsroom.intel.com/feed/": {
-    "etag": "W/\"83986-65aa8670c560f-gzip\"",
+    "etag": "W/\"84577-65aab6bde3f45-gzip\"",
     "last_modified": ""
   },
   "https://huggingface.co/blog/feed.xml": {
@@ -32,20 +32,20 @@
     "last_modified": ""
   },
   "https://techcrunch.com/category/artificial-intelligence/feed/": {
-    "etag": "W/\"ab0e6f343cd0f4e773a7eba66771f5ff\"",
-    "last_modified": "Fri, 04 Sep 2026 16:25:30 GMT"
+    "etag": "W/\"42ef01d29e85ab1dac21448cde5cddfd\"",
+    "last_modified": "Fri, 04 Sep 2026 18:17:39 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/technology-lab": {
     "etag": "",
-    "last_modified": "Fri, 4 Sep 2026 13:35:13 GMT"
+    "last_modified": "Fri, 4 Sep 2026 18:59:31 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"5fe232144db8f6e6d3af339138bd9c37\"",
-    "last_modified": "Fri, 04 Sep 2026 14:28:29 GMT"
+    "etag": "W/\"b4b35ed782dc4b6f831574e7ff09ff10\"",
+    "last_modified": "Fri, 04 Sep 2026 18:39:19 GMT"
   },
   "https://stratechery.com/feed/": {
-    "etag": "W/\"631c32fbad8d7ba505c96d6cc3ca698d\"",
-    "last_modified": "Fri, 04 Sep 2026 15:29:21 GMT"
+    "etag": "W/\"4a4f59a212f75a8d5ac346b9be7a7852\"",
+    "last_modified": "Fri, 04 Sep 2026 17:55:40 GMT"
   },
   "https://www.theinformation.com/feed": {
     "etag": "W/\"9a43aa14d31ec6487148134a4420f4f8\"",
@@ -64,7 +64,7 @@
     "last_modified": "Thu, 03 Sep 2026 05:09:05 GMT"
   },
   "https://paperswithcode.com/latest/rss": {
-    "etag": "W/\"170902-GPWlAvD8y41LiioUjgZ3NH0BWJM\"",
+    "etag": "W/\"1708fe-MLdFVUnKd3EokU85xJEacF6cqVs\"",
     "last_modified": ""
   },
   "https://hnrss.org/newest?q=artificial+intelligence+OR+LLM+OR+machine+learning&points=100": {
@@ -84,8 +84,8 @@
     "last_modified": ""
   },
   "https://the-decoder.com/feed/": {
-    "etag": "\"43684f2c5f97344ac20ac54c36ee7a74\"",
-    "last_modified": "Fri, 04 Sep 2026 14:20:59 GMT"
+    "etag": "\"d7496dbebfe662cc94bc48ddf711e18e\"",
+    "last_modified": "Fri, 04 Sep 2026 17:27:10 GMT"
   },
   "https://www.404media.co/rss": {
     "etag": "W/\"1ba7b-gCSUEubeHLqECRzTuz4s0PLDHwE\"",
